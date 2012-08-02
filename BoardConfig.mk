@@ -1,0 +1,79 @@
+#
+# Copyright (C) 2012 The Android Open-Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# This variable is set first, so it can be overridden
+# by BoardConfigVendor.mk
+USE_CAMERA_STUB := false
+BOARD_USES_TI_CAMERA_HAL := true
+
+# Use the non-open-source parts, if they're present
+-include vendor/lge/p940/BoardConfigVendor.mk
+
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
+TARGET_ARCH_VARIANT := armv7-a-neon
+ARCH_ARM_HAVE_TLS_REGISTER := true
+
+TARGET_NO_BOOTLOADER := true
+
+BOARD_KERNEL_BASE := 0x80000000
+BOARD_PAGE_SIZE := 0x00000800
+BOARD_KERNEL_CMDLINE := vram=10M,0x87000000 omapfb.vram="0:4M@0x87000000" vmalloc=256M chg=36 RGB=0,0,0 CRC=0x85e3392f mem=1G@0x80000000
+
+# Define kernel config for inline building
+#TARGET_KERNEL_CONFIG := p2_p940_defconfig
+#TARGET_KERNEL_SOURCE := kernel/lge/p940
+
+TARGET_PREBUILT_KERNEL := device/lge/p940/kernel
+
+TARGET_NO_RADIOIMAGE := true
+TARGET_BOARD_PLATFORM := omap4
+TARGET_BOOTLOADER_BOARD_NAME := p940
+
+BOARD_EGL_CFG := device/lge/p940/egl.cfg
+
+## Ignore --wipe_data sent by the bootloader
+BOARD_RECOVERY_ALWAYS_WIPES := true
+
+BOARD_VOLD_MAX_PARTITIONS := 16
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 685768704
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 14539537408
+BOARD_FLASH_BLOCK_SIZE := 4096
+
+#TARGET_PROVIDES_INIT_RC := true
+
+# Wifi related defines
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+WPA_SUPPLICANT_VERSION      := VER_0_8_X
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
+BOARD_HOSTAPD_DRIVER        := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
+BOARD_WLAN_DEVICE           := bcmdhd
+WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
+#WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcmdhd.ko"
+WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
+WIFI_DRIVER_FW_PATH_P2P     := "/vendor/firmware/fw_bcmdhd_p2p.bin"
+WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
+
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
+
+BOARD_HAS_NO_SELECT_BUTTON := true
+#BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/lge/p940/recovery_keys.c
