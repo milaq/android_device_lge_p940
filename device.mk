@@ -121,6 +121,15 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mass_storage
 
+LOCAL_PATH := device/lge/p940
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+	LOCAL_KERNEL := $(LOCAL_PATH)/kernel
+else
+	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_KERNEL):kernel
 
 # Vold and Storage
 PRODUCT_COPY_FILES += \
