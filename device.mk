@@ -62,10 +62,6 @@ PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf
 
 # Wifi
-ifneq ($(TARGET_PREBUILT_WIFI_MODULE),)
-PRODUCT_COPY_FILES += \
-	$(TARGET_PREBUILT_WIFI_MODULE):system/lib/modules/bcmdhd.ko
-endif
 PRODUCT_COPY_FILES += \
 	device/lge/p940/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
 
