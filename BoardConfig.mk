@@ -43,6 +43,8 @@ TARGET_NO_RADIOIMAGE := true
 TARGET_BOARD_PLATFORM := omap4
 TARGET_BOOTLOADER_BOARD_NAME := p940
 
+USE_OPENGL_RENDERER := true
+
 BOARD_EGL_CFG := device/lge/p940/egl.cfg
 
 ## Ignore --wipe_data sent by the bootloader
