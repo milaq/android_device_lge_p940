@@ -27,6 +27,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES := \
 	device/lge/p940/init.p940.rc:root/init.p940.rc \
+	device/lge/p940/init.p940.usb.rc:root/init.p940.ril.rc \
 	device/lge/p940/init.p940.usb.rc:root/init.p940.usb.rc \
 	device/lge/p940/ueventd.p940.rc:root/ueventd.p940.rc \
 	device/lge/p940/media_profiles.xml:system/etc/media_profiles.xml \
@@ -132,7 +133,8 @@ PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
 
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.opengles.version=131072
+	ro.opengles.version=131072 \
+	hwui.render_dirty_regions=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.sf.lcd_density=240

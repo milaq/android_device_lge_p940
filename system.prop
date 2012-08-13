@@ -1,0 +1,45 @@
+#
+# system.prop for p940
+#
+telephony.lteOnCdmaDevice=0
+
+# OMAP
+com.ti.omap_enhancement=true
+opencore.asmd=1
+
+# Define modem related settings
+ro.radio.use-ppp=no
+ro.config.nocheckin=yes
+keyguard.no_require_sim=1
+
+#Audio
+omap.audio.mic.main=AMic0
+omap.audio.mic.sub=AMic1
+omap.audio.power=HQ
+alsa.mixer.playback.master=DAC2 Analog
+alsa.mixer.capture.master=Analog
+ro.lge.audio_soundexception=true
+ro.lge.audio_soundprofile=true
+# set high quality mode android resampler
+af.resampler.quality=3
+
+# Define JPEG codec to load. (Set libskiahw with 1 & Set ARM with 0)
+jpeg.libskiahw.encoder.enable=0
+jpeg.libskiahw.decoder.enable=0
+# Define JPEG Threashold for Image size (bytes)
+jpeg.libskiahw.decoder.thresh=0
+jpeg.libskiahw.encoder.thresh=0
+
+camera.dcc.enable=0
+ro.com.android.dateformat=MM-dd-yyyy
+ro.com.android.dataroaming=false
+use.bt.tethering=0
+persist.gsm.sms.forcegsm7=1
+persist.sys.system_volume_index=7
+#persist.sys.system_volume_value=0.5957
+persist.sys.sound_enable=0
+persist.wifi.mac=FFFFFFFFFFFF
+ro.lk.version=LK MAY-2012
+ro.build.target_ril_platform=ifx
+persist.service.rr.enable=1
+ro.nfc.port=I2C
