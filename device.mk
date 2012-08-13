@@ -53,6 +53,15 @@ PRODUCT_COPY_FILES := \
 PRODUCT_COPY_FILES += \
 	device/lge/p940/prebuilt/init.d/01modules:system/etc/init.d/01modules
 
+# keylayouts and touchscreen
+PRODUCT_COPY_FILES += \
+	device/lge/p940/prebuilt/omap-keypad.kl:system/usr/keylayout/omap-keypad.kl \
+	device/lge/p940/prebuilt/osp-input.kl:system/usr/keylayout/osp-input.kl \
+	device/lge/p940/prebuilt/touch_dev.kl:system/usr/keylayout/touch_dev.kl \
+	device/lge/p940/prebuilt/twl6030_pwrbutton.kl:system/usr/keylayout/twl6030_pwrbutton.kl \
+	device/lge/p940/prebuilt/touch_dev.idc:system/usr/idc/touch_dev.idc \
+	device/lge/p940/prebuilt/osp-input.idc:system/usr/idc/osp-input.idc
+
 # Kernel Modules
 PRODUCT_COPY_FILES += $(shell \
 	find device/lge/p940/prebuilt/modules -name '*.ko' \
