@@ -47,6 +47,16 @@ PRODUCT_COPY_FILES := \
 PRODUCT_COPY_FILES := \
 	device/lge/p940/bootmenu/recovery.tar:system/bootmenu/recovery.tar
 
+	
+PRODUCT_COPY_FILES += \
+	device/lge/p940/prebuilt/init.d/01modules:system/etc/init.d/01modules
+
+# Kernel Modules
+PRODUCT_COPY_FILES += $(shell \
+	find device/lge/p940/prebuilt/modules -name '*.ko' \
+	| sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
+	| tr '\n' ' ')
+
 # Bluetooth configuration files
 PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf
