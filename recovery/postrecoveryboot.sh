@@ -1,7 +1,7 @@
 #!/system/bin/sh
 # do it like mr. rhymes
 echo 255 > /sys/class/leds/button-backlight/brightness
-echo 100 > /sys/devices/platform/omap/omap_i2c.2/i2c-2/2-0038//brightness
+echo 100 > /sys/devices/platform/omap/omap_i2c.2/i2c-2/2-0038/brightness
 sleep 2
 # switch CPUfreq from performance to interactive & tune it
 echo "interactive" >  /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
