@@ -37,7 +37,7 @@ BOARD_KERNEL_CMDLINE :=
 #TARGET_KERNEL_CONFIG := p2_p940_defconfig
 #TARGET_KERNEL_SOURCE := kernel/lge/p940
 
-TARGET_PREBUILT_KERNEL := device/lge/p940/kernel
+TARGET_PREBUILT_KERNEL := device/lge/p940/prebuilt/kernel
 
 TARGET_NO_RADIOIMAGE := true
 TARGET_BOARD_PLATFORM := omap4
