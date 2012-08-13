@@ -61,6 +61,12 @@ if $BB [ -e /system/bootmenu/fixboot ]; then
 fi
 
 #
+# remove lg crap
+#
+$BB rm /*.rc
+$BB rm /*.sh
+
+#
 # volume down - recovery mode
 #
 if $BB [ "$TYPE" = "recovery" ]; then
