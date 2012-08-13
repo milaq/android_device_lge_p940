@@ -1,0 +1,15 @@
+#!/system/bin/sh
+export PATH=/system/bin:$PATH
+BB=/system/xbin/busybox
+
+if $BB [ ! -f /.bootstamp ] && $BB [ -e /system/bootmenu/unsecureboot ]; then
+  exec /system/bootmenu/unsecureboot
+  exit 0
+fi
+
+if $BB [ -x $0.bin ]; then
+  $0.bin "$@"
+else
+  # ignore
+  exit 0
+fi

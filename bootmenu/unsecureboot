@@ -1,0 +1,120 @@
+#!/system/bin/sh
+export PATH=/system/bin:/sbin:$PATH
+SRC=/system/bootmenu/
+BB=/system/xbin/busybox
+AWK="$BB awk"
+
+$BB mount -o remount,rw rootfs /
+
+LOG=/data/bootmenu.log
+log() {
+  echo "$@" >>$LOG
+}
+
+# copy busybox
+$BB cp $BB /sbin
+# minimal symlinks
+$BB ln -s $BB /sbin/cp
+$BB ln -s $BB /sbin/[
+
+# touch stamp to prevent loop execution
+$BB touch /.bootstamp
+
+#
+# check mode
+#
+
+log "get key..."
+key=
+if $BB [ -e /system/bootmenu/getkey ]; then
+  key=$(/system/bootmenu/getkey)
+fi
+log "key is $key"
+
+#
+# volume up - original firmware mode
+#
+if $BB [ ! -z "$key" ] && $BB [ "$key" = 115 ]; then
+  exit 0
+fi
+
+TYPE=normal
+if $BB [ -f /data/.recovery_mode ] || $BB [ "$key" = 114 ]; then
+  log "Recovery mode..."
+  TYPE=recovery
+else
+  log "Normal mode..."
+fi
+
+if $BB [ "$TYPE" = "normal" ]; then
+    log "exit.. 2nd-init script."
+    exit 0
+fi
+
+# remove symbolic links
+$BB rm sdcard
+
+# fix boot files etc.
+if $BB [ -e /system/bootmenu/fixboot ]; then
+  log "Fixboot ..."
+  /system/bootmenu/fixboot $TYPE
+fi
+
+#
+# volume down - recovery mode
+#
+if $BB [ "$TYPE" = "recovery" ]; then
+  # unlink /etc
+  $BB rm /etc
+  $BB mkdir /etc
+
+  log "Copy recovery files ..."
+  $BB cp -fr /system/bootmenu/recovery.tar /
+  $BB tar xf /recovery.tar
+
+  if [ ! -z "$restart_adb" ]; then
+    log "Kill adbd ..."
+    $BB killall adbd
+  fi
+  log "Kill ueventd ..."
+  $BB killall ueventd
+  
+  $BB mkdir /tmp
+  $BB mkdir /cache
+  $BB mkdir /sdcard
+  $BB chmod 666 /dev/graphics/fb*
+
+  $BB mount -o remount,rw /system /system
+
+  # remove /data/.recovery_mode
+  $BB rm /data/.recovery_mode
+#
+# normal mode
+#
+else
+  log "Copy rootfs files ..."
+  $BB cp -fr /system/bootmenu/boot.tar /
+  $BB tar xf /boot.tar
+
+  log "Kill ueventd ..."
+  $BB killall ueventd
+fi
+
+log "2nd-init starting..."
+# unmount stuff
+$BB umount /dev/cpuctl
+$BB umount /dev/pts
+$BB umount /data
+$BB umount /cache
+$BB umount /dvp
+$BB umount /persist
+$BB umount /sys/kernel/debug
+$BB umount /system/app
+$BB umount /mpt
+
+# set our init only to the first core << check this
+/system/bootmenu/taskset -p -c 0 1
+/system/bootmenu/taskset -c 0 /system/bootmenu/2nd-init
+#/system/bootmenu/2nd-init
+
+exit 0

@@ -1,0 +1,31 @@
+#!/system/bin/sh
+
+BB=/sbin/busybox
+
+AWK="$BB awk"
+TOPDIR=
+TMPDIR=/cache
+
+#
+# TODO: fix for ICS
+#
+fix_default_prop() {
+   $AWK '
+/ro.secure=/ { print "ro.secure=0"; next; }
+/ro.allow.mock.location=/ { print "ro.allow.mock.location=1"; next; }
+/ro.debuggable=/ { print "ro.debuggable=1"; next; }
+/persist.service.adb.enable=/ { print "persist.service.adb.enable=1"; next; }
+/persist.sys.usb.config=/ { print "/persist.sys.usb.config=mass_storage,adb"; next; }
+{ print; }
+' $1
+}
+
+# fix default.prop
+fix_default_prop $TOPDIR/default.prop > $TMPDIR/default.prop
+$BB cp $TMPDIR/default.prop $TOPDIR/default.prop
+$BB rm $TMPDIR/default.prop
+
+if [ "$1" = "recovery" ] && [ -f $TOPDIR/system/build.prop ]; then
+  echo "" >> $TOPDIR/default.prop
+  $BB cat $TOPDIR/system/build.prop >> $TOPDIR/default.prop
+fi

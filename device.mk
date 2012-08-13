@@ -32,6 +32,21 @@ PRODUCT_COPY_FILES := \
 	device/lge/p940/media_profiles.xml:system/etc/media_profiles.xml \
 	device/lge/p940/gps_brcm_conf.xml:system/etc/gps_brcm_conf.xml
 
+# hijack/bootstrap
+PRODUCT_COPY_FILES := \
+	device/lge/p940/bootmenu/hijack:system/bin/hijack
+
+PRODUCT_COPY_FILES := \
+	device/lge/p940/bootmenu/2nd-init:system/bootmenu/2nd-init \
+	device/lge/p940/bootmenu/fixboot:system/bootmenu/fixboot
+	device/lge/p940/bootmenu/getkey:system/bootmenu/getkey \
+	device/lge/p940/bootmenu/taskset:system/bootmenu/taskset \
+	device/lge/p940/bootmenu/unsecureboot:system/bootmenu/unsecureboot
+
+# 2nd init ramdisks
+PRODUCT_COPY_FILES := \
+	device/lge/p940/bootmenu/recovery.tar:system/bootmenu/recovery.tar
+
 # Bluetooth configuration files
 PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf
