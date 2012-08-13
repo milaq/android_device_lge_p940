@@ -164,4 +164,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.vold.switchablepair=/mnt/emmc,/mnt/sdcard
 
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
+# goo.im stuff
+$(call inherit-product, device/lge/p940/goo.mk)
 $(call inherit-product-if-exists, vendor/lge/p940/device-vendor.mk)
