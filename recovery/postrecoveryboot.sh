@@ -7,5 +7,3 @@ sleep 2
 echo "interactive" >  /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo 20000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate
 echo 20000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
-# remove recovery trigger if present
-rm /data/.recovery_mode
