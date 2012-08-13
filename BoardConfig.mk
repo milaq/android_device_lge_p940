@@ -82,4 +82,4 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
 BOARD_HAS_NO_SELECT_BUTTON := true
-#BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/lge/p940/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/lge/p940/recovery/recovery_keys.c
