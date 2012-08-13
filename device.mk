@@ -38,7 +38,7 @@ PRODUCT_COPY_FILES := \
 
 PRODUCT_COPY_FILES := \
 	device/lge/p940/bootmenu/2nd-init:system/bootmenu/2nd-init \
-	device/lge/p940/bootmenu/fixboot:system/bootmenu/fixboot
+	device/lge/p940/bootmenu/fixboot:system/bootmenu/fixboot \
 	device/lge/p940/bootmenu/getkey:system/bootmenu/getkey \
 	device/lge/p940/bootmenu/taskset:system/bootmenu/taskset \
 	device/lge/p940/bootmenu/unsecureboot:system/bootmenu/unsecureboot
