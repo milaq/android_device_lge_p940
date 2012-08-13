@@ -30,7 +30,8 @@ PRODUCT_COPY_FILES := \
 	device/lge/p940/init.p940.usb.rc:root/init.p940.usb.rc \
 	device/lge/p940/ueventd.p940.rc:root/ueventd.p940.rc \
 	device/lge/p940/media_profiles.xml:system/etc/media_profiles.xml \
-	device/lge/p940/gps_brcm_conf.xml:system/etc/gps_brcm_conf.xml
+	device/lge/p940/gps_brcm_conf.xml:system/etc/gps_brcm_conf.xml \
+	device/lge/p940//recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
 # hijack/bootstrap
 PRODUCT_COPY_FILES := \
