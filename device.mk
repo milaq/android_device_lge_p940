@@ -76,7 +76,7 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_COPY_FILES += \
-	device/lge/p940/prebuilt/firmware/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
+	device/lge/p940/prebuilt/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
 
 PRODUCT_PROPERTY_OVERRIDES := \
 	wifi.interface=wlan0 \
