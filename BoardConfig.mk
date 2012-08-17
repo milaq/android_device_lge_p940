@@ -50,6 +50,7 @@ BOARD_EGL_CFG := device/lge/p940/egl.cfg
 ## Ignore --wipe_data sent by the bootloader
 BOARD_RECOVERY_ALWAYS_WIPES := true
 TARGET_RECOVERY_INITRC := device/lge/p940/recovery/init.rc
+BOARD_RECOVERY_IGNORE_BOOTABLES := true
 
 BOARD_VOLD_MAX_PARTITIONS := 16
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
