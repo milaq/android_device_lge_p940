@@ -429,7 +429,7 @@ service immvibed /system/bin/immvibed_linear
     oneshot
 # End Immersion changes
 
-service btld /system/bin/logwrapper /system/bin/btld -pf /vendor/firmware/BCM4330B1_002.001.003.0550.0000.hcd -hb 3000000 -hp /dev/ttyO1 -lpm 1
+service btld /system/bin/logwrapper /system/bin/btld -pf /vendor/firmware/bcm4330.hcd -hb 3000000 -hp /dev/ttyO1 -lpm 1
     user root
     group bluetooth net_bt_admin
     disabled
