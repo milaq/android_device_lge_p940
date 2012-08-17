@@ -35,10 +35,10 @@ PRODUCT_COPY_FILES := \
 	device/lge/p940/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
 # hijack/bootstrap
-PRODUCT_COPY_FILES := \
+PRODUCT_COPY_FILES += \
 	device/lge/p940/bootmenu/hijack:system/bin/hijack
 
-PRODUCT_COPY_FILES := \
+PRODUCT_COPY_FILES += \
 	device/lge/p940/bootmenu/2nd-init:system/bootmenu/2nd-init \
 	device/lge/p940/bootmenu/fixboot:system/bootmenu/fixboot \
 	device/lge/p940/bootmenu/getkey:system/bootmenu/getkey \
@@ -46,7 +46,7 @@ PRODUCT_COPY_FILES := \
 	device/lge/p940/bootmenu/unsecureboot:system/bootmenu/unsecureboot
 
 # 2nd init ramdisks
-PRODUCT_COPY_FILES := \
+PRODUCT_COPY_FILES += \
 	device/lge/p940/bootmenu/recovery.tar:system/bootmenu/recovery.tar
 
 	
