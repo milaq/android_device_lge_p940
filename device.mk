@@ -175,3 +175,7 @@ $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 # goo.im stuff
 $(call inherit-product, device/lge/p940/goo.mk)
 $(call inherit-product-if-exists, vendor/lge/p940/device-vendor.mk)
+
+BOARD_WLAN_DEVICE_REV := bcm4330_b2
+WIFI_BAND             := 802_11_ABG
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
