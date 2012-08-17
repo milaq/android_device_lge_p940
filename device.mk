@@ -174,6 +174,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 # goo.im stuff
 $(call inherit-product, device/lge/p940/goo.mk)
+
+$(call inherit-product-if-exists, vendor/nxp/pn544/nxp-pn544-fw-vendor.mk)
+$(call inherit-product, hardware/ti/omap4xxx/omap4.mk)
+$(call inherit-product-if-exists, vendor/ti/proprietary/omap4/ti-omap4-vendor.mk)
+
 $(call inherit-product-if-exists, vendor/lge/p940/device-vendor.mk)
 
 BOARD_WLAN_DEVICE_REV := bcm4330_b2
