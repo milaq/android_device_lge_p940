@@ -171,7 +171,7 @@ PRODUCT_COPY_FILES += \
 
 # Vold and Storage
 PRODUCT_COPY_FILES += \
-	device/lge/p940/configs/vold.fstab:system/etc/vold.fstab
+	device/lge/p940/vold.fstab:system/etc/vold.fstab
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.vold.switchablepair=/mnt/emmc,/mnt/sdcard
