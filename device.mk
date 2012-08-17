@@ -81,6 +81,9 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	wifi.features=p2p \
 	wifi.supplicant_scan_interval=20
 
+PRODUCT_PACKAGES += \
+	lights.p940
+
 # NFC
 PRODUCT_PACKAGES += \
         libnfc \
