@@ -38,18 +38,18 @@ PRODUCT_COPY_FILES := \
 
 # hijack/bootstrap
 PRODUCT_COPY_FILES += \
-	device/lge/p940/bootmenu/hijack:system/bin/hijack
+	device/lge/p940/bootstrap/hijack:system/bin/hijack
 
 PRODUCT_COPY_FILES += \
-	device/lge/p940/bootmenu/2nd-init:system/bootmenu/2nd-init \
-	device/lge/p940/bootmenu/fixboot:system/bootmenu/fixboot \
-	device/lge/p940/bootmenu/getkey:system/bootmenu/getkey \
-	device/lge/p940/bootmenu/taskset:system/bootmenu/taskset \
-	device/lge/p940/bootmenu/unsecureboot:system/bootmenu/unsecureboot
+	device/lge/p940/bootstrap/2nd-init:system/bootstrap/2nd-init \
+	device/lge/p940/bootstrap/fixboot:system/bootstrap/fixboot \
+	device/lge/p940/bootstrap/getkey:system/bootstrap/getkey \
+	device/lge/p940/bootstrap/taskset:system/bootstrap/taskset \
+	device/lge/p940/bootstrap/unsecureboot:system/bootstrap/unsecureboot
 
 # 2nd init ramdisks
 PRODUCT_COPY_FILES += \
-	device/lge/p940/bootmenu/recovery.tar:system/bootmenu/recovery.tar
+	device/lge/p940/bootstrap/recovery.tar:system/bootstrap/recovery.tar
 
 	
 PRODUCT_COPY_FILES += \

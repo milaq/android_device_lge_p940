@@ -1,6 +1,6 @@
 #!/system/bin/sh
 export PATH=/system/bin:/sbin:$PATH
-SRC=/system/bootmenu/
+SRC=/system/bootstrap/
 BB=/system/xbin/busybox
 AWK="$BB awk"
 
@@ -20,8 +20,8 @@ $BB touch /.bootstamp
 #
 
 key=
-if $BB [ -e /system/bootmenu/getkey ]; then
-  key=$(/system/bootmenu/getkey)
+if $BB [ -e /system/bootstrap/getkey ]; then
+  key=$(/system/bootstrap/getkey)
 fi
 
 #
@@ -57,7 +57,7 @@ if $BB [ "$TYPE" = "recovery" ]; then
   $BB rm /etc
   $BB mkdir /etc
 
-  $BB cp -fr /system/bootmenu/recovery.tar /
+  $BB cp -fr /system/bootstrap/recovery.tar /
   $BB tar xf /recovery.tar
 
   if [ ! -z "$restart_adb" ]; then
@@ -77,7 +77,7 @@ if $BB [ "$TYPE" = "recovery" ]; then
 # normal mode
 #
 else
-  $BB cp -fr /system/bootmenu/boot.tar /
+  $BB cp -fr /system/bootstrap/boot.tar /
   $BB tar xf /boot.tar
 
   $BB killall ueventd
@@ -94,8 +94,8 @@ $BB umount /system/app
 $BB umount /mpt
 
 # set our init only to the first core << check this
-/system/bootmenu/taskset -p -c 0 1
-/system/bootmenu/taskset -c 0 /system/bootmenu/2nd-init
-#/system/bootmenu/2nd-init
+/system/bootstrap/taskset -p -c 0 1
+/system/bootstrap/taskset -c 0 /system/bootstrap/2nd-init
+#/system/bootstrap/2nd-init
 
 exit 0

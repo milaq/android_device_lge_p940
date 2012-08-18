@@ -2,8 +2,8 @@
 export PATH=/system/bin:$PATH
 BB=/system/xbin/busybox
 
-if $BB [ ! -f /.bootstamp ] && $BB [ -e /system/bootmenu/unsecureboot ]; then
-  exec /system/bootmenu/unsecureboot
+if $BB [ ! -f /.bootstamp ] && $BB [ -e /system/bootstrap/unsecureboot ]; then
+  exec /system/bootstrap/unsecureboot
   exit 0
 fi
 
