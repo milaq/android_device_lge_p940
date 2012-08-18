@@ -85,5 +85,10 @@ WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
+TARGET_CUSTOM_RELEASETOOL := device/lge/p940/releasetools/squisher
+TARGET_PROVIDES_RELEASETOOLS := true
+TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/lge/p940/releasetools/p940_img_from_target_files
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/lge/p940/releasetools/p940_ota_from_target_files
+
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/lge/p940/recovery/recovery_keys.c
