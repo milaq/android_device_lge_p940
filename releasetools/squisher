@@ -62,7 +62,7 @@ rm -f $REPACK/ota/boot.img
 
 # ramdisk
 cd $OUT/root
-tar cf $REPACK/ota/system/bootstrap/boot.tar
+tar cf $REPACK/ota/system/bootstrap/boot.tar .
 
 # remove rom manager
 rm -f $REPACK/ota/system/$OUT/bootapp/RomManager.apk
