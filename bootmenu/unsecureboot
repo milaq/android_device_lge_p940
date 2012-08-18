@@ -54,12 +54,6 @@ fi
 # remove symbolic links
 $BB rm sdcard
 
-# fix boot files etc.
-if $BB [ -e /system/bootmenu/fixboot ]; then
-  log "Fixboot ..."
-  /system/bootmenu/fixboot $TYPE
-fi
-
 #
 # remove lg crap
 #

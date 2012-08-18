@@ -3,6 +3,8 @@
 #
 telephony.lteOnCdmaDevice=0
 
+ro.cwm.forbid_format=/misc,/boot,/recovery,/system
+
 # OMAP
 com.ti.omap_enhancement=true
 opencore.asmd=1
