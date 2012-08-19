@@ -36,10 +36,6 @@ if $BB [ -f /cache/.recovery_mode ] || $BB [ "$key" = 114 ]; then
   TYPE=recovery
 fi
 
-if $BB [ "$TYPE" = "normal" ]; then
-    exit 0
-fi
-
 # remove symbolic links
 $BB rm sdcard
 
