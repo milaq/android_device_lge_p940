@@ -94,5 +94,7 @@ TARGET_PROVIDES_RELEASETOOLS := true
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/lge/p940/releasetools/p940_img_from_target_files
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/lge/p940/releasetools/p940_ota_from_target_files
 
+ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
+
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/lge/p940/recovery/recovery_keys.c
