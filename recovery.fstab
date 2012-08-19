@@ -1,8 +1,9 @@
-# mount point	fstype	device
+# mount point	fstype  device    	        [device2] 
 /recovery	emmc	/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery
 /boot		emmc	/dev/block/platform/omap/omap_hsmmc.1/by-name/boot
-/sdcard		vfat	/dev/block/platform/omap/omap_hsmmc.1/by-name/fat
 /system		ext4	/dev/block/platform/omap/omap_hsmmc.1/by-name/system
 /cache		ext4	/dev/block/platform/omap/omap_hsmmc.1/by-name/cache
 /data		ext4	/dev/block/platform/omap/omap_hsmmc.1/by-name/userdata
+/sdcard		vfat	/dev/block/mmcblk1p1	/dev/block/mmcblk1
+/emmc		vfat	/dev/block/platform/omap/omap_hsmmc.1/by-name/fat
 
