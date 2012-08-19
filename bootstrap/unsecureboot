@@ -88,6 +88,10 @@ $BB umount /persist
 $BB umount /sys/kernel/debug
 $BB umount /system/app
 $BB umount /mpt
+$BB umount /mnt/asec
+$BB umount /mnt/obb
+$BB umount /mnt/extasec
+$BB umount /mnt/extobb
 
 # set our init only to the first core << check this
 /system/bootstrap/taskset -p -c 0 1
