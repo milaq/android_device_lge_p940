@@ -46,7 +46,7 @@ if $BB [ ! -z "$key" ] && $BB [ "$key" = 115 ]; then
 fi
 
 TYPE=normal
-if $BB [ -f /cache/.recovery_mode ] || $BB [ "$key" = 114 ]; then
+if $BB [ -f /data/.recovery_mode ] || $BB [ "$key" = 114 ]; then
   TYPE=recovery
 fi
 
@@ -82,8 +82,8 @@ if $BB [ "$TYPE" = "recovery" ]; then
 
   $BB mount -o remount,rw /system /system
 
-  # remove /cache/.recovery_mode
-  $BB rm /cache/.recovery_mode
+  # remove recovery_mode trigger
+  $BB rm /data/.recovery_mode
 #
 # normal mode
 #
