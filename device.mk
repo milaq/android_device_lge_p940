@@ -44,6 +44,7 @@ PRODUCT_COPY_FILES += \
 	device/lge/p940/bootstrap/2nd-init:system/bootstrap/2nd-init \
 	device/lge/p940/bootstrap/getkey:system/bootstrap/getkey \
 	device/lge/p940/bootstrap/taskset:system/bootstrap/taskset \
+	device/lge/p940/bootstrap/stop:system/bootstrap/stop \
 	device/lge/p940/bootstrap/unsecureboot:system/bootstrap/unsecureboot
 
 # 2nd init ramdisks
