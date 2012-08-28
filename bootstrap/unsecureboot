@@ -2,7 +2,16 @@
 export PATH=/system/bin:/sbin:$PATH
 SRC=/system/bootstrap/
 BB=/system/xbin/busybox
-AWK="$BB awk"
+STOP=$SRC/stop
+
+if $BB [ -f /.bootstamp ]; then
+  exit 0
+fi
+
+if $BB [ -f $STOP ]; then
+  # Stop init process
+  $STOP 1
+fi
 
 $BB mount -o remount,rw rootfs /
 
@@ -11,6 +20,8 @@ $BB cp $BB /sbin
 # minimal symlinks
 $BB ln -s $BB /sbin/cp
 $BB ln -s $BB /sbin/[
+
+BB=/sbin/busybox
 
 # touch stamp to prevent loop execution
 $BB touch /.bootstamp
@@ -23,6 +34,9 @@ key=
 if $BB [ -e /system/bootstrap/getkey ]; then
   key=$(/system/bootstrap/getkey)
 fi
+
+# Continue init process
+$BB kill -CONT 1
 
 #
 # volume up - original firmware mode
@@ -62,6 +76,7 @@ if $BB [ "$TYPE" = "recovery" ]; then
   $BB killall ueventd
   
   $BB mkdir /tmp
+  $BB mkdir /cache
   $BB mkdir /sdcard
   $BB chmod 666 /dev/graphics/fb*
 
