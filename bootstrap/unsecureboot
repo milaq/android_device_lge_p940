@@ -38,16 +38,14 @@ fi
 # Continue init process
 $BB kill -CONT 1
 
-#
-# volume up - original firmware mode
-#
-if $BB [ ! -z "$key" ] && $BB [ "$key" = 115 ]; then
-  exit 0
-fi
-
 TYPE=normal
 if $BB [ -f /data/.recovery_mode ] || $BB [ "$key" = 114 ]; then
   TYPE=recovery
+fi
+
+# no boot.tar - stock rom
+if $BB [ "$TYPE" = "normal" ] && $BB [ ! -f /system/bootstrap/boot.tar ] ; then
+  exit 0
 fi
 
 # remove symbolic links
