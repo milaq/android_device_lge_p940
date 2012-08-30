@@ -128,14 +128,12 @@ set_light_backlight(struct light_device_t* dev,
 {
     int err = 0;
     int brightness = rgb_to_brightness(state);
-    int alc_is_on = 0;
+    
     LOGV("Setting display brightness to %d",brightness);
 
     pthread_mutex_lock(&g_lock);
-    err = write_int(LCD_FILE, (brightness));
+    err = write_int(LCD_FILE, brightness);
     pthread_mutex_unlock(&g_lock);
-
-    err = set_light_buttons(dev, state);
     return err;
 }
 
@@ -158,19 +156,6 @@ set_light_notifications(struct light_device_t* dev,
     pthread_mutex_unlock(&g_lock);
     return err;
 }
-
-/*static int
-set_light_attention(struct light_device_t* dev,
-        struct light_state_t const* state)
-{
-    int err = 0;
-    int on = is_lit(state);
-    LOGV("Calling attention light with state %d",on);
-    pthread_mutex_lock(&g_lock);
-    err = write_int(BUTTON_PULSE, on ? 1000 : 0);
-    pthread_mutex_unlock(&g_lock);
-    return err;
-}*/
 
 /** Close the lights device */
 static int
@@ -202,9 +187,6 @@ static int open_lights(const struct hw_module_t* module, char const* name,
     else if (0 == strcmp(LIGHT_ID_BUTTONS, name)) {
         set_light = set_light_buttons;
     }
-    /*else if (0 == strcmp(LIGHT_ID_ATTENTION, name)) {
-        set_light = set_light_attention;
-    }*/
     else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name)) {
         set_light = set_light_notifications;
     }
