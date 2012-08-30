@@ -113,15 +113,11 @@ set_light_buttons(struct light_device_t* dev,
 {
     int err = 0;
     int on = is_lit(state);
-    long value = rgb_to_brightness(state);
 
     LOGV("Setting button brightness to %ld",value);
 
     pthread_mutex_lock(&g_lock);
-    err = write_int(BUTTON_BRIGHTNESS, (int)value);
-    /*if (!err) {
-        err = write_int(BUTTON_STATE, value ? 1 : 0);
-    }*/
+    err = write_int(BUTTON_BRIGHTNESS, on?255:0);
     pthread_mutex_unlock(&g_lock);
     return err;
 }
@@ -156,12 +152,9 @@ set_light_notifications(struct light_device_t* dev,
     blue = (state->color) & 0xff;
 
     LOGV("Calling notification light with state %d",on);
+    
     pthread_mutex_lock(&g_lock);
-    if (!on) {
-        err = write_int(BUTTON_BRIGHTNESS, 0);
-    } else {
-            err = write_int(BUTTON_BRIGHTNESS, 255);
-    }
+    err = write_int(BUTTON_BRIGHTNESS, on?255:0);
     pthread_mutex_unlock(&g_lock);
     return err;
 }
