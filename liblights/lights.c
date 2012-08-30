@@ -42,7 +42,7 @@ char const*const LCD_FILE
         = "/sys/devices/platform/omap/omap_i2c.2/i2c-2/2-0038/brightness";
 
 char const*const BUTTON_BRIGHTNESS
-        = "/sys/devices/platform/keypad_led/leds/button-backlight";
+        = "/sys/devices/platform/keypad_led/leds/button-backlight/brightness";
 
 /**
  * device methods
