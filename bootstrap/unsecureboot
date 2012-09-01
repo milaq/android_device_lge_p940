@@ -14,6 +14,8 @@ if $BB [ -f $STOP ]; then
 fi
 
 $BB mount -o remount,rw rootfs /
+# mount /data now to get recovery mode detection working
+$BB mount -t ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/userdata /data -o nosuid,nodev,barrier=1,noauto_da_alloc
 
 # copy busybox
 $BB cp $BB /sbin
@@ -29,19 +31,21 @@ $BB touch /.bootstamp
 #
 # check mode
 #
-
-key=
-if $BB [ -e /system/bootstrap/getkey ]; then
-  key=$(/system/bootstrap/getkey)
+TYPE=normal
+if $BB [ -f /data/.recovery_mode ]; then
+  TYPE=recovery
+else
+  key=
+  if $BB [ -e /system/bootstrap/getkey ]; then
+    key=$(/system/bootstrap/getkey)
+  fi
+  if $BB [ "$key" = 114 ]; then
+    TYPE=recovery
+  fi
 fi
 
 # Continue init process
 $BB kill -CONT 1
-
-TYPE=normal
-if $BB [ -f /data/.recovery_mode ] || $BB [ "$key" = 114 ]; then
-  TYPE=recovery
-fi
 
 # no boot.tar - stock rom
 if $BB [ "$TYPE" = "normal" ] && $BB [ ! -f /system/bootstrap/boot.tar ] ; then
