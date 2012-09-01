@@ -44,6 +44,10 @@ else
   fi
 fi
 
+# remove recoverymode trigger and unmount data again
+$BB rm /data/.recovery_mode
+$BB umount /data
+
 # Continue init process
 $BB kill -CONT 1
 
@@ -83,9 +87,6 @@ if $BB [ "$TYPE" = "recovery" ]; then
   $BB chmod 666 /dev/graphics/fb*
 
   $BB mount -o remount,rw /system /system
-
-  # remove recovery_mode trigger
-  $BB rm /data/.recovery_mode
 #
 # normal mode
 #
