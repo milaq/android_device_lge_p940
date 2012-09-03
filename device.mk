@@ -25,6 +25,11 @@ PRODUCT_PACKAGES := \
 PRODUCT_PACKAGES += \
 	libinvensense_mpl
 
+# init boardname differs from the correct boardname
+PRODUCT_COPY_FILES := \
+	device/lge/p940/prebuilt/init.lgep940board.rc:root/init.lgep940board.rc \
+	device/lge/p940/prebuilt/ueventd.lgep940board.rc:root/ueventd.lgep940board.rc
+
 PRODUCT_COPY_FILES := \
 	device/lge/p940/init.p940.rc:root/init.p940.rc \
 	device/lge/p940/init.p940.usb.rc:root/init.p940.ril.rc \
