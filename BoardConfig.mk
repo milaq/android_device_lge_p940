@@ -45,6 +45,12 @@ TARGET_BOOTLOADER_BOARD_NAME := p940
 
 USE_OPENGL_RENDERER := true
 
+# OMAP
+OMAP_ENHANCEMENT := true
+ifdef OMAP_ENHANCEMENT
+  COMMON_GLOBAL_CFLAGS += -DOMAP_ENHANCEMENT -DTARGET_OMAP4
+endif
+
 BOARD_EGL_CFG := device/lge/p940/egl.cfg
 
 ## Ignore --wipe_data sent by the bootloader
