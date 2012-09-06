@@ -105,6 +105,31 @@ PRODUCT_PACKAGES += \
         VisualizationWallpapers \
         librs_jni
 
+#--> manual omap4 start
+PRODUCT_PACKAGES += \
+        libdomx \
+        libOMX_Core \
+        libOMX.TI.DUCATI1.VIDEO.H264E \
+        libOMX.TI.DUCATI1.VIDEO.MPEG4E \
+        libOMX.TI.DUCATI1.VIDEO.DECODER \
+        libOMX.TI.DUCATI1.VIDEO.DECODER.secure \
+        libOMX.TI.DUCATI1.VIDEO.CAMERA \
+        libOMX.TI.DUCATI1.MISC.SAMPLE \
+        libdrmdecrypt \
+        libstagefrighthw \
+        libI420colorconvert \
+        libtiutils \
+        libcamera \
+        libion \
+        camera.omap4 \
+        libomxcameraadapter \
+        smc_pa_ctrl \
+        tf_daemon \
+        libtf_crypto_sst
+
+PRODUCT_VENDOR_KERNEL_HEADERS := hardware/ti/omap4xxx/kernel-headers
+# manual omap4 end <--
+
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
 	frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -194,7 +219,6 @@ $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 $(call inherit-product, device/lge/p940/goo.mk)
 
 $(call inherit-product-if-exists, vendor/nxp/pn544/nxp-pn544-fw-vendor.mk)
-$(call inherit-product, hardware/ti/omap4xxx/omap4.mk)
 $(call inherit-product-if-exists, vendor/ti/proprietary/omap4/ti-omap4-vendor.mk)
 
 $(call inherit-product-if-exists, vendor/lge/p940/device-vendor.mk)
