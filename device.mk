@@ -65,10 +65,15 @@ PRODUCT_COPY_FILES += \
 	device/lge/p940/prebuilt/osp-input.idc:system/usr/idc/osp-input.idc
 
 # Kernel Modules
-PRODUCT_COPY_FILES += $(shell \
-	find device/lge/p940/prebuilt/modules -name '*.ko' \
-	| sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
-	| tr '\n' ' ')
+PRODUCT_COPY_FILES += \
+	device/lge/p940/prebuilt/modules/bcmdhd.ko:system/lib/modules/bcmdhd.ko \
+	device/lge/p940/prebuilt/modules/cifs.ko:system/lib/modules/cifs.ko \
+	device/lge/p940/prebuilt/modules/vpnclient.ko:system/lib/modules/vpnclient.ko
+
+# Ssx modules
+PRODUCT_COPY_FILES += \
+	device/lge/p940/prebuilt/modules/omaplfb_sgx540_120.ko:system/modules/omaplfb_sgx540_120.ko \
+	device/lge/p940/prebuilt/modules/pvrsrvkm_sgx540_120.ko:system/modules/pvrsrvkm_sgx540_120.ko
 
 # Bluetooth configuration files
 PRODUCT_COPY_FILES += \
