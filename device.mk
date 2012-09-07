@@ -25,6 +25,10 @@ PRODUCT_PACKAGES := \
 PRODUCT_PACKAGES += \
 	libinvensense_mpl
 
+PRODUCT_PACKAGES += \
+	audio.a2dp.default \
+	libaudioutils
+
 PRODUCT_COPY_FILES := \
 	device/lge/p940/init.lgep940board.rc:root/init.lgep940board.rc \
 	device/lge/p940/init.p940.ril.rc:root/init.p940.ril.rc \
