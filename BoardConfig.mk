@@ -65,6 +65,8 @@ BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p14
 BOARD_VOLD_MAX_PARTITIONS := 16
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file"
+
 BOARD_HAS_NO_MISC_PARTITION := true
 
 TARGET_USERIMAGES_USE_EXT4 := true
