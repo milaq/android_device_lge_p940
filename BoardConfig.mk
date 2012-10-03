@@ -65,7 +65,7 @@ BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p14
 BOARD_VOLD_MAX_PARTITIONS := 16
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file"
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun%d/file"
 
 BOARD_HAS_NO_MISC_PARTITION := true
 
@@ -102,6 +102,7 @@ TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/lge/p940/releasetools/p940
 
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
 
+BOARD_UMS_LUNFILE := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file"
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/lge/p940/recovery/recovery_keys.c
 
