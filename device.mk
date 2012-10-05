@@ -213,6 +213,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.vold.switchablepair=/mnt/emmc,/mnt/sdcard
 
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+	persist.sys.vold.switchexternal=1
+
 PRODUCT_PACKAGES += \
 	com.android.future.usb.accessory
 
