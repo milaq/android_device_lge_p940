@@ -12,10 +12,13 @@
 ## <sysfs_path> - List of sysfs paths to source devices
 ######################
 
-## Example of a standard sdcard mount for the emulator / Dream
-# Mounts the first usable partition of the specified device
-dev_mount sdcard /mnt/sdcard 14 /devices/platform/omap/omap_hsmmc.1/mmc_host
-dev_mount extsdcard /mnt/sdcard/external_sd auto /devices/platform/omap/omap_hsmmc.0/mmc_host
+#dev_mount sdcard /mnt/sdcard 14 /devices/platform/omap/omap_hsmmc.1/mmc_host
+#dev_mount extsdcard /mnt/sdcard/external_sd auto /devices/platform/omap/omap_hsmmc.0/mmc_host
 #dev_mount sdcard /mnt/sdcard auto /devices/platform/mmci-omap-hs.1/mmc_host/mmc0
 #dev_mount extsdcard /mnt/sdcard/_ExternalSD auto /devices/platform/mmci-omap-hs.0/mmc_host/mmc1
 
+# internal sdcard
+dev_mount emmc /mnt/emmc 14 /devices/platform/omap/omap_hsmmc.1/mmc_host/mmc0 nonremovable,encryptable
+
+# external sdcard
+dev_mount sdcard /mnt/sdcard auto /devices/platform/omap/omap_hsmmc.0/mmc_host/mmc1
