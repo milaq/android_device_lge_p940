@@ -14,6 +14,8 @@ ro.radio.use-ppp=no
 ro.config.nocheckin=yes
 keyguard.no_require_sim=1
 
+mobiledata.interfaces=rmnet0,rmnet1,rmnet2
+
 #Audio
 omap.audio.mic.main=AMic0
 omap.audio.mic.sub=AMic1
