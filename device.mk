@@ -159,6 +159,10 @@ PRODUCT_COPY_FILES += \
 # Portrait dock image
 PRODUCT_COPY_FILES += \
     device/lge/p940/dock.png:system/vendor/res/images/dock/dock.png
+	
+# ril
+PRODUCT_COPY_FILES += \
+	device/lge/p940/ipc_channels.config:system/etc/ipc_channels.config
 
 # Commands to migrate prefs from com.android.nfc3 to com.android.nfc
 PRODUCT_COPY_FILES += \
