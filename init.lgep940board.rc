@@ -364,6 +364,16 @@ service spritebud /system/xbin/spritebud
     group root
 # LGE_ADD_END
 
+service lgsecclk /system/bin/lgsecclkserver
+    class main
+    user system
+    group system lgdrm_acc sdcard_rw media_rw
+
+service lgdrm /system/bin/lgdrmserver
+    class main
+    user root
+    group lgdrm_acc sdcard_rw media_rw system radio
+
 
 service pvrsrvinit /vendor/bin/pvrsrvinit
     class core
