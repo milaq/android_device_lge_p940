@@ -162,7 +162,7 @@ PRODUCT_COPY_FILES += \
 	
 # ril
 PRODUCT_COPY_FILES += \
-	device/lge/p940/ipc_channels.config:system/etc/ipc_channels.config
+	device/lge/p940/prebuilt/ipc_channels.config:system/etc/ipc_channels.config
 
 # Commands to migrate prefs from com.android.nfc3 to com.android.nfc
 PRODUCT_COPY_FILES += \
