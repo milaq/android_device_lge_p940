@@ -437,14 +437,6 @@ service glgps /system/bin/glgps -c /system/etc/gps_brcm_conf.xml
     group net_raw sdcard_rw system radio
 # GPS [End]
 
-# Begin Immersion changes
-service immvibed /system/bin/immvibed_linear
-    class main
-    user shell
-    group shell
-    oneshot
-# End Immersion changes
-
 service btld /system/bin/logwrapper /system/bin/btld -pf /vendor/firmware/bcm4330.hcd -hb 3000000 -hp /dev/ttyO1 -lpm 1
     user root
     group bluetooth net_bt_admin
