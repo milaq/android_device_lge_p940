@@ -34,7 +34,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES := \
 	device/lge/p940/init.lgep940board.rc:root/init.lgep940board.rc \
-	device/lge/p940/init.p940.ril.rc:root/init.p940.ril.rc \
 	device/lge/p940/init.p940.usb.rc:root/init.p940.usb.rc \
 	device/lge/p940/ueventd.lgep940board.rc:root/ueventd.lgep940board.rc \
 	device/lge/p940/prebuilt/init.rmnet:system/bin/init.rmnet \
