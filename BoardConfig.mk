@@ -100,6 +100,8 @@ WIFI_BAND                   := 802_11_ABG
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
+BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
+
 TARGET_CUSTOM_RELEASETOOL := device/lge/p940/releasetools/squisher
 TARGET_PROVIDES_RELEASETOOLS := true
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/lge/p940/releasetools/p940_img_from_target_files
