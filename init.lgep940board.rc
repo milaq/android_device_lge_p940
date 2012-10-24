@@ -79,7 +79,7 @@ on fs
     mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/mlt /mpt nosuid nodev barrier=1 data=ordered
 
 # LGE_BSP 2012-02-01 [myeonggyu.son@lge.com] disable FUSE property value
-     ro.crypto.fuse_sdcard false
+    setprop ro.crypto.fuse_sdcard false
 
 on post-fs-data
     chown system system /dvp
