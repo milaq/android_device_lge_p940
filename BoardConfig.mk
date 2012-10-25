@@ -1,4 +1,4 @@
-#
+
 # Copyright (C) 2012 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -99,6 +99,9 @@ WIFI_BAND                   := 802_11_ABG
 
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
+
+BOARD_HAVE_FM_RADIO := true
+BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 
 BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
 
