@@ -28,8 +28,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	audio.a2dp.default \
-	audio.primary.omap4 \
-	audio_policy.omap4 \
+	libtinyalsa \
 	libaudioutils
 
 PRODUCT_COPY_FILES := \
