@@ -54,29 +54,12 @@ on early-fs
 
 on fs
 # mount mtd partitions
-    wait /dev/block/platform/omap/omap_hsmmc.1/by-name/system
-    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/system /system ro barrier=1
-
-    wait /dev/block/platform/omap/omap_hsmmc.1/by-name/userdata
-    exec /system/bin/tune2fs -u system -m 10 /dev/block/platform/omap/omap_hsmmc.1/by-name/userdata
-    exec /system/bin/e2fsck -p /dev/block/platform/omap/omap_hsmmc.1/by-name/userdata
-    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/userdata /data nosuid nodev barrier=1 noauto_da_alloc
-
-    wait /dev/block/platform/omap/omap_hsmmc.1/by-name/cache
-    exec /system/bin/e2fsck -p /dev/block/platform/omap/omap_hsmmc.1/by-name/cache
-    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/cache /cache nosuid nodev barrier=1
-
-    wait /dev/block/platform/omap/omap_hsmmc.1/by-name/divxkey
-    exec /system/bin/e2fsck -p /dev/block/platform/omap/omap_hsmmc.1/by-name/divxkey
-    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/divxkey /dvp noatime nosuid nodev
-
-    wait /dev/block/platform/omap/omap_hsmmc.1/by-name/persist
-    exec /system/bin/e2fsck -p /dev/block/platform/omap/omap_hsmmc.1/by-name/persist
-    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/persist /persist noatime nosuid nodev
-
-    wait /dev/block/platform/omap/omap_hsmmc.1/by-name/mlt
-    exec /system/bin/e2fsck -p /dev/block/platform/omap/omap_hsmmc.1/by-name/mlt
-    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/mlt /mpt nosuid nodev barrier=1 data=ordered
+    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/system /system wait ro barrier=1
+    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/userdata /data wait noatime nosuid nodev barrier=1 noauto_da_alloc
+    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/cache /cache wait noatime nosuid nodev barrier=1
+    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/divxkey /dvp wait noatime nosuid nodev
+    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/persist /persist wait noatime nosuid nodev
+    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/mlt /mpt wait nosuid nodev barrier=1 data=ordered
 
 # LGE_BSP 2012-02-01 [myeonggyu.son@lge.com] disable FUSE property value
     setprop ro.crypto.fuse_sdcard false
