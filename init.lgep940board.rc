@@ -42,7 +42,6 @@ on init
 # Immersion changes
     mkdir /dev/pipes 0771 shell shell
 
-# LGE_CHANGE [jugwan.eom@lge.com] for hidden set configuration
     chown system system /sys/module/lge_handle_panic/parameters/hidden_reset_enable
     chmod 660 /sys/module/lge_handle_panic/parameters/hidden_reset_enable
 
@@ -61,7 +60,6 @@ on fs
     mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/persist /persist wait noatime nosuid nodev
     mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/mlt /mpt wait nosuid nodev barrier=1 data=ordered
 
-# LGE_BSP 2012-02-01 [myeonggyu.son@lge.com] disable FUSE property value
     setprop ro.crypto.fuse_sdcard false
 
 on post-fs-data
@@ -86,21 +84,17 @@ on post-fs-data
 # create directory for lgdrm
     mkdir /data/lgdrm 0770 lgdrm lgdrm_acc
 
-# LGE_CHANGE_S [sungho.jung@lge.com] 2011-09-15, Create Directory for HDCP
+# hdcp
     mkdir /persist/mhl 0770 radio radio
     chown system system /dev/hdcp
     chmod 0644 /dev/hdcp
-# LGE_CHANGE_E [sungho.jung@lge.com] 2011-09-15
 
-# LGE_D1_BSP_ICS_S  seungdae.goh@lge.com 2012-02-16  audio file access [START_LGE]
+# audio
 	mkdir /data/audio 0770 media audio
 	chown media audio /data/audio
 	chmod 0770 /data/audio
-# LGE_D1_BSP_ICS_E  seungdae.goh@lge.com 2012-02-16  audio file access [END_LGE]
 
-# LGE_UPDATE_S taesook.yoon@lge.com 20110415
-# gps permissions
-# GPS GPIO Setting - refer gps_gpio.c(android\kernel\drivers\p940\misc)
+# GPS
     chown system system /sys/devices/platform/gps_gpio/poweron
     chown system system /sys/devices/platform/gps_gpio/reset
 # GPS UART Setting 
@@ -108,16 +102,6 @@ on post-fs-data
 # GPS RIL port Setting 
     chown system system /dev/pts17
 # glgps & libgps & log setting
-# data
-#    /gps
-#        gldata.sto: The assistance data in file format
-#        glgpsctrl: The control (Unix) socket for string based commands ($pglirm).
-#            Please refer to doc\html\irm_commands.html
-#        lcs.socket: The LCS (Unix) socket
-#   /log: The log directory
-#   gpspipe: The NMEA printing output socket.
-#        3gpp.socket: The 3GPP control plane (Unix) socket
-
     mkdir /data/gps
     chmod 770 /data/gps
     chown system system /data/gps
@@ -129,12 +113,10 @@ on post-fs-data
     chmod 770 /data/cache
     chown system system /data/cache
     
-#    chown root /system/bin/glgps
     chown system system /system/bin/glgps
     chown system system /system/etc/gps_brcm_conf.xml
     chown system system /system/etc/cert/
-    chown system system /system/etc/cert/lge.cer
-# LGE_UPDATE_E taesook.yoon@lge.com 20110415   
+    chown system system /system/etc/cert/lge.cer  
     
     # Create dump dir and collect dumps.
     mkdir /data/dontpanic
@@ -157,44 +139,37 @@ on post-fs-data
 
     write /proc/apanic_console 1
 
-#BEGIN: ICS POWER juya.kim@lge.com 2012-02-02
-	chown system system /sys/devices/platform/omap/omap_i2c.1/i2c-1/1-0049/twl6030_bci/smpl_en
-	chown system system /sys/devices/platform/omap/omap_i2c.1/i2c-1/1-0049/twl6030_bci/abnormal_wakelock_dis
-	chown system system /sys/class/power_supply/battery/temp_control
-	chown radio radio /sys/class/power_supply/battery/charger_mode
-	chown radio radio /sys/class/power_supply/battery/gauge_control
-	chown radio radio /sys/class/power_supply/bk_battery/voltage_now
-	chmod 0664 /sys/devices/platform/omap/omap_i2c.4/i2c-4/4-0036/state
-#END: ICS POWER juya.kim@lge.com 2012-02-02
+    chown system system /sys/devices/platform/omap/omap_i2c.1/i2c-1/1-0049/twl6030_bci/smpl_en
+    chown system system /sys/devices/platform/omap/omap_i2c.1/i2c-1/1-0049/twl6030_bci/abnormal_wakelock_dis
+    chown system system /sys/class/power_supply/battery/temp_control
+    chown radio radio /sys/class/power_supply/battery/charger_mode
+    chown radio radio /sys/class/power_supply/battery/gauge_control
+    chown radio radio /sys/class/power_supply/bk_battery/voltage_now
+    chmod 0664 /sys/devices/platform/omap/omap_i2c.4/i2c-4/4-0036/state
 
-#BEGIN: change persmissions for ALS/PROX_SENSOR younglae.kim@lge.com 2012-03-13
-     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/interrupt_als
-     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/interrupt_prox
-     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/proxidata
-     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/luxdata
-     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/DF
-     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/GA
-     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/piht
-     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/pilt
-     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/pers
-     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/ppcount
-     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/wtime
-     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/ptime
-     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/atime
-#END: change permissions for ALS/PROX_SENSOR younglae.kim@lge.com 2012-03-13
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/interrupt_als
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/interrupt_prox
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/proxidata
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/luxdata
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/DF
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/GA
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/piht
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/pilt
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/pers
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/ppcount
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/wtime
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/ptime
+    chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/atime
 
-#BEGIN: MPL 3.3 integration younglae.kim@lge.com 2012-03-23
+# mpl
      chmod 0777 /dev/mpu
      chmod 0777 /dev/mpuirq
      chmod 0777 /dev/timerirq
-#END: MPL 3.3 integration younglae.kim@lge.com 2012-03-23
-#BEGIN: change permissions for KEY younglae.kim@lge.com 2012-03-13
+
      chown radio radio /sys/devices/platform/lge-gkpd/key_test_mode
      chown radio radio /sys/devices/platform/omap/omap4-keypad/key_saving
-#END: change permissions for KEY younglae.kim@lge.com 2012-03-13
 
-#BEGIN: 0019605 hyuntae0.kim@lge.com 2012-01-04
-#MOD: 0019605 [P2_ICS][BT] UART2: Bring up code.
+# UART2
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/type
     chmod 0660 /sys/class/rfkill/rfkill1/state
@@ -214,50 +189,32 @@ on post-fs-data
     setprop service.brcm.bt.srv_active 0
     setprop service.brcm.bt.hcid_active 0
     setprop sys.settings_secure_version 0
-#END: 0019605 hyuntae0.kim@lge.com 2011-01-04
 
-#BEGIN: Log Service jinbaek.lee@lge.com----------------------
     mkdir /data/logger 0775 system system
     chown system system /data/logger
     chmod 0771 /data/logger
 
-#	setprop persist.service.main.enable 1
-#	setprop persist.service.system.enable 1
-#	setprop persist.service.radio.enable 1
-#	setprop persist.service.events.enable 1
-#	setprop persist.service.kernel.enable 1
-#	setprop persist.service.ducati.enable 1
-#	setprop persist.service.packet.enable 1
+    chown system system /sys/class/mhl_orient/mhl_dev_orient/MHL_orient
 
-#END: Log Service jinbaek.lee@lge.com-----------------------
+    service charger /charger
+        class charger
+        user root
+        group root
+        oneshot
 
-#BEGIN: To getting orient donghyuk79.park@lge.com 2012-03-06
-chown system system /sys/class/mhl_orient/mhl_dev_orient/MHL_orient
-#END: To getting orient donghyuk79.park@lge.com 2012-03-06
-
-# setup power-off charger service - juya.kim@lge.com
-service charger /charger
-		class charger
-		user root
-		group root
-		oneshot
 on boot
 
     setprop rild.libpath /system/lib/lge-ril.so
-    #setprop rild.libargs -d /dev/xmd-tty0
 
     chmod 0666 /dev/pvrsrvkm
-# change permissions for Tiler driver
     chmod 0777 /dev/tiler
     chmod 0777 /dev/dmm
-# LGE_CHANGE_S [jongsoo.lee@lge.com] 2011-12-21, Create Directory for Secure Storage 
+
     mkdir /data/smc 0770 drmrpc drmrpc
-# LGE_CHANGE_E [jongsoo.lee@lge.com] 2011-12-21
+
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
-# touch
-	chown system system /sys/devices/virtual/input/lge_touch/keyguard
-# change permissions for ION driver
+    chown system system /sys/devices/virtual/input/lge_touch/keyguard
     chmod 0777 /dev/ion
 
     chown system graphics /sys/class/graphics/fb0/overlays
@@ -266,58 +223,54 @@ on boot
     chmod 0777 /dev/graphics/fb0
     chmod 0777 /dev/graphics/fb1
 
-# wooho47.jung@lge.com 2012.04.19
-# MOD : for HiddenMenu
+
+# for HiddenMenu
     chown system system /sys/devices/platform/omapdss/display1/enabled
     chown system system /sys/devices/platform/omapdss/display1/bestScore
     chmod 0660 /sys/devices/platform/omapdss/display1/enabled
     chmod 0660 /sys/devices/platform/omapdss/display1/bestScore
 
-# change permissions for LCD backlight
+# LCD backlight
     chown system radio /sys/devices/platform/omap/omap_i2c.2/i2c-2/2-0038/brightness
     chmod 0664 /sys/devices/platform/omap/omap_i2c.2/i2c-2/2-0038/brightness
 
-# change permissions for LCD Gamma Tuning
+# LCD Gamma Tuning
     chown system radio /sys/devices/omapdss/display0/gamma_tuning
     chmod 0660 /sys/devices/omapdss/display0/gamma_tuning
 
-# change permissions for LED backlight
+# LED backlight
     chown system radio /sys/class/leds/button-backlight/br_maintain_on
     chmod 0660 /sys/class/leds/button-backlight/br_maintain_on
     chown system radio /sys/class/leds/button-backlight/brightness
     chmod 0660 /sys/devices/platform/keypad_led/leds/button-backlight/brightness
 
-# change NFC permission
+# nfc
     chmod 0666 /dev/pn544
 
-# LGE_UPDATE_S [dongki.cheon, 2012.01.09] for usb serial
-# LGE_UPDATE_S hunsoo.lee for usb serial
+# usb serial
     chmod 0777 /dev/ttyGS0
     chmod 0777 /dev/ttyGS1
     chmod 0777 /dev/ttyGS2
-# LGE_UPDATE_E
-# LGE_UPDATE_E
 
-
-# LGE_ADD_START, 20120202 dongki.cheon@lge.com, set permission misc and nv for CTS Pass
+# misc and nv for CTS Pass
     chown system media_rw /dev/block/platform/omap/omap_hsmmc.1/by-name/misc
     chmod 0660 /dev/block/platform/omap/omap_hsmmc.1/by-name/misc ## misc partition
 
     chown system media_rw /dev/block/platform/omap/omap_hsmmc.1/by-name/nv
     chmod 0660 /dev/block/platform/omap/omap_hsmmc.1/by-name/nv ## NV partition
-# LGE_ADD_END
 
 
-# MUIC permission
+# MUIC
     chown system radio /sys/class/muic/tsu5611/state
     chmod 0664 /sys/class/muic/tsu5611/state
     
-#USB VID permission
+# USB VID
     chown system system /sys/class/android_usb/android0/idVendor    
     chmod 0664 /sys/class/android_usb/android0/idVendor
-# LGE_ADD, jahoon.ku@lge.com, write access permission for autorun
+
+# write access permission for drive emulation
     chown system system /sys/class/android_usb/android0/f_cdrom_storage/lun/cdrom_usbmode
-# Start : Set DivXDRM Memory [hanjun11.cho, 2012.02.17] 
+
     mkdir /dvp/rysh 0770 system divxdrm
     chown media divxdrm /dvp/rysh
     chmod 0770 /dvp/rysh
@@ -330,26 +283,23 @@ on boot
     chown media divxdrm /dvp/ssamu
     chmod 0770 /dvp/ssamu
 
-# Start : Set widevine drm keybox repository [jungjoo.nahm@lge.com, 2012.02.21]
+# widevine drm keybox repository
     mkdir /dvp/jjn 0770 drm system
-# End : Set widevine drm keybox repository [jungjoo.nahm@lge.com, 2012.02.21]
 
     chown system system /dvp
     chmod 0771 /dvp
 
-# SJIT: jongrak.kwon TI sdram frequency set problem work around
+# TI sdram frequency set problem work around
 # Temporarily adjust CPU frequency and reset to (performance) interactive
      write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor userspace
      write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed 800000
      write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
 
-# LGE_ADD_START, 20120130 dongki.cheon@lge.com, The spritebud daemon process is started when the device is booted.
 service spritebud /system/xbin/spritebud
     class main
     socket spritebud stream 660 root radio
     user root
     group root
-# LGE_ADD_END
 
 service lgsecclk /system/bin/lgsecclkserver
     class main
@@ -367,55 +317,49 @@ service pvrsrvinit /vendor/bin/pvrsrvinit
     group root
     oneshot
 
-# moon-wifi@lge.com by kwisuk.kwon, 20120530, delete '-dd' to change a debug log level
 service wpa_supplicant /system/bin/wpa_supplicant -Dnl80211 -iwlan0 -puse_p2p_group_interface=1 -e/data/misc/wifi/entropy.bin
-     class main
-     group system wifi inet
-     socket wpa_wlan0 dgram 660 wifi wifi
-     disabled
-     oneshot
+    class main
+    group system wifi inet
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
 
-#service dhcpcd_wlan0 /system/bin/dhcpcd -BKLG  # moon-wifi@lge.com by wo0ngs, enabling AUTO IP and not enabling ARP option
 service dhcpcd_wlan0 /system/bin/dhcpcd -ABKG
-     class main
-     disabled
-     oneshot
+    class main
+    disabled
+    oneshot
  
 service dhcpcd_p2p /system/bin/dhcpcd -BKLG
     class main
     disabled
     oneshot
 
-#LGE_CHANGE_S, moon-wifi@lge.com by 2lee, 20120518, modifying iprenew parameter and option.
 service iprenew_wlan0 /system/bin/dhcpcd -nK
-     class main
-     disabled
-     oneshot
+    class main
+    disabled
+    oneshot
  
 service iprenew_p2p /system/bin/dhcpcd -nK
-     class main
-     disabled
-     oneshot
+    class main
+    disabled
+    oneshot
 
 service hostapd /system/bin/hostapd -dddd /data/misc/wifi/hostapd.conf
-     class main
-     group system wifi inet
-     socket wpa_wlan1 dgram 660 wifi wifi
-     oneshot
-     disabled  
+    class main
+    group system wifi inet
+    socket wpa_wlan1 dgram 660 wifi wifi
+    oneshot
+    disabled  
 
-# gspapa 2012-02-28 begin
 service ap_at_command /system/bin/ap_at_command
     class main
     user root
     group system input graphics media_rw sdcard_rw
-# gspapa 2012-02-28 end
-# GPS [Start]
+
 service glgps /system/bin/glgps -c /system/etc/gps_brcm_conf.xml
     class main
     user system
     group net_raw sdcard_rw system radio
-# GPS [End]
 
 service btld /system/bin/logwrapper /system/bin/btld -pf /vendor/firmware/bcm4330.hcd -hb 3000000 -hp /dev/ttyO1 -lpm 1
     user root
