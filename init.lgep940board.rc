@@ -90,9 +90,9 @@ on post-fs-data
     chmod 0644 /dev/hdcp
 
 # audio
-	mkdir /data/audio 0770 media audio
-	chown media audio /data/audio
-	chmod 0770 /data/audio
+    mkdir /data/audio 0770 media audio
+    chown media audio /data/audio
+    chmod 0770 /data/audio
 
 # GPS
     chown system system /sys/devices/platform/gps_gpio/poweron
@@ -162,12 +162,12 @@ on post-fs-data
     chown system system /sys/devices/platform/omap/omap_i2c.3/i2c-3/3-0039/atime
 
 # mpl
-     chmod 0777 /dev/mpu
-     chmod 0777 /dev/mpuirq
-     chmod 0777 /dev/timerirq
+    chmod 0777 /dev/mpu
+    chmod 0777 /dev/mpuirq
+    chmod 0777 /dev/timerirq
 
-     chown radio radio /sys/devices/platform/lge-gkpd/key_test_mode
-     chown radio radio /sys/devices/platform/omap/omap4-keypad/key_saving
+    chown radio radio /sys/devices/platform/lge-gkpd/key_test_mode
+    chown radio radio /sys/devices/platform/omap/omap4-keypad/key_saving
 
 # UART2
     chmod 0660 /sys/class/rfkill/rfkill0/state
@@ -196,11 +196,11 @@ on post-fs-data
 
     chown system system /sys/class/mhl_orient/mhl_dev_orient/MHL_orient
 
-    service charger /charger
-        class charger
-        user root
-        group root
-        oneshot
+service charger /charger
+    class charger
+    user root
+    group root
+    oneshot
 
 on boot
 
@@ -367,11 +367,9 @@ service btld /system/bin/logwrapper /system/bin/btld -pf /vendor/firmware/bcm433
     disabled
     oneshot
 
-# start btld if soft_onoff is enabled
 on property:service.brcm.bt.soft_onoff=1
     start btld
 
-# stop btld if soft_onoff is disabled
 on property:service.brcm.bt.soft_onoff=0
     stop btld
 
