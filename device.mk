@@ -196,7 +196,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mass_storage
+	persist.sys.usb.config=mtp
 
 LOCAL_PATH := device/lge/p940
 ifeq ($(TARGET_PREBUILT_KERNEL),)
