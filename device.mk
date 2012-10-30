@@ -226,7 +226,7 @@ PRODUCT_PACKAGES += \
 	make_ext4fs \
 	setup_fs
 
-$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
+$(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)
 # goo.im stuff
 $(call inherit-product, device/lge/p940/goo.mk)
 
