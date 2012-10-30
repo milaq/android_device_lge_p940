@@ -91,7 +91,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES := \
 	wifi.interface=wlan0 \
 	wifi.features=p2p \
-	wifi.supplicant_scan_interval=20
+	wifi.supplicant_scan_interval=45
 
 PRODUCT_PACKAGES += \
 	lights.p940
