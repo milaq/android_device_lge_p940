@@ -153,10 +153,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
 	frameworks/base/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
 	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
-
-# Portrait dock image
-PRODUCT_COPY_FILES += \
-    device/lge/p940/dock.png:system/vendor/res/images/dock/dock.png
 	
 # ril
 PRODUCT_COPY_FILES += \
