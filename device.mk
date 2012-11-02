@@ -28,7 +28,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	audio.a2dp.default \
-	libtinyalsa \
 	libaudioutils
 
 PRODUCT_COPY_FILES := \
