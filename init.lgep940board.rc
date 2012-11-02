@@ -383,6 +383,20 @@ service rawip_rmnet1 /system/bin/init.rmnet 1
     disabled
     oneshot
 
+service rawip_rmnet2 /system/bin/init.rmnet 2
+    class main
+    user root
+    group radio cache inet misc net_admin net_raw
+    disabled
+    oneshot
+
+service rawip_rmnet3 /system/bin/init.rmnet 3
+    class main
+    user root
+    group radio cache inet misc net_admin net_raw
+    disabled
+    oneshot
+
 service rmnet1_down /system/bin/init.rmnet-down 1
     class main
     user root
@@ -390,11 +404,19 @@ service rmnet1_down /system/bin/init.rmnet-down 1
     disabled
     oneshot
 
-on property:net.pdp1.name=rmnet0
-    start rawip_rmnet1
+service rmnet2_down /system/bin/init.rmnet-down 2
+    class main
+    user root
+    group radio cache inet misc net_admin net_raw
+    disabled
+    oneshot
 
-on property:net.pdp1.svc_down_done=
-    start rmnet1_down
+service rmnet3_down /system/bin/init.rmnet-down 3
+    class main
+    user root
+    group radio cache inet misc net_admin net_raw
+    disabled
+    oneshot
 
 service hdcp-init /system/bin/hdcp-init 1 3 >> /data/mhl.log
     class main

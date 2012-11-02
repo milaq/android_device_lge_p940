@@ -13,6 +13,7 @@
 # limitations under the License.
 
 DEVICE_PACKAGE_OVERLAYS := device/lge/p940/overlay
+TARGET_SPECIFIC_HEADER_PATH := device/lge/p940/include
 
 # make fallback to mdpi possible
 # e.g. for maintaining crisp assets on 160dpi
