@@ -104,6 +104,8 @@ BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 
 BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
 
+BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/lge/p940/vibrator.c
+
 TARGET_CUSTOM_RELEASETOOL := device/lge/p940/releasetools/squisher
 TARGET_PROVIDES_RELEASETOOLS := true
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/lge/p940/releasetools/p940_img_from_target_files
