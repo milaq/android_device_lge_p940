@@ -1,5 +1,3 @@
-<!--taesook.yoon@lge.com 20110725 - change devicename from vsnet0 to rmnet0   -->
-<!--taesook.yoon@lge.com 20110725 - change arp-supl-cap-ecid from true to false   -->
 <?xml version="1.0" encoding="utf-8"?>
 <glgps xmlns="http://www.glpals.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.glpals.com/ glconfig.xsd" >
   <!--HAL Confguration: Please make sure to split the hal configuration when it's bigger than 1K bytes. -->
