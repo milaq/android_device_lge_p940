@@ -14,6 +14,8 @@ ro.radio.use-ppp=no
 ro.config.nocheckin=yes
 keyguard.no_require_sim=1
 
+ro.bt.bdaddr_path=/sys/devices/platform/bd_address/bdaddr_if
+
 mobiledata.interfaces=rmnet0
 
 #Audio
