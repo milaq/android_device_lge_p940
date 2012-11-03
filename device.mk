@@ -202,6 +202,9 @@ else
 endif
 
 PRODUCT_COPY_FILES += \
+        device/lge/p940/prebuilt/bootanimation.zip:system/media/bootanimation.zip
+
+PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
 # Vold and Storage
