@@ -1,4 +1,4 @@
-# Copyright (C) 2010 The Android Open Source Project
+# Copyright (C) 2012 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,16 +13,9 @@
 # limitations under the License.
 
 #
-# Emulator keyboard configuration file #1.
+# Input Device Configuration File for the p940 touchscreen
 #
 
+# Basic Parameters
 touch.deviceType = touchScreen
 touch.orientationAware = 1
-
-keyboard.layout = qwerty
-keyboard.characterMap = qwerty
-keyboard.orientationAware = 1
-keyboard.builtIn = 0
-
-cursor.mode = navigation
-cursor.orientationAware = 1

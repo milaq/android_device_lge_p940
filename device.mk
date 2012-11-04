@@ -62,12 +62,11 @@ PRODUCT_COPY_FILES += \
 
 # keylayouts and touchscreen
 PRODUCT_COPY_FILES += \
-	device/lge/p940/prebuilt/omap-keypad.kl:system/usr/keylayout/omap-keypad.kl \
-	device/lge/p940/prebuilt/osp-input.kl:system/usr/keylayout/osp-input.kl \
 	device/lge/p940/prebuilt/touch_dev.kl:system/usr/keylayout/touch_dev.kl \
-	device/lge/p940/prebuilt/twl6030_pwrbutton.kl:system/usr/keylayout/twl6030_pwrbutton.kl \
 	device/lge/p940/prebuilt/touch_dev.idc:system/usr/idc/touch_dev.idc \
-	device/lge/p940/prebuilt/osp-input.idc:system/usr/idc/osp-input.idc
+	device/lge/p940/prebuilt/omap4-keypad.kl:system/usr/keylayout/omap4-keypad.kl \
+	device/lge/p940/prebuilt/twl6030_pwrbutton.kl:system/usr/keylayout/twl6030_pwrbutton.kl
+
 
 # Kernel Modules
 PRODUCT_COPY_FILES += \
