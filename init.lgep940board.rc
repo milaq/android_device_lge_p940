@@ -314,6 +314,15 @@ service lgdrm /system/bin/lgdrmserver
     user root
     group lgdrm_acc sdcard_rw media_rw system radio
 
+service hciattach /system/bin/brcm_patchram_plus --enable_hci --no2bytes --enable_lpm \
+	--scopcm=0,4,0,1,1,0,0,3,3,0  --baudrate 3000000 --use_baudrate_for_download \
+	--tosleep 50000 --patchram /vendor/firmware/bcm4330.hcd /dev/ttyO1
+	class main
+	user bluetooth
+	group bluetooth net_bt_admin
+	disabled
+	oneshot
+
 service pvrsrvinit /vendor/bin/pvrsrvinit
     class core
     user root
@@ -363,18 +372,6 @@ service glgps /system/bin/glgps -c /system/etc/gps_brcm_conf.xml
     class main
     user system
     group net_raw sdcard_rw system radio
-
-service btld /system/bin/logwrapper /system/bin/btld -pf /vendor/firmware/bcm4330.hcd -hb 3000000 -hp /dev/ttyO1 -lpm 1
-    user root
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-on property:service.brcm.bt.soft_onoff=1
-    start btld
-
-on property:service.brcm.bt.soft_onoff=0
-    stop btld
 
 service rawip_rmnet1 /system/bin/init.rmnet 1
     class main
