@@ -31,8 +31,7 @@ TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 TARGET_NO_BOOTLOADER := true
 
 BOARD_KERNEL_BASE := 0x80000000
-BOARD_PAGE_SIZE := 0x00000800
-BOARD_KERNEL_CMDLINE :=
+#BOARD_KERNEL_CMDLINE :=
 
 # Define kernel config for inline building
 #TARGET_KERNEL_CONFIG := p2_p940_defconfig
