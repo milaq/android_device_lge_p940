@@ -1,7 +1,5 @@
 #!/system/bin/sh
 #
 # Load MODULES
-insmod /system/lib/modules/omaplfb_sgx540_120.ko
-insmod /system/lib/modules/pvrsrvkm_sgx540_120.ko
 insmod /system/lib/modules/cifs.ko
 insmod /system/lib/modules/vpnclient.ko

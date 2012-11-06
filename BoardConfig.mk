@@ -51,7 +51,7 @@ ifdef OMAP_ENHANCEMENT
   COMMON_GLOBAL_CFLAGS += -DOMAP_ENHANCEMENT -DTARGET_OMAP4
 endif
 
-BOARD_EGL_CFG := device/lge/p940/egl.cfg
+BOARD_EGL_CFG := device/lge/p940/config/egl.cfg
 
 ## Ignore --wipe_data sent by the bootloader
 BOARD_RECOVERY_ALWAYS_WIPES := true

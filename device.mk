@@ -37,8 +37,8 @@ PRODUCT_COPY_FILES := \
 	device/lge/p940/ueventd.lgep940board.rc:root/ueventd.lgep940board.rc \
 	device/lge/p940/prebuilt/init.rmnet:system/bin/init.rmnet \
 	device/lge/p940/prebuilt/init.rmnet-down:system/bin/init.rmnet-down \
-	device/lge/p940/media_profiles.xml:system/etc/media_profiles.xml \
-	device/lge/p940/gps_brcm_conf.xml:system/etc/gps_brcm_conf.xml \
+	device/lge/p940/config/media_profiles.xml:system/etc/media_profiles.xml \
+	device/lge/p940/config/gps_brcm_conf.xml:system/etc/gps_brcm_conf.xml \
 	device/lge/p940/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
 # hijack/bootstrap
@@ -62,10 +62,10 @@ PRODUCT_COPY_FILES += \
 
 # keylayouts and touchscreen
 PRODUCT_COPY_FILES += \
-	device/lge/p940/prebuilt/touch_dev.kl:system/usr/keylayout/touch_dev.kl \
-	device/lge/p940/prebuilt/touch_dev.idc:system/usr/idc/touch_dev.idc \
-	device/lge/p940/prebuilt/omap4-keypad.kl:system/usr/keylayout/omap4-keypad.kl \
-	device/lge/p940/prebuilt/twl6030_pwrbutton.kl:system/usr/keylayout/twl6030_pwrbutton.kl
+	device/lge/p940/config/touch_dev.kl:system/usr/keylayout/touch_dev.kl \
+	device/lge/p940/config/touch_dev.idc:system/usr/idc/touch_dev.idc \
+	device/lge/p940/config/omap4-keypad.kl:system/usr/keylayout/omap4-keypad.kl \
+	device/lge/p940/config/twl6030_pwrbutton.kl:system/usr/keylayout/twl6030_pwrbutton.kl
 
 
 # Kernel Modules
@@ -85,7 +85,7 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_COPY_FILES += \
-	device/lge/p940/prebuilt/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
+	device/lge/p940/config/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
 
 PRODUCT_PROPERTY_OVERRIDES := \
 	wifi.interface=wlan0 \
@@ -155,7 +155,7 @@ PRODUCT_COPY_FILES += \
 	
 # ril
 PRODUCT_COPY_FILES += \
-	device/lge/p940/prebuilt/ipc_channels.config:system/etc/ipc_channels.config
+	device/lge/p940/config/ipc_channels.config:system/etc/ipc_channels.config
 
 # Commands to migrate prefs from com.android.nfc3 to com.android.nfc
 PRODUCT_COPY_FILES += \
@@ -173,9 +173,9 @@ PRODUCT_COPY_FILES += \
 
 # NFCEE access control
 ifeq ($(TARGET_BUILD_VARIANT),user)
-    NFCEE_ACCESS_PATH := device/lge/p940/nfcee_access.xml
+    NFCEE_ACCESS_PATH := device/lge/p940/config/nfcee_access.xml
 else
-    NFCEE_ACCESS_PATH := device/lge/p940/nfcee_access_debug.xml
+    NFCEE_ACCESS_PATH := device/lge/p940/config/nfcee_access_debug.xml
 endif
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
