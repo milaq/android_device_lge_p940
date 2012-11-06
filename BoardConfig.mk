@@ -115,7 +115,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
 BOARD_UMS_LUNFILE := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file"
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/lge/p940/recovery/recovery_keys.c
-TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /data/.recovery_mode; sync;"
+TARGET_RECOVERY_PRE_COMMAND := "touch /cache/recovery/boot;sync;"
 
 # Bootanimation
 TARGET_BOOTANIMATION_PRELOAD := true

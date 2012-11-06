@@ -14,8 +14,8 @@ if $BB [ -f $STOP ]; then
 fi
 
 $BB mount -o remount,rw rootfs /
-# mount /data now to get recovery mode detection working
-$BB mount -t ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/userdata /data -o nosuid,nodev,barrier=1,noauto_da_alloc
+# mount /cache now to get recovery mode detection working
+$BB mount -t ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/cache /cache -o noatime,nosuid,nodev,barrier=1
 
 # copy busybox
 $BB cp $BB /sbin
@@ -32,7 +32,7 @@ $BB touch /.bootstamp
 # check mode
 #
 TYPE=normal
-if $BB [ -f /data/.recovery_mode ]; then
+if $BB [ -f /cache/recovery/boot ]; then
   TYPE=recovery
 else
   key=
@@ -44,9 +44,9 @@ else
   fi
 fi
 
-# remove recoverymode trigger and unmount data again
-$BB rm /data/.recovery_mode
-$BB umount /data
+# remove recoverymode trigger and unmount cache again
+$BB rm /cache/recovery/boot
+$BB umount /cache
 
 # Continue init process
 $BB kill -CONT 1
