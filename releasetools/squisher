@@ -64,9 +64,6 @@ rm -f $REPACK/ota/boot.img
 cd $OUT/root
 tar cf $REPACK/ota/system/bootstrap/boot.tar .
 
-# remove rom manager
-rm -f $REPACK/ota/system/$OUT/bootapp/RomManager.apk
-
 # 2nd-init hijack
 cd $REPACK/ota/system/bin
 mv e2fsck e2fsck.bin
