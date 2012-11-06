@@ -88,6 +88,9 @@ on post-fs-data
     mkdir /persist/mhl 0770 radio radio
     chown system system /dev/hdcp
     chmod 0644 /dev/hdcp
+	
+# add symlink for HDCP key
+    symlink /persist/en_hdcp.bin /system/vendor/firmware/hdcp.keys
 
 # audio
     mkdir /data/audio 0770 media audio
