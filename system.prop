@@ -3,7 +3,7 @@
 #
 telephony.lteOnCdmaDevice=0
 
-ro.cwm.forbid_format=/misc,/boot,/recovery,/system
+ro.cwm.forbid_format=/misc,/radio,/bootloader,/recovery,/efs,/wimax,/system,/boot
 
 # OMAP
 com.ti.omap_enhancement=true
