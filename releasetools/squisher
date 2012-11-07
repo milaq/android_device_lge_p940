@@ -62,6 +62,7 @@ rm -f $REPACK/ota/boot.img
 
 # ramdisk
 cd $OUT/root
+rm -f init
 tar cf $REPACK/ota/system/bootstrap/boot.tar .
 
 # 2nd-init hijack
