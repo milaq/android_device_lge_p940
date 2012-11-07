@@ -81,6 +81,11 @@ on post-fs-data
     chmod 0666 /data/misc/wifi/wpa_supplicant.conf
     chmod 0775 /data/misc/wifi
 
+# wifi fw path file
+    write /data/misc/wifi/fw_path 0
+    chown wifi wifi /data/misc/wifi/fw_path
+    chmod 0660 /data/misc/wifi/fw_path
+
 # create directory for lgdrm
     mkdir /data/lgdrm 0770 lgdrm lgdrm_acc
 
