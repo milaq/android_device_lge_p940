@@ -228,10 +228,10 @@ on boot
     chmod 0777 /dev/ttyGS2
 
 # misc and nv for CTS Pass
-    chown system media_rw /dev/block/platform/omap/omap_hsmmc.1/by-name/misc
+    chown system misc /dev/block/platform/omap/omap_hsmmc.1/by-name/misc
     chmod 0660 /dev/block/platform/omap/omap_hsmmc.1/by-name/misc ## misc partition
 
-    chown system media_rw /dev/block/platform/omap/omap_hsmmc.1/by-name/nv
+    chown system misc /dev/block/platform/omap/omap_hsmmc.1/by-name/nv
     chmod 0660 /dev/block/platform/omap/omap_hsmmc.1/by-name/nv ## NV partition
 
 
