@@ -111,36 +111,11 @@ on post-fs-data
     mkdir /data/gps/log
     chmod 770 /data/gps/log
     chown system system /data/gps/log 
-    
-    mkdir /data/cache
-    chmod 770 /data/cache
-    chown system system /data/cache
-    
+
     chown system system /system/bin/glgps
     chown system system /system/etc/gps_brcm_conf.xml
     chown system system /system/etc/cert/
-    chown system system /system/etc/cert/lge.cer  
-    
-    # Create dump dir and collect dumps.
-    mkdir /data/dontpanic
-    chown root system /data/dontpanic
-    chmod 0754 /data/dontpanic
-
-    # collect ramconsole data
-    copy /proc/last_kmsg /data/dontpanic/last_kmsg.txt
-    chown root log /data/dontpanic/last_kmsg.txt
-    chmod 0640 /data/dontpanic/last_kmsg.txt
-
-    # collect apanic data, free resources and re-arm trigger
-    copy /proc/apanic_console /data/dontpanic/apanic_console
-    chown root log /data/dontpanic/apanic_console
-    chmod 0640 /data/dontpanic/apanic_console
-
-    copy /proc/apanic_threads /data/dontpanic/apanic_threads
-    chown root log /data/dontpanic/apanic_threads
-    chmod 0640 /data/dontpanic/apanic_threads
-
-    write /proc/apanic_console 1
+    chown system system /system/etc/cert/lge.cer
 
     chown system system /sys/devices/platform/omap/omap_i2c.1/i2c-1/1-0049/twl6030_bci/smpl_en
     chown system system /sys/devices/platform/omap/omap_i2c.1/i2c-1/1-0049/twl6030_bci/abnormal_wakelock_dis
