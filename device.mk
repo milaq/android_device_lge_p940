@@ -93,7 +93,8 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	wifi.supplicant_scan_interval=45
 
 PRODUCT_PACKAGES += \
-	lights.p940
+	lights.p940 \
+	wifimac
 
 # NFC
 PRODUCT_PACKAGES += \
