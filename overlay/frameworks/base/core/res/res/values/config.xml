@@ -214,4 +214,8 @@
          legacy USB manager should be started. -->
     <string name="config_legacyUmsLunFile">/sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file</string>
 
+    <!-- Flag indicating whether we should enable automatic brightness for
+         the button and keyboard backlights. -->
+    <bool name="config_autoBrightnessButtonKeyboard">false</bool>
+
 </resources>
