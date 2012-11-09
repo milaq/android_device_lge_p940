@@ -29,6 +29,7 @@ TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 
 TARGET_NO_BOOTLOADER := true
+TARGET_NO_RADIOIMAGE := true
 
 BOARD_KERNEL_BASE := 0x80000000
 #BOARD_KERNEL_CMDLINE :=
@@ -36,27 +37,19 @@ BOARD_KERNEL_BASE := 0x80000000
 # Define kernel config for inline building
 #TARGET_KERNEL_CONFIG := p2_p940_defconfig
 #TARGET_KERNEL_SOURCE := kernel/lge/p940
-
 TARGET_PREBUILT_KERNEL := device/lge/p940/prebuilt/kernel
 
-TARGET_NO_RADIOIMAGE := true
 TARGET_BOARD_PLATFORM := omap4
 TARGET_BOOTLOADER_BOARD_NAME := p940
 
 USE_OPENGL_RENDERER := true
+BOARD_EGL_CFG := device/lge/p940/config/egl.cfg
 
 # OMAP
 OMAP_ENHANCEMENT := true
 ifdef OMAP_ENHANCEMENT
   COMMON_GLOBAL_CFLAGS += -DOMAP_ENHANCEMENT -DTARGET_OMAP4
 endif
-
-BOARD_EGL_CFG := device/lge/p940/config/egl.cfg
-
-## Ignore --wipe_data sent by the bootloader
-BOARD_RECOVERY_ALWAYS_WIPES := true
-TARGET_RECOVERY_INITRC := device/lge/p940/recovery/init.rc
-BOARD_RECOVERY_IGNORE_BOOTABLES := true
 
 BOARD_HAS_SDCARD_INTERNAL := true
 BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
@@ -72,10 +65,6 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 536870912
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2457862144
 BOARD_FLASH_BLOCK_SIZE := 4096
 BOARD_HAS_LARGE_FILESYSTEM := true
-
-BOARD_NEVER_UMOUNT_SYSTEM := true
-
-#TARGET_PROVIDES_INIT_RC := true
 
 # Wifi related defines
 BOARD_WLAN_DEVICE           := bcmdhd
@@ -109,9 +98,12 @@ TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/lge/p940/releasetools/p940
 
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
 
+BOARD_RECOVERY_ALWAYS_WIPES := true
+TARGET_RECOVERY_INITRC := device/lge/p940/recovery/init.rc
+BOARD_RECOVERY_IGNORE_BOOTABLES := true
 BOARD_UMS_LUNFILE := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file"
-BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/lge/p940/recovery/recovery_keys.c
+BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_PRE_COMMAND := "touch /cache/recovery/boot;sync;"
 
 # Bootanimation
