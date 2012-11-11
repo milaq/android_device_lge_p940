@@ -188,9 +188,9 @@ class EdifyGenerator(object):
     fstab = self.info.get("fstab", None)
     if fstab:
       p = fstab[partition]
-      self.script.append('format("%s", "%s", "%s", "%s");' %
+      self.script.append('format("%s", "%s", "%s", "%s", "%s");' %
                          (p.fs_type, common.PARTITION_TYPES[p.fs_type],
-                          p.device, p.length))
+                          p.device, p.length, p.mount_point))
 
   def DeleteFiles(self, file_list):
     """Delete all files in file_list."""
@@ -256,20 +256,6 @@ class EdifyGenerator(object):
       cmd = ('symlink("%s", ' % (dest,) +
              ",\0".join(['"' + i + '"' for i in sorted(links)]) + ");")
       self.script.append(self._WordWrap(cmd))
-
-  def RetouchBinaries(self, file_list):
-    """Execute the retouch instructions in files listed."""
-    cmd = ('retouch_binaries(' +
-           ', '.join(['"' + i[0] + '", "' + i[1] + '"' for i in file_list]) +
-           ');')
-    self.script.append(self._WordWrap(cmd))
-
-  def UndoRetouchBinaries(self, file_list):
-    """Undo the retouching (retouch to zero offset)."""
-    cmd = ('undo_retouch_binaries(' +
-           ', '.join(['"' + i[0] + '", "' + i[1] + '"' for i in file_list]) +
-           ');')
-    self.script.append(self._WordWrap(cmd))
 
   def AppendExtra(self, extra):
     """Append text verbatim to the output script."""
