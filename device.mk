@@ -94,6 +94,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 PRODUCT_PACKAGES += \
 	lights.p940 \
+	nfc.p940 \
 	wifimac
 
 # NFC
