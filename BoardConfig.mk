@@ -88,12 +88,10 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_HAVE_FM_RADIO := true
 BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 
-<<<<<<< HEAD
 # ics audio+camera blobs
 COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB -DICS_CAMERA_BLOB
-=======
+
 BOARD_LIB_DUMPSTATE := libdumpstate.p940
->>>>>>> a7f23b1... add dumpstate support
 
 BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
 
