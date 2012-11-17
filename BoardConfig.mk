@@ -107,7 +107,6 @@ BOARD_RECOVERY_ALWAYS_WIPES := true
 TARGET_RECOVERY_INITRC := device/lge/p940/recovery/init.rc
 BOARD_RECOVERY_IGNORE_BOOTABLES := true
 BOARD_UMS_LUNFILE := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file"
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/lge/p940/recovery/recovery_keys.c
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_PRE_COMMAND := "touch /cache/recovery/boot;sync;"
 
