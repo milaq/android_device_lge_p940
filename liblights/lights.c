@@ -37,6 +37,8 @@
 static pthread_once_t g_init = PTHREAD_ONCE_INIT;
 static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 static struct light_state_t g_notification;
+static int g_enable_touchlight = -1;
+static int g_touchled_on = 0;
 
 char const*const LCD_FILE
         = "/sys/devices/platform/omap/omap_i2c.2/i2c-2/2-0038/brightness";
@@ -48,11 +50,30 @@ char const*const BUTTON_BRIGHTNESS
  * device methods
  */
 
-void init_globals(void)
+void
+init_globals(void)
 {
     // init the mutex
     pthread_mutex_init(&g_lock, NULL);
 
+}
+
+void
+load_settings()
+{
+    FILE* fp = fopen("/data/.disable_touchlight", "r");
+    if (!fp) {
+        LOGV("load_settings failed to open /data/.disable_touchlight - leaving touchled enabled\n");
+        g_enable_touchlight = 1;
+    } else {
+        g_enable_touchlight = (int)(fgetc(fp));
+        if (g_enable_touchlight == '1')
+            g_enable_touchlight = 1;
+        else
+            g_enable_touchlight = 0;
+
+        fclose(fp);
+    }
 }
 
 static int
@@ -114,7 +135,7 @@ set_light_buttons(struct light_device_t* dev,
     int err = 0;
     int on = is_lit(state);
 
-    LOGV("Setting button brightness to %ld",value);
+    LOGV("Setting button brightness to %ld",on);
 
     pthread_mutex_lock(&g_lock);
     err = write_int(BUTTON_BRIGHTNESS, on?255:0);
@@ -128,14 +149,18 @@ set_light_backlight(struct light_device_t* dev,
 {
     int err = 0;
     int brightness = rgb_to_brightness(state);
-    
+
     LOGV("Setting display brightness to %d",brightness);
 
     pthread_mutex_lock(&g_lock);
     err = write_int(LCD_FILE, brightness);
     pthread_mutex_unlock(&g_lock);
 
-    err = set_light_buttons(dev, state);
+    if (g_enable_touchlight == -1 || g_enable_touchlight > 0) {
+        g_touchled_on = brightness?1:0;
+        err = set_light_buttons(dev, state);
+    }
+
     return err;
 }
 
@@ -145,17 +170,16 @@ set_light_notifications(struct light_device_t* dev,
 {
     int err = 0;
     int on = is_lit(state);
-    int red, green, blue = 0;
-
-    red = (state->color >> 16) & 0xff;
-    green = (state->color >> 8) & 0xff;
-    blue = (state->color) & 0xff;
 
     LOGV("Calling notification light with state %d",on);
-    
-    pthread_mutex_lock(&g_lock);
-    err = write_int(BUTTON_BRIGHTNESS, on?255:0);
-    pthread_mutex_unlock(&g_lock);
+
+    if (on)
+        err = set_light_buttons(dev, state);
+    else if (!on && !g_touchled_on)
+        err = set_light_buttons(dev, state);
+    else
+        LOGV("not disabling button/notification light since button backlight is on");
+
     return err;
 }
 
@@ -189,12 +213,14 @@ static int open_lights(const struct hw_module_t* module, char const* name,
     else if (0 == strcmp(LIGHT_ID_BUTTONS, name)) {
         set_light = set_light_buttons;
     }
-    /*else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name)) {
+    else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name)) {
         set_light = set_light_notifications;
-    }*/
+    }
     else {
         return -EINVAL;
     }
+
+    load_settings();
 
     pthread_once(&g_init, init_globals);
 
