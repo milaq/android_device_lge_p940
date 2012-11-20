@@ -210,12 +210,12 @@
 
     <!-- Vibrator pattern for feedback about touching a virtual key -->
     <integer-array name="config_virtualKeyVibePattern">
-        <item>20</item>
+        <item>15</item>
     </integer-array>
 
     <!-- Vibrator pattern for a very short but reliable vibration for soft keyboard tap -->
     <integer-array name="config_keyboardTapVibePattern">
-        <item>15</item>
+        <item>10</item>
     </integer-array>
 
     <!-- LUN file to be used by legacy USB manager.
