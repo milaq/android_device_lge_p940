@@ -63,7 +63,7 @@ load_settings()
 {
     FILE* fp = fopen("/data/.disable_touchlight", "r");
     if (!fp) {
-        LOGV("load_settings failed to open /data/.disable_touchlight - leaving touchled enabled\n");
+        ALOGV("load_settings failed to open /data/.disable_touchlight - leaving touchled enabled\n");
         g_enable_touchlight = 1;
     } else {
         g_enable_touchlight = (int)(fgetc(fp));
@@ -171,7 +171,7 @@ set_light_notifications(struct light_device_t* dev,
     int err = 0;
     int on = is_lit(state);
 
-    LOGV("Calling notification light with state %d",on);
+    ALOGV("Calling notification light with state %d",on);
 
     if (on)
         err = set_light_buttons(dev, state);
