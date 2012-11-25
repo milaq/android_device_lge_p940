@@ -106,6 +106,8 @@ BOARD_RECOVERY_IGNORE_BOOTABLES := true
 BOARD_UMS_LUNFILE := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file"
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_PRE_COMMAND := "touch /cache/recovery/boot;sync;"
+BOARD_HDPI_RECOVERY := true
+BOARD_USE_CUSTOM_FONT := true
 
 # Bootanimation
 TARGET_BOOTANIMATION_PRELOAD := true
