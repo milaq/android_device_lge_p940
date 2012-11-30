@@ -41,22 +41,6 @@ PRODUCT_COPY_FILES := \
 	device/lge/p940/config/gps_brcm_conf.xml:system/etc/gps_brcm_conf.xml \
 	device/lge/p940/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
-# hijack/bootstrap
-PRODUCT_COPY_FILES += \
-	device/lge/p940/bootstrap/hijack:system/bin/hijack
-
-PRODUCT_COPY_FILES += \
-	device/lge/p940/bootstrap/2nd-init:system/bootstrap/2nd-init \
-	device/lge/p940/bootstrap/getkey:system/bootstrap/getkey \
-	device/lge/p940/bootstrap/taskset:system/bootstrap/taskset \
-	device/lge/p940/bootstrap/stop:system/bootstrap/stop \
-	device/lge/p940/bootstrap/unsecureboot:system/bootstrap/unsecureboot
-
-# 2nd init ramdisks
-PRODUCT_COPY_FILES += \
-	device/lge/p940/bootstrap/recovery.tar:system/bootstrap/recovery.tar
-
-	
 PRODUCT_COPY_FILES += \
 	device/lge/p940/prebuilt/init.d/01modules:system/etc/init.d/01modules
 

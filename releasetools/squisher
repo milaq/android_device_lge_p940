@@ -54,20 +54,8 @@ printf "Unpacking $OTAPACKAGE..."
 unzip $QUIET $OTAPACKAGE
 
 ### begin p940 stuff >>>
-echo
-printf "running p940 custom releasetools..."
-
-# remove boot.img
-rm -f $REPACK/ota/boot.img
-
-# ramdisk
-cd $OUT/root
-tar cf $REPACK/ota/system/bootstrap/boot.tar .
-
-# 2nd-init hijack
-cd $REPACK/ota/system/bin
-mv e2fsck e2fsck.bin
-mv hijack e2fsck
+printf "signing boot.img..."
+$ANDROID_BUILD_TOP/device/lge/p940/releasetools/ifttool/signimg.sh $REPACK/ota/boot.img
 ### end p940 stuff <<<
 
 echo
@@ -126,4 +114,3 @@ echo
 )
 
 exit 0
-
