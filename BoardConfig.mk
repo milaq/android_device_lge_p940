@@ -98,17 +98,14 @@ BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
 BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/lge/p940/vibrator.c
 
 TARGET_CUSTOM_RELEASETOOL := device/lge/p940/releasetools/squisher
-TARGET_PROVIDES_RELEASETOOLS := true
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/lge/p940/releasetools/p940_ota_from_target_files
 
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
 
 BOARD_RECOVERY_ALWAYS_WIPES := true
 TARGET_RECOVERY_INITRC := device/lge/p940/recovery/init.rc
-BOARD_RECOVERY_IGNORE_BOOTABLES := true
 BOARD_UMS_LUNFILE := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file"
+TARGET_RECOVERY_PRE_COMMAND := "echo boot-recovery | dd of=/dev/block/mmcblk0p6 bs=1;"
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_PRE_COMMAND := "touch /cache/recovery/boot;sync;"
 BOARD_HDPI_RECOVERY := true
 BOARD_USE_CUSTOM_FONT := true
 
@@ -120,8 +117,6 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 DEVICE_RESOLUTION := 480x800
 TW_NO_REBOOT_BOOTLOADER := true
 TW_NO_REBOOT_RECOVERY := true
-TW_ALWAYS_RMRF := true
-TW_NEVER_UNMOUNT_SYSTEM := true
 TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_INTERNAL_STORAGE_PATH := "/emmc"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "emmc"

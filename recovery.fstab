@@ -4,6 +4,7 @@
 /system		ext4	/dev/block/platform/omap/omap_hsmmc.1/by-name/system
 /cache		ext4	/dev/block/platform/omap/omap_hsmmc.1/by-name/cache
 /data		ext4	/dev/block/platform/omap/omap_hsmmc.1/by-name/userdata
+/misc		emmc	/dev/block/platform/omap/omap_hsmmc.1/by-name/misc
 /sdcard		vfat	/dev/block/mmcblk1p1	/dev/block/mmcblk1
 /emmc		vfat	/dev/block/platform/omap/omap_hsmmc.1/by-name/fat
 
