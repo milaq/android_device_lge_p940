@@ -56,7 +56,6 @@ PRODUCT_COPY_FILES += \
 # Kernel Modules
 PRODUCT_COPY_FILES += \
 	device/lge/p940/prebuilt/modules/bcmdhd.ko:system/lib/modules/bcmdhd.ko \
-	device/lge/p940/prebuilt/modules/cifs.ko:system/lib/modules/cifs.ko \
 	device/lge/p940/prebuilt/modules/vpnclient.ko:system/lib/modules/vpnclient.ko
 
 # Ssx modules
