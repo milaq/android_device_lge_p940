@@ -1,5 +1,4 @@
 #!/system/bin/sh
 #
 # Load MODULES
-insmod /system/lib/modules/cifs.ko
 insmod /system/lib/modules/vpnclient.ko
