@@ -1,9 +1,6 @@
 #
 # system.prop for p940
 #
-telephony.lteOnCdmaDevice=0
-
-ro.cwm.forbid_format=/misc,/radio,/bootloader,/recovery,/efs,/wimax,/system,/boot
 
 # OMAP
 com.ti.omap_enhancement=true
@@ -13,7 +10,7 @@ opencore.asmd=1
 ro.radio.use-ppp=no
 ro.config.nocheckin=yes
 keyguard.no_require_sim=1
-
+telephony.lteOnCdmaDevice=0
 mobiledata.interfaces=rmnet0
 
 #Audio
