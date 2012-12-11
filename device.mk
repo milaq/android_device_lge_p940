@@ -190,13 +190,7 @@ PRODUCT_COPY_FILES += \
 
 # Vold and Storage
 PRODUCT_COPY_FILES += \
-	device/lge/p940/vold.fstab:system/etc/vold.fstab
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.vold.switchablepair=/storage/sdcard0,/storage/sdcard1
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.vold.switchexternal=1
+	device/lge/p940/config/vold.fstab:system/etc/vold.fstab
 
 PRODUCT_PACKAGES += \
 	com.android.future.usb.accessory

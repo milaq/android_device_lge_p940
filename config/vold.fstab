@@ -1,0 +1,5 @@
+# internal sdcard
+dev_mount sdcard0 /storage/sdcard0 14 /devices/platform/omap/omap_hsmmc.1/mmc_host/mmc0 nonremovable,encryptable
+
+# external sdcard
+dev_mount sdcard1 /storage/sdcard1 auto /devices/platform/omap/omap_hsmmc.0/mmc_host/mmc1
