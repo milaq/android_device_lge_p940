@@ -45,9 +45,6 @@ PRODUCT_COPY_FILES := \
 	device/lge/p940/config/gps_brcm_conf.xml:system/etc/gps_brcm_conf.xml \
 	device/lge/p940/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
-PRODUCT_COPY_FILES += \
-	device/lge/p940/prebuilt/init.d/01modules:system/etc/init.d/01modules
-
 # keylayouts and touchscreen
 PRODUCT_COPY_FILES += \
 	device/lge/p940/config/touch_dev.kl:system/usr/keylayout/touch_dev.kl \

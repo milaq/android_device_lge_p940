@@ -1,4 +1,0 @@
-#!/system/bin/sh
-#
-# Load MODULES
-insmod /system/lib/modules/vpnclient.ko
