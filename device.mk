@@ -53,12 +53,11 @@ PRODUCT_COPY_FILES += \
 	device/lge/p940/config/twl6030_pwrbutton.kl:system/usr/keylayout/twl6030_pwrbutton.kl
 
 
-# Kernel Modules
+# Wifi module
 PRODUCT_COPY_FILES += \
-	device/lge/p940/prebuilt/modules/bcmdhd.ko:system/lib/modules/bcmdhd.ko \
-	device/lge/p940/prebuilt/modules/vpnclient.ko:system/lib/modules/vpnclient.ko
+	device/lge/p940/prebuilt/modules/bcmdhd.ko:system/lib/modules/bcmdhd.ko
 
-# Ssx modules
+# Sgx modules
 PRODUCT_COPY_FILES += \
 	device/lge/p940/prebuilt/modules/omaplfb_sgx540_120.ko:system/modules/omaplfb_sgx540_120.ko \
 	device/lge/p940/prebuilt/modules/pvrsrvkm_sgx540_120.ko:system/modules/pvrsrvkm_sgx540_120.ko
