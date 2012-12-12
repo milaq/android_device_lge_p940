@@ -7,6 +7,7 @@ com.ti.omap_enhancement=true
 opencore.asmd=1
 
 # Define modem related settings
+ro.telephony.ril_class=LGEInfineon
 ro.radio.use-ppp=no
 ro.config.nocheckin=yes
 keyguard.no_require_sim=1
