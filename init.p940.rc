@@ -118,7 +118,10 @@ on post-fs-data
     chown system system /data/gps
     mkdir /data/gps/log
     chmod 770 /data/gps/log
-    chown system system /data/gps/log 
+    chown system system /data/gps/log    
+    mkdir /data/cache
+    chmod 770 /data/cache
+    chown system system /data/cache
 
     chown system system /system/bin/glgps
     chown system system /system/etc/gps_brcm_conf.xml
