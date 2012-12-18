@@ -39,8 +39,8 @@ struct omap_ion_tiler_alloc_data {
 	struct ion_handle *handle;
 	size_t stride;
 	size_t offset;
-	__u32 out_align;
-	__u32 token;
+	u32 out_align;
+	u32 token;
 };
 
 #ifdef __KERNEL__
@@ -93,4 +93,3 @@ enum {
 };
 
 #endif /* _LINUX_ION_H */
-
