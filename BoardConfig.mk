@@ -49,6 +49,9 @@ TARGET_SPECIFIC_HEADER_PATH := device/lge/p940/include/
 USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/lge/p940/config/egl.cfg
 
+# set if the target supports FBIO_WAITFORVSYNC
+TARGET_HAS_WAITFORVSYNC := true
+
 # OMAP
 OMAP_ENHANCEMENT := true
 OMAP_ENHANCEMENT_CPCAM := true
