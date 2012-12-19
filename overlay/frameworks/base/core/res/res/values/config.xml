@@ -66,7 +66,6 @@
         <item>1300</item>
         <item>1920</item>
         <item>3000</item>
-        <item>20000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -85,7 +84,6 @@
         <item>210</item>
         <item>222</item>
         <item>255</item>
-        <item>86</item>
     </integer-array>
 
     <!-- Array of output values for button backlight corresponding to the LUX values
@@ -93,7 +91,6 @@
          than the size of the config_autoBrightnessLevels array.
     -->
     <integer-array name="config_autoBrightnessButtonBacklightValues">
-        <item>255</item>
         <item>255</item>
         <item>255</item>
         <item>255</item>
@@ -113,7 +110,6 @@
          Crespo has no keyboard so all values are zero.
     -->
     <integer-array name="config_autoBrightnessKeyboardBacklightValues">
-        <item>0</item>
         <item>0</item>
         <item>0</item>
         <item>0</item>
