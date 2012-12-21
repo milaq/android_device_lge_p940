@@ -16,16 +16,20 @@
 ifneq ($(filter p940, $(TARGET_BOOTLOADER_BOARD_NAME)),)
 
 LOCAL_PATH:= $(call my-dir)
+
 include $(CLEAR_VARS)
-
 LOCAL_MODULE_TAGS := optional
-
-LOCAL_SRC_FILES := wifimac.c
-
+LOCAL_SRC_FILES := wifimac_native.c
 LOCAL_PRELINK_MODULE := false
-
-LOCAL_MODULE := wifimac
-
+LOCAL_MODULE := wifimac_native
 include $(BUILD_EXECUTABLE)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE := wifimac
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT)/bin
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
 
 endif

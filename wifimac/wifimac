@@ -1,0 +1,8 @@
+#!/system/bin/sh
+
+if [ ! -s /data/misc/wifi/config ]
+then
+  /system/bin/wifimac_native
+fi
+chown system.wifi /data/misc/wifi/config
+chmod 660 /data/misc/wifi/config
