@@ -13,6 +13,7 @@ ro.config.nocheckin=yes
 keyguard.no_require_sim=1
 telephony.lteOnCdmaDevice=0
 mobiledata.interfaces=rmnet0
+telephony.test.ignore.nitz=true
 
 #Audio
 omap.audio.mic.main=AMic0
@@ -33,14 +34,9 @@ jpeg.libskiahw.decoder.thresh=0
 jpeg.libskiahw.encoder.thresh=0
 
 camera.dcc.enable=0
-ro.com.android.dateformat=MM-dd-yyyy
-ro.com.android.dataroaming=false
-use.bt.tethering=0
 persist.gsm.sms.forcegsm7=1
 persist.sys.system_volume_index=7
-#persist.sys.system_volume_value=0.5957
-persist.sys.sound_enable=0
-persist.wifi.mac=FFFFFFFFFFFF
+persist.sys.sound_enable=2
 ro.lk.version=LK MAY-2012
 ro.build.target_ril_platform=ifx
 persist.service.rr.enable=1
