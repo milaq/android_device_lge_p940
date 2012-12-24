@@ -173,22 +173,8 @@ on post-fs-data
     setprop ro.bt.bdaddr_path "/sys/devices/platform/bd_address/bdaddr_if"
     chmod 0660 /sys/devices/platform/bd_address/bdaddr_if
     chown bluetooth bluetooth /sys/devices/platform/bd_address/bdaddr_if
-    
-    setprop service.brcm.bt.btld 0
-    setprop service.brcm.bt.activation 0
-    setprop service.brcm.bt.srv_active 0
-    setprop service.brcm.bt.hcid_active 0
-    setprop sys.settings_secure_version 0
-
-    mkdir /data/logger 0775 system system
-    chown system system /data/logger
-    chmod 0771 /data/logger
 
     chown system system /sys/class/mhl_orient/mhl_dev_orient/MHL_orient
-
-on early-boot
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
 
 on boot
     setprop rild.libpath /system/lib/lge-ril.so
