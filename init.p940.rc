@@ -55,13 +55,8 @@ on early-fs
     mkdir /mpt 0775 system system
 
 on fs
-# mount mtd partitions
-    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/system /system wait ro barrier=1
-    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/userdata /data wait noatime nosuid nodev barrier=1 noauto_da_alloc
-    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/cache /cache wait noatime nosuid nodev barrier=1
-    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/divxkey /dvp wait noatime nosuid nodev
-    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/persist /persist wait noatime nosuid nodev
-    mount ext4 /dev/block/platform/omap/omap_hsmmc.1/by-name/mlt /mpt wait nosuid nodev barrier=1 data=ordered
+# mount partitions
+    mount_all /fstab.p940
 
     setprop ro.crypto.fuse_sdcard false
 

@@ -40,12 +40,17 @@ PRODUCT_COPY_FILES := \
 	device/lge/p940/init.p940.rc:root/init.p940.rc \
 	device/lge/p940/init.p940.usb.rc:root/init.p940.usb.rc \
 	device/lge/p940/ueventd.p940.rc:root/ueventd.p940.rc \
+	device/lge/p940/fstab.p940:root/fstab.p940 \
 	device/lge/p940/prebuilt/init.rmnet:system/bin/init.rmnet \
 	device/lge/p940/prebuilt/init.rmnet-down:system/bin/init.rmnet-down \
+	device/lge/p940/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
+	
+# configs
+PRODUCT_COPY_FILES += \
 	device/lge/p940/config/media_profiles.xml:system/etc/media_profiles.xml \
 	device/lge/p940/config/media_codecs.xml:system/etc/media_codecs.xml \
-	device/lge/p940/config/gps_brcm_conf.xml:system/etc/gps_brcm_conf.xml \
-	device/lge/p940/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
+	device/lge/p940/config/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
+	device/lge/p940/config/gps_brcm_conf.xml:system/etc/gps_brcm_conf.xml
 
 # keylayouts and touchscreen
 PRODUCT_COPY_FILES += \
@@ -67,10 +72,6 @@ PRODUCT_COPY_FILES += \
 # Bluetooth configuration files
 PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf
-
-# Wifi
-PRODUCT_COPY_FILES += \
-	device/lge/p940/config/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
 
 PRODUCT_PROPERTY_OVERRIDES := \
 	wifi.interface=wlan0 \
