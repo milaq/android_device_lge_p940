@@ -25,18 +25,7 @@
 #include <hardware/hardware.h>
 #include <hardware/power.h>
 
-#define SCALINGMAXFREQ_PATH "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq"
-#define SCREENOFFMAXFREQ_PATH "/sys/devices/system/cpu/cpu0/cpufreq/screen_off_max_freq"
 #define BOOSTPULSE_PATH "/sys/devices/system/cpu/cpufreq/interactive/boostpulse"
-
-#define MAX_BUF_SZ  10
-
-/* initialize to something safe */
-static char screen_off_max_freq[MAX_BUF_SZ] = "600000";
-static char scaling_max_freq[MAX_BUF_SZ] = "1008000";
-
-/* for tracking previous screen state */
-static int previous_state = 0;
 
 struct p940_power_module {
     struct power_module base;
@@ -66,23 +55,6 @@ static void sysfs_write(char *path, char *s)
     close(fd);
 }
 
-int sysfs_read(const char *path, char *buf, size_t size)
-{
-  int fd, len;
-
-  fd = open(path, O_RDONLY);
-  if (fd < 0)
-    return -1;
-
-  do {
-    len = read(fd, buf, size);
-  } while (len < 0 && errno == EINTR);
-
-  close(fd);
-
-  return len;
-}
-
 static void p940_power_init(struct power_module *module)
 {
     /*
@@ -93,11 +65,11 @@ static void p940_power_init(struct power_module *module)
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_rate",
                 "20000");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/min_sample_time",
-                "60000");
+                "20000");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/hispeed_freq",
                 "600000");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load",
-                "50");
+                "70");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay",
                 "100000");
 }
@@ -127,43 +99,12 @@ static int boostpulse_open(struct p940_power_module *p940)
 static void p940_power_set_interactive(struct power_module *module, int on)
 {
     /*
-     * Lower maximum frequency when screen changes from on to off.
-     * Return it to previous value when screen changes from off to on.
-     * CPU 0 and 1 share a cpufreq policy.
+     * Lower maximum frequency when screen is off.  CPU 0 and 1 share a
+     * cpufreq policy.
      */
 
-    //screen state has changed since last call
-    if (on != previous_state)
-    {           
-        char buf_screen_off_max[MAX_BUF_SZ], buf_scaling_max[MAX_BUF_SZ];
-        int screen_off_max, scaling_max;
-
-        previous_state = on;
-
-        //read value of screen-off max from sysfs, and convert to int for comparison
-        if (sysfs_read(SCREENOFFMAXFREQ_PATH, buf_screen_off_max, sizeof(buf_screen_off_max)) != -1)
-            screen_off_max = atoi(buf_screen_off_max);
-
-        //read value of max from sysfs, and convert to int for comparison
-        if (sysfs_read(SCALINGMAXFREQ_PATH, buf_scaling_max, sizeof(buf_scaling_max)) != -1)
-            scaling_max = atoi(buf_scaling_max);
-
-        /* If scaling_max_freq > screen_off_max_freq, then scaling_max_freq is really the maximum frequency, so save it for the next time the screen comes on.
-         * If screen_off_max_freq == 0, then we're just going to write our saved scalin_max_freq back to sysfs no matter what
-         * If scaling_max_freq == screen_off_max_freq, then scaling_max_freq has the screen_off_max in it, so DON'T SAVE IT TO OUR MAX VARIABLE!
-         */
-        if (scaling_max > screen_off_max)
-            memcpy(scaling_max_freq,
-               (scaling_max > screen_off_max) ? buf_scaling_max : buf_screen_off_max,
-               strlen((scaling_max > screen_off_max) ? buf_scaling_max : buf_screen_off_max));
-
-        memcpy(screen_off_max_freq,
-               (scaling_max <= screen_off_max && screen_off_max > 0) ? buf_scaling_max : buf_screen_off_max,
-               strlen((scaling_max <= screen_off_max && screen_off_max > 0) ? buf_scaling_max : buf_screen_off_max));
-
-        //write the appropriate value for scaling_max back to sysfs
-        sysfs_write(SCALINGMAXFREQ_PATH, on?scaling_max_freq:screen_off_max_freq);
-    }
+    sysfs_write("/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq",
+                on ? "1008000" : "600000");
 }
 
 static void p940_power_hint(struct power_module *module, power_hint_t hint,
