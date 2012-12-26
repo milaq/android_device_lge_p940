@@ -101,6 +101,7 @@ WIFI_DRIVER_FW_PATH_P2P     := "/vendor/firmware/fw_bcmdhd_p2p.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
 WIFI_DRIVER_MODULE_NAME     := "bcmdhd"
 WIFI_BAND                   := 802_11_ABG
+BOARD_LEGACY_NL80211_STA_EVENTS := true
 
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
