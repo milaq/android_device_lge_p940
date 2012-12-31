@@ -82,7 +82,8 @@ PRODUCT_PACKAGES += \
 	lights.p940 \
 	power.p940 \
 	nfc.p940 \
-	wifimac
+	wifimac \
+	wifimac_native
 
 # NFC
 PRODUCT_PACKAGES += \
