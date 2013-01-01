@@ -49,6 +49,7 @@ PRODUCT_COPY_FILES := \
 PRODUCT_COPY_FILES += \
 	device/lge/p940/config/media_profiles.xml:system/etc/media_profiles.xml \
 	device/lge/p940/config/media_codecs.xml:system/etc/media_codecs.xml \
+	device/lge/p940/config/audio_policy.conf:system/etc/audio_policy.conf \
 	device/lge/p940/config/bcmdhd.cal:system/etc/wifi/bcmdhd.cal \
 	device/lge/p940/config/gps_brcm_conf.xml:system/etc/gps_brcm_conf.xml
 
