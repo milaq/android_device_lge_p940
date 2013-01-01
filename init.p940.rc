@@ -80,7 +80,7 @@ on post-fs-data
     chmod 0775 /data/misc/wifi
 
 # wifi fw path file
-    write /data/misc/wifi/fw_path 0
+    write /data/misc/wifi/fw_path ""
     chown wifi wifi /data/misc/wifi/fw_path
     chmod 0660 /data/misc/wifi/fw_path
 
