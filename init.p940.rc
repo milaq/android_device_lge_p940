@@ -274,6 +274,11 @@ on boot
 
     write /sys/devices/system/cpu/cpu0/cpufreq/screen_off_max_freq 600000
 
+# disable IPv6 for mobile network
+    write /proc/sys/net/ipv6/conf/rmnet0/disable_ipv6 1
+    write /proc/sys/net/ipv6/conf/rment1/disable_ipv6 1
+    write /proc/sys/net/ipv6/conf/rmnet2/disable_ipv6 1
+
 service charger /charger
     class charger
     user root
