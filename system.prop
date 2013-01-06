@@ -42,6 +42,10 @@ jpeg.libskiahw.decoder.enable=0
 jpeg.libskiahw.decoder.thresh=0
 jpeg.libskiahw.encoder.thresh=0
 
+# Used for automagic internal configs
+ro.build.target_country=EU
+ro.build.target_operator=OPEN
+
 # misc stuff from stock
 camera.dcc.enable=0
 persist.gsm.sms.forcegsm7=1
