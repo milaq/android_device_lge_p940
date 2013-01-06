@@ -8,9 +8,6 @@ opencore.asmd=1
 
 # Define modem related settings
 ro.telephony.ril_class=LGEInfineon
-ro.radio.use-ppp=no
-ro.config.nocheckin=yes
-keyguard.no_require_sim=1
 telephony.lteOnCdmaDevice=0
 mobiledata.interfaces=rmnet0
 telephony.test.ignore.nitz=true
@@ -48,5 +45,4 @@ ro.build.target_operator=OPEN
 
 # misc stuff from stock
 camera.dcc.enable=0
-persist.gsm.sms.forcegsm7=1
 ro.lk.version=LK MAY-2012
