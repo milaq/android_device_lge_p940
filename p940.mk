@@ -17,9 +17,6 @@ $(call inherit-product, device/common/gps/gps_eu.mk)
 DEVICE_PACKAGE_OVERLAYS := device/lge/p940/overlay
 TARGET_SPECIFIC_HEADER_PATH := device/lge/p940/include
 
-# Radio fixes
-FRAMEWORKS_BASE_SUBDIRS += ../../$(LOCAL_PATH)/ril/
-
 # make fallback to mdpi possible
 # e.g. for maintaining crisp assets on 160dpi
 PRODUCT_AAPT_CONFIG := normal hdpi mdpi

@@ -20,6 +20,7 @@ USE_CAMERA_STUB := true
 # Use the non-open-source parts, if they're present
 -include vendor/lge/p940/BoardConfigVendor.mk
 
+TARGET_ARCH := arm
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
@@ -32,12 +33,14 @@ BOARD_GLOBAL_CFLAGS += -DNEEDS_ARM_ERRATA_754319_754320
 
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
+BOARD_CUSTOM_BOOTIMG_MK := device/lge/p940/releasetools/boot.mk
+TARGET_CUSTOM_RELEASETOOL := device/lge/p940/releasetools/squisher
 
 BOARD_KERNEL_BASE := 0x80000000
 #BOARD_KERNEL_CMDLINE :=
 
 # Define kernel config for inline building
-#TARGET_KERNEL_CONFIG := p2_p940_defconfig
+#TARGET_KERNEL_CONFIG := cyanogenmod_p940_defconfig
 #TARGET_KERNEL_SOURCE := kernel/lge/p940
 TARGET_PREBUILT_KERNEL := device/lge/p940/prebuilt/kernel
 
@@ -105,6 +108,8 @@ BOARD_LEGACY_NL80211_STA_EVENTS := true
 
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/p940/bluetooth
+BOARD_BLUEDROID_VENDOR_CONF := device/lge/p940/bluetooth/vnd_p940.txt
 
 BOARD_HAVE_FM_RADIO := true
 BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
@@ -116,9 +121,10 @@ BOARD_LIB_DUMPSTATE := libdumpstate.p940
 
 BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
 
-TARGET_CUSTOM_RELEASETOOL := device/lge/p940/releasetools/squisher
-
 BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/lge/p940/vibrator.c
+
+# Radio fixes
+BOARD_RIL_CLASS := ../../../device/lge/p940/ril/
 
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
 

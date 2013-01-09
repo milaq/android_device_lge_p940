@@ -30,74 +30,27 @@ if [ ! -f "$OTAPACKAGE" ]; then
 	exit 1
 fi
 
-OPTICHARGER=$ANDROID_BUILD_TOP/vendor/cm/tools/opticharger
-QUIET=-q
-DELETE_BINS="applypatch applypatch_static check_prereq recovery updater"
 
+#>>> include some squisher stuff again
+QUIET=-q
 REPACK=$OUT/repack.d
 printf "Sanitizing environment..."
 rm -rf $REPACK
-mkdir -p $REPACK
-echo
-
-
-# Unpack the otapackage and opticharge all apks
-mkdir $REPACK/ota
-(
+mkdir -p $REPACK/ota
 cd $REPACK/ota
 printf "Unpacking $OTAPACKAGE..."
 unzip $QUIET $OTAPACKAGE
 
-### begin p940 stuff >>>
+# sign image for locked bootloader
 printf "signing boot.img..."
 $ANDROID_BUILD_TOP/device/lge/p940/releasetools/ifttool/signimg.sh $REPACK/ota/boot.img
-### end p940 stuff <<<
 
-echo
-
-# Move all apks to the same directory so xargs can
-# use also with framework-res.apk. This allow process
-# framework-res.apk in parallel with other apks
-mkdir -p $REPACK/parallel
-cd $REPACK/parallel
-cp $REPACK/ota/system/framework/framework-res.apk .
-cp $REPACK/ota/system/app/*.apk .
-
-# Do optimization in parallel
-find ./ -name \*.apk | $XARGS $OPTICHARGER
-
-# Move optimized apks to repack directory
-mv -f $REPACK/parallel/framework-res.apk $REPACK/ota/system/framework/framework-res.apk
-mv -f $REPACK/parallel/*.apk $REPACK/ota/system/app/
-
-# Return to directory
-cd $REPACK/ota
-rm -rf $REPACK/parallel
-)
-
-# Fix build.prop
-$SED -i \
-	-e '/ro\.kernel\.android\.checkjni/d' \
-	-e '/ro\.build\.type/s/eng/user/' \
-	$REPACK/ota/system/build.prop
-
-
-# Delete unnecessary binaries
-( cd $REPACK/ota/system/bin; echo $DELETE_BINS | xargs rm -f; )
-
-# No need for recovery
-rm -rf $REPACK/ota/recovery
-
-# Strip modules
-[ -d $REPACK/ota/system/lib/modules ] && \
-	find $REPACK/ota/system/lib/modules -name "*.ko" -print0 | xargs -0 arm-eabi-strip --strip-unneeded
-
-# Determine what to name the new signed package
-MODVERSION=`sed -n -e'/ro\.cm\.version/s/^.*=//p' $REPACK/ota/system/build.prop`
-OUTFILE=$OUT/cm-$MODVERSION.zip
+# Determine what to name the new package
+MODVERSION=`sed -n -e'/ro\.cm\.version/s/^.*=//p' $OUT/system/build.prop`
 echo -e $CL_CYN"MODVERSION: $MODVERSION"$CL_RST
+OUTFILE=$OUT/cm-$MODVERSION.zip
 
-# Pack it up and sign
+# Pack it up and sign it again
 printf "Zipping package..."
 ( cd $REPACK/ota; zip $QUIET -r $REPACK/update.zip . )
 echo
@@ -111,6 +64,7 @@ echo
 printf "Cleaning up..."
 rm -rf $REPACK
 echo
+#>>> done including some good stuff instead of crap to circumvent derping around with ota_from_... packages (all was fine before you fucked around with it)
 
 # Create a md5 checksum image of the repacked package
 (
@@ -119,7 +73,7 @@ cd `dirname $OUTFILE`
 $MD5 $img >$img.md5sum
 echo
 echo -e $CL_GRN"Package complete: $OUTFILE"$CL_RST
-cat $img.md5sum
+echo -e $CL_GRN"md5: $(cat $img.md5sum | awk '{ print $1 }')"$CL_RST
 echo
 )
 

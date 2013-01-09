@@ -45,6 +45,8 @@ char const*const LCD_FILE
 
 char const*const BUTTON_BRIGHTNESS
         = "/sys/devices/platform/keypad_led/leds/button-backlight/brightness";
+char const*const BUTTON_KEEP_ON_TRIGGER
+        = "/sys/devices/platform/keypad_led/leds/button-backlight/br_maintain_on";
 
 /**
  * device methods
@@ -138,6 +140,7 @@ set_light_buttons(struct light_device_t* dev,
     ALOGV("Setting button brightness to %ld",on);
 
     pthread_mutex_lock(&g_lock);
+    err = write_int(BUTTON_KEEP_ON_TRIGGER, on?1:0);
     err = write_int(BUTTON_BRIGHTNESS, on?255:0);
     pthread_mutex_unlock(&g_lock);
     return err;

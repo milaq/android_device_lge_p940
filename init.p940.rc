@@ -4,18 +4,21 @@ on early-init
 # create mountpoints
     mkdir /mnt 0775 root system
 
-    export EXTERNAL_STORAGE /storage/sdcard0
-    export SECONDARY_STORAGE /storage/sdcard1
-
     mkdir /storage 0050 system sdcard_r	
-    mkdir /storage/sdcard0 0000 system system
     mkdir /storage/sdcard1 0000 system system
 
-# for backwards compatibility
-    symlink /storage/sdcard0 /emmc
-    symlink /storage/sdcard0 /mnt/emmc
-    symlink /storage/sdcard1 /sdcard
-    symlink /storage/sdcard1 /mnt/sdcard
+    mkdir /mnt/shell/sdcard 0700 shell shell
+    mkdir /storage/sdcard 0555 root root
+
+    export EXTERNAL_STORAGE /storage/sdcard
+    export SECONDARY_STORAGE /storage/sdcard1
+
+    # Support legacy paths
+    symlink /storage/sdcard /sdcard
+    symlink /storage/sdcard /mnt/sdcard
+    symlink /storage/sdcard /storage/sdcard0
+    symlink /storage/sdcard1 /extSdCard
+    symlink /storage/sdcard1 /mnt/extSdCard
 	
 # Immersion changes
     export VIBE_PIPE_PATH /dev/pipes
@@ -300,15 +303,6 @@ service lgdrm /system/bin/lgdrmserver
     class main
     user root
     group lgdrm_acc sdcard_rw media_rw system radio
-
-service hciattach /system/bin/brcm_patchram_plus --enable_hci --no2bytes --enable_lpm \
-	--scopcm=0,4,0,1,1,0,0,3,3,0  --baudrate 3000000 --use_baudrate_for_download \
-	--tosleep 50000 --patchram /vendor/firmware/bcm4330.hcd /dev/ttyO1
-	class main
-	user bluetooth
-	group bluetooth net_bt_admin
-	disabled
-	oneshot
 
 service pvrsrvinit /vendor/bin/pvrsrvinit
     class core
