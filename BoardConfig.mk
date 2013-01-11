@@ -15,7 +15,7 @@
 
 # This variable is set first, so it can be overridden
 # by BoardConfigVendor.mk
-USE_CAMERA_STUB := true
+USE_CAMERA_STUB := false
 
 # Use the non-open-source parts, if they're present
 -include vendor/lge/p940/BoardConfigVendor.mk
@@ -62,26 +62,13 @@ ifdef OMAP_ENHANCEMENT
   COMMON_GLOBAL_CFLAGS += -DOMAP_ENHANCEMENT -DTARGET_OMAP4 -DOMAP_ENHANCEMENT_CPCAM -DOMAP_ENHANCEMENT_VTC
 endif
 
+TARGET_USES_GL_VENDOR_EXTENSIONS := false
+
 BOARD_USES_TI_CAMERA_HAL := true
 TI_OMAP4_CAMERAHAL_VARIANT := DONOTBUILDIT
-
-ENHANCED_DOMX := true
 HARDWARE_OMX := true
-ifdef HARDWARE_OMX
-  OMX_VENDOR := ti
-  OMX_VENDOR_WRAPPER := TI_OMX_Wrapper
-  BOARD_OPENCORE_LIBRARIES := libOMX_Core
-  BOARD_OPENCORE_FLAGS := -DHARDWARE_OMX=1
-endif
 
-BOARD_HAS_SDCARD_INTERNAL := true
-BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
-BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk0p14
-BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p14
 BOARD_VOLD_MAX_PARTITIONS := 16
-BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
-
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun%d/file"
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 536870912
