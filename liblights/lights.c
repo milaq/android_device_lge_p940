@@ -173,12 +173,13 @@ set_light_notifications(struct light_device_t* dev,
 
     ALOGV("Calling notification light with state %d",on);
 
-    pthread_mutex_lock(&g_lock);
     if (g_touchled_on)
         ALOGV("not switching button/notification light since button backlight is on");
-    else
+    else {
+        pthread_mutex_lock(&g_lock);
         err = write_int(BUTTON_BRIGHTNESS, on?127:0);
-    pthread_mutex_unlock(&g_lock);
+        pthread_mutex_unlock(&g_lock);
+	}
 
     return err;
 }
