@@ -172,7 +172,7 @@
                    channels="1" />
         </EncoderProfile>
 
-        <EncoderProfile quality="1080p" fileFormat="mp4" duration="30">
+        <!--EncoderProfile quality="1080p" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="16384000"
                    width="1920"
@@ -182,7 +182,7 @@
                    bitRate="48000"
                    sampleRate="22050"
                    channels="1" />
-        </EncoderProfile>
+        </EncoderProfile-->
 
         <EncoderProfile quality="timelapselow" fileFormat="mp4" duration="30">
             <Video codec="h264"
@@ -256,7 +256,7 @@
                    channels="1" />
         </EncoderProfile>
 
-        <EncoderProfile quality="timelapse1080p" fileFormat="mp4" duration="30">
+        <!--EncoderProfile quality="timelapse1080p" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="16384000"
                    width="1920"
@@ -266,7 +266,7 @@
                    bitRate="48000"
                    sampleRate="22050"
                    channels="1" />
-        </EncoderProfile>
+        </EncoderProfile-->
 
         <ImageEncoding quality="95" />
         <ImageEncoding quality="80" />
