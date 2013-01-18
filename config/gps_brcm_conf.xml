@@ -3,15 +3,14 @@
   <!--HAL Confguration: Please make sure to split the hal configuration when it's bigger than 1K bytes. -->
   <hal 
 	  acPortName="/dev/ttyO2" lBaudRate="460800"  cLogEnabled="true" acLogDirectory="/data/gps/log"
-       enhanced-assisted="false"
+       enhanced-assisted="false" cLogEnableInitState="false"
               
        arp-supl-enable="true" arp-supl-cap-msb="true" arp-supl-cap-msa="true" arp-supl-cap-ecid="false"
-	   acSuplServer="lge.glpals.com" SuplPort="7275" tlsCertPath="/system/etc/cert/lge.cer" 
+	   acSuplServer="supl.google.com" SuplPort="7276" tlsCertPath="/system/etc/cert/lge.cer" 
        tlsStopForInvPath="true" arp-supl-use-apn="true" arp-supl-interface-device="rmnet0"
-       ReAidingType="1" ReAidingRetryIntervalSec="10" ReAidingIntervalSec="1800"
-
-       LbsEnable="false" LbsLocal="false" LbsServer="bcmlbsqa2.glpals.com" LbsPort="7275"
-       LbsSyncLto="false" LbsSyncCells="false" ltoFileName="lto.dat"
+       ReAidingType="3" ReAidingRetryIntervalSec="10" ReAidingIntervalSec="1800"
+       LbsEnable="true" LbsLocal="false" LbsServer="bcmls2.glpals.com" LbsPort="7275"
+       LbsSyncLto="true" LbsSyncCells="false" ltoFileName="lto.dat"
        LbsGetGpsAssistance="true" LbsSyncLtoThresholdDays="3"
        LbsCellEnable="true" LbsGpsEnable="true" LbsWlanEnable="false"
 	   />
