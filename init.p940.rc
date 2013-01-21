@@ -19,7 +19,7 @@ on early-init
     symlink /storage/sdcard /storage/sdcard0
     symlink /storage/sdcard1 /extSdCard
     symlink /storage/sdcard1 /mnt/extSdCard
-	
+
 # Immersion changes
     export VIBE_PIPE_PATH /dev/pipes
 
@@ -51,11 +51,7 @@ on init
     chown system system /sys/module/lge_handle_panic/parameters/hidden_reset_enable
     chmod 660 /sys/module/lge_handle_panic/parameters/hidden_reset_enable
 
-on early-fs
-# LGE's mount points
-    mkdir /dvp 0771 system system
     mkdir /persist 0771 system system
-    mkdir /mpt 0775 system system
 
 on fs
 # mount partitions
@@ -69,9 +65,6 @@ on post-fs-data
 
     chown system system /persist
     chmod 0771 /persist
-
-    chown system system /mpt
-    chmod 0775 /mpt
 
     mkdir /data/misc/wifi 0775 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
@@ -97,6 +90,9 @@ on post-fs-data
 	
 # add symlink for HDCP key
     symlink /persist/en_hdcp.bin /system/vendor/firmware/hdcp.keys
+
+# Create Directory for widevine
+    mkdir /persist/widevine 0770 drm system
 
 # audio
     mkdir /data/audio 0770 media audio
@@ -242,24 +238,6 @@ on boot
 
 # write access permission for drive emulation
     chown system system /sys/class/android_usb/android0/f_cdrom_storage/lun/cdrom_usbmode
-
-    mkdir /dvp/rysh 0770 system divxdrm
-    chown media divxdrm /dvp/rysh
-    chmod 0770 /dvp/rysh
-
-    mkdir /dvp/ooda 0770 system divxdrm
-    chown media divxdrm /dvp/ooda
-    chmod 0770 /dvp/ooda
-
-    mkdir /dvp/ssamu system divxdrm
-    chown media divxdrm /dvp/ssamu
-    chmod 0770 /dvp/ssamu
-
-# widevine drm keybox repository
-    mkdir /dvp/jjn 0770 drm system
-
-    chown system system /dvp
-    chmod 0771 /dvp
 
 # TI sdram frequency set problem work around
 # Temporarily adjust CPU frequency and reset to (performance) interactive
