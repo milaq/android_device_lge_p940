@@ -20,7 +20,7 @@ $(call inherit-product, device/lge/p940/full_p940.mk)
 PRODUCT_DEVICE := p940
 PRODUCT_NAME := cm_p940
 PRODUCT_BRAND := lge
-PRODUCT_MODEL := Prada 3.0
+PRODUCT_MODEL := LG-P940
 PRODUCT_MANUFACTURER := LGE
 
 #Set build fingerprint / ID / Product Name ect.
