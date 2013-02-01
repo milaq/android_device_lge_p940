@@ -27,7 +27,7 @@ PRODUCT_PACKAGES := \
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-# Inherit from d2tmo device
+# Inherit from core device
 $(call inherit-product, device/lge/p940/p940.mk)
 
 # Set those variables here to overwrite the inherited values.

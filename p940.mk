@@ -73,7 +73,6 @@ PRODUCT_COPY_FILES += \
 	device/lge/p940/config/omap4-keypad.kl:system/usr/keylayout/omap4-keypad.kl \
 	device/lge/p940/config/twl6030_pwrbutton.kl:system/usr/keylayout/twl6030_pwrbutton.kl
 
-
 # Wifi module
 PRODUCT_COPY_FILES += \
 	device/lge/p940/prebuilt/modules/bcmdhd.ko:system/lib/modules/bcmdhd.ko
@@ -105,13 +104,6 @@ PRODUCT_PACKAGES += \
         libnfc_jni \
         Nfc \
         Tag
-
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-        LiveWallpapers \
-        LiveWallpapersPicker \
-        VisualizationWallpapers \
-        librs_jni
 
 #--> manual omap4 start
 PRODUCT_PACKAGES += \
@@ -159,8 +151,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
 	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
+	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
 	
 # ril
 PRODUCT_COPY_FILES += \
@@ -230,6 +221,6 @@ $(call inherit-product, device/lge/p940/goo.mk)
 $(call inherit-product-if-exists, vendor/nxp/pn544/nxp-pn544-fw-vendor.mk)
 $(call inherit-product-if-exists, vendor/ti/proprietary/omap4/ti-omap4-vendor.mk)
 
-$(call inherit-product-if-exists, vendor/lge/p940/device-vendor.mk)
+$(call inherit-product-if-exists, vendor/lge/p940/p940-vendor.mk)
 
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)

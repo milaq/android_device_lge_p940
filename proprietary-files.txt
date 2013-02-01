@@ -1,0 +1,86 @@
+bin/ap_at_command
+lib/hw/sensors.omap4.so
+lib/libhdcp.so
+lib/liblgehdmi.so
+bin/hdcp-init
+bin/spritebud
+lib/libmllite.so
+lib/libmlplatform.so
+lib/libmpl.so
+lib/libini.so
+
+## ril
+bin/rild
+lib/lge-ril.so
+lib/libril.so
+lib/lib-lge-drm.so
+
+## drm crap
+bin/lgdrmserver
+lib/liblgdrm.so
+bin/lgsecclkserver
+lib/liblgsecclk.so
+
+## audio
+lib/hw/audio.primary.omap4.so
+lib/libtinyalsa.so
+
+## camera
+lib/hw/camera.omap4.so
+
+## gps
+bin/glgps
+lib/hw/gps.omap4.so
+etc/cert/lge.cer
+
+## widevine
+vendor/lib/libwvdrm_L3.so
+vendor/lib/libwvm.so
+vendor/lib/libWVStreamControlAPI_L3.so
+vendor/lib/drm/libdrmwvmplugin.so
+
+## vendor firmwares
+vendor/firmware/libpn544_fw.so
+vendor/firmware/ducati-m3.bin
+vendor/firmware/bcm4330.hcd
+
+## egl
+vendor/lib/egl/libEGL_POWERVR_SGX540_120.so
+vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so
+vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so
+
+## sgx
+vendor/bin/pvrsrvinit_SGX540_120
+vendor/bin/pvrsrvinit
+vendor/lib/hw/gralloc.omap4.so
+#vendor/lib/hw/hwcomposer.omap4.so
+vendor/lib/libbltsville_cpu.so
+vendor/lib/libbltsville_ticpu.2.0.0.10.so
+vendor/lib/libbltsville_ticpu.so
+vendor/lib/libbltsville_ticpu_license.txt
+vendor/lib/libglslcompiler_SGX540_120.so
+vendor/lib/libIMGegl_SGX540_120.so
+vendor/lib/liblvverx.so
+vendor/lib/liblvvetx.so
+vendor/lib/libpvr2d_SGX540_120.so
+vendor/lib/libpvrANDROID_WSEGL_SGX540_120.so
+vendor/lib/libPVRScopeServices_SGX540_120.so
+vendor/lib/libsrv_init_SGX540_120.so
+vendor/lib/libsrv_um_SGX540_120.so
+vendor/lib/libusc_SGX540_120.so
+
+## TI DOMX
+lib/libdomx.so
+lib/libion.so
+lib/libmm_osal.so
+lib/libOMX.ITTIAM.WMA.decode.so
+lib/libOMX.ITTIAM.WMALSL.decode.so
+lib/libOMX.ITTIAM.WMAPRO.decode.so
+lib/libOMX.TI.DUCATI1.MISC.SAMPLE.so
+lib/libOMX.TI.DUCATI1.VIDEO.CAMERA.so
+lib/libOMX.TI.DUCATI1.VIDEO.DECODER.secure.so
+lib/libOMX.TI.DUCATI1.VIDEO.DECODER.so
+lib/libOMX.TI.DUCATI1.VIDEO.H264E.so
+lib/libOMX.TI.DUCATI1.VIDEO.MPEG4E.so
+lib/libOMX_Core.so
+lib/libtiutils.so
