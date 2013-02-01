@@ -222,5 +222,3 @@ $(call inherit-product-if-exists, vendor/nxp/pn544/nxp-pn544-fw-vendor.mk)
 $(call inherit-product-if-exists, vendor/ti/proprietary/omap4/ti-omap4-vendor.mk)
 
 $(call inherit-product-if-exists, vendor/lge/p940/p940-vendor.mk)
-
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)

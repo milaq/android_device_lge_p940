@@ -21,6 +21,12 @@ lib/liblgdrm.so
 bin/lgsecclkserver
 lib/liblgsecclk.so
 
+## wifi
+vendor/firmware/fw_bcmdhd.bin
+vendor/firmware/fw_bcmdhd_apsta.bin
+vendor/firmware/fw_bcmdhd_mfgtest.bin
+vendor/firmware/fw_bcmdhd_p2p.bin
+
 ## audio
 lib/hw/audio.primary.omap4.so
 lib/libtinyalsa.so
