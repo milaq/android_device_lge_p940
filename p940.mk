@@ -35,7 +35,6 @@ PRODUCT_COPY_FILES := \
 	device/lge/p940/ueventd.p940.rc:root/ueventd.p940.rc \
 	device/lge/p940/fstab.p940:root/fstab.p940 \
 	device/lge/p940/prebuilt/init.rmnet:system/bin/init.rmnet \
-	device/lge/p940/prebuilt/init.rmnet-down:system/bin/init.rmnet-down \
 	device/lge/p940/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
 # proprietary charger
