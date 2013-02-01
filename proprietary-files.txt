@@ -1,13 +1,8 @@
-bin/ap_at_command
+## sensorlib
 lib/hw/sensors.omap4.so
-lib/libhdcp.so
-lib/liblgehdmi.so
-bin/hdcp-init
-bin/spritebud
+lib/libmpl.so
 lib/libmllite.so
 lib/libmlplatform.so
-lib/libmpl.so
-lib/libini.so
 
 ## ril
 bin/rild
@@ -37,6 +32,7 @@ lib/hw/camera.omap4.so
 ## gps
 bin/glgps
 lib/hw/gps.omap4.so
+lib/libini.so
 etc/cert/lge.cer
 
 ## widevine
@@ -60,6 +56,8 @@ vendor/bin/pvrsrvinit_SGX540_120
 vendor/bin/pvrsrvinit
 vendor/lib/hw/gralloc.omap4.so
 #vendor/lib/hw/hwcomposer.omap4.so
+lib/libhdcp.so
+lib/liblgehdmi.so
 vendor/lib/libbltsville_cpu.so
 vendor/lib/libbltsville_ticpu.2.0.0.10.so
 vendor/lib/libbltsville_ticpu.so

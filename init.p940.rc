@@ -255,12 +255,6 @@ service charger /charger
     group root
     oneshot
 
-service spritebud /system/xbin/spritebud
-    class main
-    socket spritebud stream 660 root radio
-    user root
-    group root
-
 service lgsecclk /system/bin/lgsecclkserver
     class main
     user system
@@ -321,11 +315,6 @@ service iprenew_bnep0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service ap_at_command /system/bin/ap_at_command
-    class main
-    user root
-    group system input graphics media_rw sdcard_rw
-
 service glgps /system/bin/glgps -c /system/etc/gps_brcm_conf.xml
     class main
     user system
@@ -371,12 +360,6 @@ service rmnet3_down /system/bin/init.rmnet-down 3
     user root
     group radio cache inet misc net_admin net_raw
     disabled
-    oneshot
-
-service hdcp-init /system/bin/hdcp-init 1 3 >> /data/mhl.log
-    class main
-    user root
-    group radio system sdcard_rw shell
     oneshot
 
 service wifimac /system/bin/wifimac
