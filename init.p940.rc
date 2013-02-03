@@ -153,9 +153,8 @@ on post-fs-data
     chown bluetooth bluetooth /sys/class/rfkill/rfkill1/type
     chown bluetooth bluetooth /dev/ttyO1
     
-    setprop ro.bt.bdaddr_path "/sys/devices/platform/bd_address/bdaddr_if"
     chmod 0660 /sys/devices/platform/bd_address/bdaddr_if
-    chown bluetooth bluetooth /sys/devices/platform/bd_address/bdaddr_if
+    chown radio radio /sys/devices/platform/bd_address/bdaddr_if
 
     chown system system /sys/class/mhl_orient/mhl_dev_orient/MHL_orient
 
