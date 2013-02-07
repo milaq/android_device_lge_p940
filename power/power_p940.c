@@ -65,11 +65,11 @@ static void p940_power_init(struct power_module *module)
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_rate",
                 "20000");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/min_sample_time",
-                "20000");
+                "60000");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/hispeed_freq",
                 "600000");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load",
-                "70");
+                "50");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay",
                 "100000");
 }
