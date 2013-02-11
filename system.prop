@@ -4,7 +4,6 @@
 
 # OMAP
 com.ti.omap_enhancement=true
-opencore.asmd=1
 
 # Define modem related settings
 ro.telephony.ril_class=LGEInfineon
@@ -42,7 +41,3 @@ jpeg.libskiahw.encoder.thresh=0
 # Used for automagic internal configs
 ro.build.target_country=EU
 ro.build.target_operator=OPEN
-
-# misc stuff from stock
-camera.dcc.enable=0
-ro.lk.version=LK MAY-2012
