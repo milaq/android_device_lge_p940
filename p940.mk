@@ -72,10 +72,6 @@ PRODUCT_COPY_FILES += \
 	device/lge/p940/config/omap4-keypad.kl:system/usr/keylayout/omap4-keypad.kl \
 	device/lge/p940/config/twl6030_pwrbutton.kl:system/usr/keylayout/twl6030_pwrbutton.kl
 
-# Wifi module
-PRODUCT_COPY_FILES += \
-	device/lge/p940/prebuilt/modules/bcmdhd.ko:system/lib/modules/bcmdhd.ko
-
 # Sgx modules
 PRODUCT_COPY_FILES += \
 	device/lge/p940/prebuilt/modules/omaplfb_sgx540_120.ko:system/modules/omaplfb_sgx540_120.ko \
