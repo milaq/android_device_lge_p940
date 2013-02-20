@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/app_name">
+
+    <!-- General settings -->
+    <PreferenceCategory android:key="category_hardware"
+        android:title="@string/category_hardware_title">
+        <com.cyanogenmod.settings.device.VibratorTuningPreference
+            android:key="vibrator_tuning"
+            android:title="@string/vibrator_tuning_title_head"
+            android:summary="@string/vibrator_tuning_summary_head" />
+        
+        <CheckBoxPreference
+            android:key="touchkeys"
+            android:title="@string/touchkeys_title"
+            android:summary="@string/touchkeys_summary" />
+    </PreferenceCategory>
+
+    <!-- GPU -->
+    <PreferenceCategory android:key="category_gpu"
+        android:title="@string/category_gpu_title">
+        <ListPreference
+            android:key="gpu_overclock"
+            android:title="@string/gpu_overclock_title"
+            android:entries="@array/gpu_overclock_entries"
+            android:entryValues="@array/gpu_overclock_values"
+            android:defaultValue="0" />
+    </PreferenceCategory>
+</PreferenceScreen>

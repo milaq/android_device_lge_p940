@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prada 3.0 Settings</string>
+
+    <string name="category_hardware_title">Hardware</string>
+    
+    <string name="touchkeys_title">Button Backlight</string>
+    <string name="touchkeys_summary">Sync button backlight with display backlight (requires reboot)</string>
+    
+    <string name="vibrator_tuning_title_head">Vibrator feedback tuning</string>
+    <string name="vibrator_tuning_summary_head">Controls the default power of vibrator feedback</string>
+
+    <string name="vibrator_title">Vibration %</string>
+    <string name="vibrator_default_title">Default</string>
+    <string name="vibrator_test_title">Test</string>
+
+    <string name="category_gpu_title">GPU</string>
+    <string name="gpu_overclock_title">Clock Speed</string>
+    
+    <string name="credits_presets">Credits: ale.landra91, cpaixao, provolinoom, milaq</string>
+
+</resources>

@@ -37,7 +37,7 @@
 static pthread_once_t g_init = PTHREAD_ONCE_INIT;
 static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 static struct light_state_t g_notification;
-static int g_enable_touchlight = -1;
+static int g_enable_touchlight = 1;
 static int g_touchled_on = 0;
 
 char const*const LCD_FILE
@@ -61,16 +61,16 @@ init_globals(void)
 void
 load_settings()
 {
-    FILE* fp = fopen("/data/.disable_touchlight", "r");
+    FILE* fp = fopen("/data/misc/touchlight", "r");
     if (!fp) {
-        ALOGV("load_settings failed to open /data/.disable_touchlight - leaving touchled enabled\n");
-        g_enable_touchlight = 1;
+        ALOGV("load_settings failed to open /data/misc/touchlight - leaving touchled enabled\n");
+        g_enable_touchlight = -1;
     } else {
         g_enable_touchlight = (int)(fgetc(fp));
-        if (g_enable_touchlight == '1')
-            g_enable_touchlight = 1;
-        else
+        if (g_enable_touchlight == '0')
             g_enable_touchlight = 0;
+        else
+            g_enable_touchlight = 1;
 
         fclose(fp);
     }
@@ -135,11 +135,17 @@ set_light_buttons(struct light_device_t* dev,
     int err = 0;
     int on = is_lit(state);
 
-    ALOGV("Setting button brightness to %ld",on);
+    if (on && (g_enable_touchlight == -1 || g_enable_touchlight > 0)) {
+        g_touchled_on = on?1:0;
 
-    pthread_mutex_lock(&g_lock);
-    err = write_int(BUTTON_BRIGHTNESS, on?255:0);
-    pthread_mutex_unlock(&g_lock);
+        ALOGV("Setting button brightness to %ld",on);
+
+        pthread_mutex_lock(&g_lock);
+        err = write_int(BUTTON_BRIGHTNESS, 255);
+        pthread_mutex_unlock(&g_lock);
+    } else {
+        err = write_int(BUTTON_BRIGHTNESS, 0);
+    }
     return err;
 }
 
@@ -156,10 +162,7 @@ set_light_backlight(struct light_device_t* dev,
     err = write_int(LCD_FILE, brightness);
     pthread_mutex_unlock(&g_lock);
 
-    if (g_enable_touchlight == -1 || g_enable_touchlight > 0) {
-        g_touchled_on = brightness?1:0;
-        err = set_light_buttons(dev, state);
-    }
+    err = set_light_buttons(dev, state);
 
     return err;
 }
