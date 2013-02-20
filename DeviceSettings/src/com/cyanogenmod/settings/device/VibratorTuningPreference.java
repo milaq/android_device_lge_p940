@@ -47,7 +47,7 @@ public class VibratorTuningPreference extends DialogPreference implements OnClic
     };
 
     private static final String[] FILE_PATH = new String[] {
-            "/sys/vibrator/pwmvalue",
+            "/sys/devices/platform/tspdrv/pwmvalue",
     };
 
     private vibratorSeekBar mSeekBars[] = new vibratorSeekBar[1];
@@ -243,14 +243,14 @@ public class VibratorTuningPreference extends DialogPreference implements OnClic
         private int convertAverageToVibrator(int averageValue) {
             int resultVibrator;
 
-            resultVibrator = (averageValue * 127) / 100;
+            resultVibrator = (averageValue * 128) / 100;
             return resultVibrator;
         }
 
         private int convertVibratorToAverage(int resultVibrator) {
             int averageValue;
 
-            averageValue = (resultVibrator * 100) / 127;
+            averageValue = (resultVibrator * 100) / 128;
             return averageValue;
         }
 
@@ -268,7 +268,7 @@ public class VibratorTuningPreference extends DialogPreference implements OnClic
     }
 
     private void setDefaultSettings() {
-        mSeekBars[0].setNewValue(100);
+        mSeekBars[0].setNewValue(75);
     }
 
     private void testVibration() {
