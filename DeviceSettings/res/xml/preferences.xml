@@ -11,9 +11,9 @@
             android:summary="@string/vibrator_tuning_summary_head" />
         
         <CheckBoxPreference
-            android:key="touchkeys"
-            android:title="@string/touchkeys_title"
-            android:summary="@string/touchkeys_summary" />
+            android:key="touchlight"
+            android:title="@string/touchlight_title"
+            android:summary="@string/touchlight_summary" />
     </PreferenceCategory>
 
     <!-- GPU -->

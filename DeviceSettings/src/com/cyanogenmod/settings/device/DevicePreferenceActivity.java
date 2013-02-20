@@ -28,11 +28,11 @@ public class DevicePreferenceActivity extends PreferenceFragment {
     public static final String ACTION_UPDATE_PREFERENCES = "com.cyanogenmod.settings.device.UPDATE";
     public static final String KEY_VIBRATOR_TUNING = "vibrator_tuning";
     public static final String KEY_GPU_OVERCLOCK = "gpu_overclock";
-    public static final String KEY_TOUCHKEYS = "touchkeys";
+    public static final String KEY_TOUCHLIGHT = "touchlight";
 
     private VibratorTuningPreference mVibratorTuning;
     private ListPreference mGpuOverclock;
-    private CheckBoxPreference mTouchkeys;
+    private CheckBoxPreference mTouchlight;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,10 +40,10 @@ public class DevicePreferenceActivity extends PreferenceFragment {
 
         addPreferencesFromResource(R.xml.preferences);
 
-        mTouchkeys = (CheckBoxPreference) findPreference(KEY_TOUCHKEYS);
-        mTouchkeys.setEnabled(true);
-        mTouchkeys.setChecked(!(Utils.fileExists("/data/misc/touchlight") && Utils.readOneLine("/data/misc/touchlight").equals("0")));
-        mTouchkeys.setOnPreferenceChangeListener(new Touchlight());
+        mTouchlight = (CheckBoxPreference) findPreference(KEY_TOUCHLIGHT);
+        mTouchlight.setEnabled(true);
+        mTouchlight.setChecked(!(Utils.fileExists("/data/misc/touchlight") && Utils.readOneLine("/data/misc/touchlight").equals("0")));
+        mTouchlight.setOnPreferenceChangeListener(new Touchlight());
         
         mVibratorTuning = (VibratorTuningPreference) findPreference(KEY_VIBRATOR_TUNING);
         mVibratorTuning.setEnabled(VibratorTuningPreference.isSupported());

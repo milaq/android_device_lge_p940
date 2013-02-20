@@ -4,8 +4,8 @@
 
     <string name="category_hardware_title">Hardware</string>
     
-    <string name="touchkeys_title">Button Backlight</string>
-    <string name="touchkeys_summary">Sync button backlight with display backlight (requires reboot)</string>
+    <string name="touchlight_title">Button Backlight</string>
+    <string name="touchlight_summary">Sync button backlight with display backlight (requires reboot)</string>
     
     <string name="vibrator_tuning_title_head">Vibrator feedback tuning</string>
     <string name="vibrator_tuning_summary_head">Controls the default power of vibrator feedback</string>
