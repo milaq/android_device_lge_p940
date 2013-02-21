@@ -135,11 +135,10 @@ set_light_buttons(struct light_device_t* dev,
     int err = 0;
     int on = is_lit(state);
 
+    g_touchled_on = on?1:0;
+    ALOGV("Setting button brightness to %ld",on);
+
     if (on && (g_enable_touchlight == -1 || g_enable_touchlight > 0)) {
-        g_touchled_on = on?1:0;
-
-        ALOGV("Setting button brightness to %ld",on);
-
         pthread_mutex_lock(&g_lock);
         err = write_int(BUTTON_BRIGHTNESS, 255);
         pthread_mutex_unlock(&g_lock);
