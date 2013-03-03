@@ -26,14 +26,8 @@ int main() {
 	int fd1; FILE *fd2;
 	int macbyte;
 	int addrcount = 0;
-	char macaddr[17];
+	char macaddr[18];
 	int i;
-
-	fd1 = fopen("/data/misc/wifi/config","r");
-	if(fd1) {
-		fclose(fd1);
-		return 0;
-	}
 
 	fd1 = fopen("/data/misc/wifi/config","w");
 	fd2 = open("/dev/block/mmcblk0p7",O_RDONLY);
