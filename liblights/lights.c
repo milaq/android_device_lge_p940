@@ -46,6 +46,11 @@ char const*const LCD_FILE
 char const*const BUTTON_BRIGHTNESS
         = "/sys/devices/platform/keypad_led/leds/button-backlight/brightness";
 
+char const*const PULSE_INTERVAL
+        = "/sys/devices/platform/keypad_led/led_pulse_interval";
+char const*const PULSE_LENGTH
+        = "/sys/devices/platform/keypad_led/led_pulse_length";
+
 /**
  * device methods
  */
@@ -178,10 +183,18 @@ set_light_notifications(struct light_device_t* dev,
     if (g_touchled_on)
         ALOGV("not switching button/notification light since button backlight is on");
     else {
+        ALOGV("flashOFF %i, flashON: %i", state->flashOffMS, state->flashOnMS);
         pthread_mutex_lock(&g_lock);
+        if (state->flashOffMS == 0) {
+                err = write_int(PULSE_INTERVAL, 1);
+                err = write_int(PULSE_LENGTH, 5000);
+        } else {
+                err = write_int(PULSE_INTERVAL, state->flashOffMS/250);
+                err = write_int(PULSE_LENGTH, state->flashOnMS/2);
+        }
         err = write_int(BUTTON_BRIGHTNESS, on?127:0);
         pthread_mutex_unlock(&g_lock);
-	}
+        }
 
     return err;
 }
