@@ -76,9 +76,6 @@ vendor/lib/libusc_SGX540_120.so
 lib/libdomx.so
 lib/libion.so
 lib/libmm_osal.so
-lib/libOMX.ITTIAM.WMA.decode.so
-lib/libOMX.ITTIAM.WMALSL.decode.so
-lib/libOMX.ITTIAM.WMAPRO.decode.so
 lib/libOMX.TI.DUCATI1.MISC.SAMPLE.so
 lib/libOMX.TI.DUCATI1.VIDEO.CAMERA.so
 lib/libOMX.TI.DUCATI1.VIDEO.DECODER.secure.so
