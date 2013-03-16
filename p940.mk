@@ -101,30 +101,55 @@ PRODUCT_PACKAGES += \
         Nfc \
         Tag
 
-#--> manual omap4 start
 PRODUCT_PACKAGES += \
-        libdomx \
-        libOMX_Core \
-        libOMX.TI.DUCATI1.VIDEO.H264E \
-        libOMX.TI.DUCATI1.VIDEO.MPEG4E \
-        libOMX.TI.DUCATI1.VIDEO.DECODER \
-        libOMX.TI.DUCATI1.VIDEO.DECODER.secure \
-        libOMX.TI.DUCATI1.VIDEO.CAMERA \
-        libOMX.TI.DUCATI1.MISC.SAMPLE \
-        libdrmdecrypt \
-        libstagefrighthw \
-        libI420colorconvert \
-        libtiutils \
-        libcamera \
-        libion \
-        camera.omap4 \
-        libomxcameraadapter \
-        smc_pa_ctrl \
-        tf_daemon \
-        libtf_crypto_sst
+    OMXCore \
+    libOMX_Core \
+    libdomx \
+    libOMX.TI.DUCATI1.VIDEO.H264E \
+    libOMX.TI.DUCATI1.VIDEO.MPEG4E \
+    libOMX.TI.DUCATI1.VIDEO.CAMERA \
+    libOMX.TI.DUCATI1.MISC.SAMPLE \
+    libOMX.TI.DUCATI1.VIDEO.DECODER.secure \
+    libOMX.TI.DUCATI1.VIDEO.DECODER
 
-PRODUCT_VENDOR_KERNEL_HEADERS := hardware/ti/omap4xxx/kernel-headers
-# manual omap4 end <--
+#
+PRODUCT_PACKAGES += \
+    libtiutils \
+    libipcutils \
+    libipc \
+    libnotify \
+    syslink_trace_daemon.out \
+    librcm \
+    libsysmgr \
+    syslink_daemon.out \
+    dmm_daemontest.out \
+    event_listener.out \
+    interm3.out \
+    gateMPApp.out \
+    heapBufMPApp.out \
+    heapMemMPApp.out \
+    listMPApp.out \
+    messageQApp.out \
+    nameServerApp.out \
+    sharedRegionApp.out \
+    memmgrserver.out \
+    notifyping.out \
+    ducati_load.out \
+    procMgrApp.out \
+    slpmresources.out \
+    slpmtransport.out \
+    utilsApp.out \
+    libd2cmap \
+    libomap_mm_library_jni \
+    libtimemmgr
+
+PRODUCT_PACKAGES += \
+    libskiahwdec \
+    libskiahwenc
+
+PRODUCT_PACKAGES += \
+    libstagefrighthw
+
 
 FRAMEWORKS_BASE_SUBDIRS += \
 	$(addsuffix /java, omapmmlib )
@@ -215,6 +240,5 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 $(call inherit-product, device/lge/p940/goo.mk)
 
 $(call inherit-product-if-exists, vendor/nxp/pn544/nxp-pn544-fw-vendor.mk)
-$(call inherit-product-if-exists, vendor/ti/proprietary/omap4/ti-omap4-vendor.mk)
 
 $(call inherit-product-if-exists, vendor/lge/p940/p940-vendor.mk)

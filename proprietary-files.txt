@@ -54,7 +54,7 @@ vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so
 vendor/bin/pvrsrvinit_SGX540_120
 vendor/bin/pvrsrvinit
 vendor/lib/hw/gralloc.omap4.so
-#vendor/lib/hw/hwcomposer.omap4.so
+vendor/lib/hw/hwcomposer.omap4.so
 lib/libhdcp.so
 lib/liblgehdmi.so
 vendor/lib/libbltsville_cpu.so
