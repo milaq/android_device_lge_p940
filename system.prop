@@ -41,3 +41,6 @@ jpeg.libskiahw.encoder.thresh=0
 # Used for automagic internal configs
 ro.build.target_country=EU
 ro.build.target_operator=OPEN
+
+# BT address path
+ro.bt.bdaddr_path=/sys/devices/platform/bd_address/bdaddr_if
