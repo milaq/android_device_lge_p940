@@ -91,7 +91,6 @@ PRODUCT_PACKAGES += \
 	power.p940 \
 	nfc.p940 \
 	wifimac \
-	wifimac_native \
 	Prada30Settings
 
 # NFC

@@ -44,10 +44,13 @@ on post-fs-data
     chmod 0666 /data/misc/wifi/wpa_supplicant.conf
     chmod 0775 /data/misc/wifi
 
-# wifi fw path file
+# wifi fw stuff
     write /data/misc/wifi/fw_path ""
     chown wifi wifi /data/misc/wifi/fw_path
     chmod 0660 /data/misc/wifi/fw_path
+    write /data/misc/wifi/config ""
+    chmod 0660 /data/misc/wifi/config
+    chown system wifi /data/misc/wifi/config
 
 # create directory for lgdrm
     mkdir /data/lgdrm 0770 lgdrm lgdrm_acc
@@ -357,6 +360,5 @@ service rmnet3_down /system/bin/init.rmnet 3 down
     disabled
     oneshot
 
-service wifimac /system/bin/wifimac
-    class main
-    oneshot
+on property:dev.bootcomplete=1
+    exec /system/bin/wifimac

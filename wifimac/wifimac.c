@@ -54,21 +54,7 @@ int main() {
 		sprintf(macaddr,"0b:ad:c0:ff:ef:%x",macbyte);
 	}
 
-	fprintf(fd1,"btc_mode=1\n\
-country=GB\n\
-vlan_mode=0\n\
-mpc=1\n\
-wme_auto_trigger=0\n\
-wme_apsd_trigger=290000\n\
-roam_off=0\n\
-roam_scan_period=10\n\
-roam_delta=20\n\
-roam_trigger=-70\n\
-PM=2\n\
-assoc_listen=1\n\
-assoc_retry_max=7\n\
-cur_etheraddr=%s\n\
-",macaddr);
+	fprintf(fd1,"cur_etheraddr=%s\n",macaddr);
 
 	fclose(fd1);
 	return 0;
