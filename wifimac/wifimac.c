@@ -37,12 +37,10 @@ int main() {
 		lseek(fd2,i+7680,SEEK_SET);
 		read(fd2,&macbyte,1);
 		addrcount+=macbyte;
-		if (i)
-			sprintf(macaddr,"%s%c",macaddr,macbyte);
+		if (i%2==0 && i!=0)
+			sprintf(macaddr,"%s:%c",macaddr,macbyte);
 		else
-			sprintf(macaddr,"%c",macbyte);
-		if (i%2==1 && i<11 && i)
-			sprintf(macaddr,"%s%s",macaddr,":");
+			sprintf(macaddr,"%s%c",macaddr,macbyte);
 	}
 
 	close(fd2);
