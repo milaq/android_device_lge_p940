@@ -30,7 +30,7 @@ int main() {
 	int i;
 
 	fd1 = fopen("/data/misc/wifi/config","w");
-	fd2 = open("/dev/block/mmcblk0p7",O_RDONLY);
+	fd2 = open("/dev/block/platform/omap/omap_hsmmc.1/by-name/nv",O_RDONLY);
 
 	for (i = 0; i<12; i++) {
 		macbyte=0;
