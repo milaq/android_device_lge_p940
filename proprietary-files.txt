@@ -8,13 +8,6 @@ lib/libmlplatform.so
 bin/rild
 lib/lge-ril.so
 lib/libril.so
-lib/lib-lge-drm.so
-
-## drm crap
-bin/lgdrmserver
-lib/liblgdrm.so
-bin/lgsecclkserver
-lib/liblgsecclk.so
 
 ## wifi
 vendor/firmware/fw_bcmdhd.bin
