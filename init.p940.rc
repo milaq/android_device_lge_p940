@@ -52,9 +52,6 @@ on post-fs-data
     chmod 0660 /data/misc/wifi/config
     chown system wifi /data/misc/wifi/config
 
-# create directory for lgdrm
-    mkdir /data/lgdrm 0770 lgdrm lgdrm_acc
-
 # hdcp
     mkdir /persist/mhl 0770 radio radio
     chown system system /dev/hdcp
@@ -103,16 +100,6 @@ on post-fs-data
     copy /proc/last_kmsg /data/dontpanic/last_kmsg.txt
     chown root log /data/dontpanic/last_kmsg.txt
     chmod 0640 /data/dontpanic/last_kmsg.txt
-
-    # collect apanic data, free resources and re-arm trigger
-    copy /proc/apanic_console /data/dontpanic/apanic_console
-    chown root log /data/dontpanic/apanic_console
-    chmod 0640 /data/dontpanic/apanic_console
-    copy /proc/apanic_threads /data/dontpanic/apanic_threads
-    chown root log /data/dontpanic/apanic_threads
-    chmod 0640 /data/dontpanic/apanic_threads
-
-    write /proc/apanic_console 1
 
     chown system system /sys/devices/platform/omap/omap_i2c.1/i2c-1/1-0049/twl6030_bci/smpl_en
     chown system system /sys/devices/platform/omap/omap_i2c.1/i2c-1/1-0049/twl6030_bci/abnormal_wakelock_dis
@@ -211,14 +198,6 @@ on boot
     chmod 0777 /dev/ttyGS1
     chmod 0777 /dev/ttyGS2
 
-# misc and nv for CTS Pass
-    chown system misc /dev/block/platform/omap/omap_hsmmc.1/by-name/misc
-    chmod 0660 /dev/block/platform/omap/omap_hsmmc.1/by-name/misc ## misc partition
-
-    chown system misc /dev/block/platform/omap/omap_hsmmc.1/by-name/nv
-    chmod 0660 /dev/block/platform/omap/omap_hsmmc.1/by-name/nv ## NV partition
-
-
 # MUIC
     chown system radio /sys/class/muic/tsu5611/state
     chmod 0664 /sys/class/muic/tsu5611/state
@@ -226,14 +205,6 @@ on boot
 # USB VID
     chown system system /sys/class/android_usb/android0/idVendor    
     chmod 0664 /sys/class/android_usb/android0/idVendor
-
-# write access permission for drive emulation
-    chown system system /sys/class/android_usb/android0/f_cdrom_storage/lun/cdrom_usbmode
-
-# TI sdram frequency set problem work around
-# Temporarily adjust CPU frequency and reset to (performance) interactive
-     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor userspace
-     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed 800000
 
 # switch back to interactive and tune it
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
@@ -261,16 +232,6 @@ service charger /charger
     user root
     group root
     oneshot
-
-service lgsecclk /system/bin/lgsecclkserver
-    class main
-    user system
-    group system lgdrm_acc sdcard_rw media_rw
-
-service lgdrm /system/bin/lgdrmserver
-    class main
-    user root
-    group lgdrm_acc sdcard_rw media_rw system radio
 
 service pvrsrvinit /vendor/bin/pvrsrvinit
     class core
