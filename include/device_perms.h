@@ -5,3 +5,6 @@
     { "rmnet1_down", AID_RADIO, AID_RADIO }, \
     { "rmnet2_down", AID_RADIO, AID_RADIO }, \
     { "rmnet3_down", AID_RADIO, AID_RADIO },
+
+#define PROPERTY_PERMS_APPEND \
+    { "watchdog.reset_progress",      AID_RADIO,    AID_RADIO },
