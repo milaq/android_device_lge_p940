@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012
+ * Copyright (C) 2013 Micha LaQua <micha.laqua@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  */
 
 
-//#define LOG_NDEBUG 0
-#define LOG_TAG "lights"
+#define LOG_NDEBUG 0
+//#define LOG_TAG "lights"
 
 #include <cutils/log.h>
 
@@ -39,6 +39,8 @@ static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 static struct light_state_t g_notification;
 static int g_enable_touchlight = 1;
 static int g_touchled_on = 0;
+static int g_batled_on = 0;
+static int g_notled_on = 0;
 
 char const*const LCD_FILE
         = "/sys/devices/platform/omap/omap_i2c.2/i2c-2/2-0038/brightness";
@@ -139,17 +141,20 @@ set_light_buttons(struct light_device_t* dev,
 {
     int err = 0;
     int on = is_lit(state);
+    g_touchled_on = on;
+    ALOGV("Setting button brightness to %d",on);
 
-    g_touchled_on = on?1:0;
-    ALOGV("Setting button brightness to %ld",on);
-
-    if (on && (g_enable_touchlight == -1 || g_enable_touchlight > 0)) {
-        pthread_mutex_lock(&g_lock);
-        err = write_int(BUTTON_BRIGHTNESS, 255);
-        pthread_mutex_unlock(&g_lock);
+    pthread_mutex_lock(&g_lock);
+    if (on) {
+        if (g_enable_touchlight == -1 || g_enable_touchlight > 0) {
+            err = write_int(BUTTON_BRIGHTNESS, 255);
+        } else {
+            err = write_int(BUTTON_BRIGHTNESS, 254);
+        }
     } else {
-        err = write_int(BUTTON_BRIGHTNESS, 0);
+        err = write_int(BUTTON_BRIGHTNESS, g_batled_on?254:0);
     }
+    pthread_mutex_unlock(&g_lock);
     return err;
 }
 
@@ -172,17 +177,39 @@ set_light_backlight(struct light_device_t* dev,
 }
 
 static int
+set_light_battery (struct light_device_t* dev,
+        struct light_state_t const* state)
+{
+    int err = 0;
+    unsigned int colorRGB = state->color & 0xFFFFFF;
+    int red = (colorRGB >> 16)&0xFF;
+    int green = (colorRGB >> 8)&0xFF;
+    g_batled_on = red?1:0;
+    ALOGV("Calling battery light with state %d - red: %i, green: %i", g_batled_on, red, green);
+
+    if (g_touchled_on || g_notled_on)
+        ALOGV("not switching battery light since button/notification led is on");
+    else {
+        pthread_mutex_lock(&g_lock);
+        err = write_int(BUTTON_BRIGHTNESS, g_batled_on?254:0);
+        pthread_mutex_unlock(&g_lock);
+    }
+    return err;
+}
+
+static int
 set_light_notifications(struct light_device_t* dev,
         struct light_state_t const* state)
 {
     int err = 0;
     int on = is_lit(state);
-
+    g_notled_on = on;
     ALOGV("Calling notification light with state %d",on);
 
     if (g_touchled_on)
         ALOGV("not switching button/notification light since button backlight is on");
     else {
+        
         ALOGV("flashOFF %i, flashON: %i", state->flashOffMS, state->flashOnMS);
         pthread_mutex_lock(&g_lock);
         if (state->flashOffMS == 0) {
@@ -192,7 +219,10 @@ set_light_notifications(struct light_device_t* dev,
                 err = write_int(PULSE_INTERVAL, state->flashOffMS/250);
                 err = write_int(PULSE_LENGTH, state->flashOnMS/2);
         }
-        err = write_int(BUTTON_BRIGHTNESS, on?127:0);
+        if (g_batled_on)
+            err = write_int(BUTTON_BRIGHTNESS, on?127:254);
+        else
+            err = write_int(BUTTON_BRIGHTNESS, on?127:0);
         pthread_mutex_unlock(&g_lock);
         }
 
@@ -228,6 +258,9 @@ static int open_lights(const struct hw_module_t* module, char const* name,
     }
     else if (0 == strcmp(LIGHT_ID_BUTTONS, name)) {
         set_light = set_light_buttons;
+    }
+    else if (0 == strcmp(LIGHT_ID_BATTERY, name)) {
+        set_light = set_light_battery;
     }
     else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name)) {
         set_light = set_light_notifications;
