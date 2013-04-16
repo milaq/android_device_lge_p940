@@ -80,7 +80,6 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 
 # Wifi related defines
 BOARD_WLAN_DEVICE           := bcmdhd
-BOARD_WLAN_DEVICE_REV       := bcm4330_b2
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
@@ -90,7 +89,6 @@ WIFI_DRIVER_FW_PATH_PARAM   := "/data/misc/wifi/fw_path"
 WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd_p2p.bin"
 WIFI_DRIVER_FW_PATH_P2P     := "/vendor/firmware/fw_bcmdhd_p2p.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
-WIFI_BAND                   := 802_11_ABG
 BOARD_LEGACY_NL80211_STA_EVENTS := true
 
 BOARD_HAVE_BLUETOOTH := true
