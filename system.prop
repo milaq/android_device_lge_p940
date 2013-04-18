@@ -6,6 +6,7 @@
 com.ti.omap_enhancement=true
 
 # Define modem related settings
+rild.libpath=/system/lib/lge-ril.so
 ro.telephony.ril_class=LGEInfineon
 telephony.lteOnCdmaDevice=0
 mobiledata.interfaces=rmnet0
@@ -44,3 +45,6 @@ ro.build.target_operator=OPEN
 
 # BT address path
 ro.bt.bdaddr_path=/sys/devices/platform/bd_address/bdaddr_if
+
+# nfc
+ro.nfc.port="I2C"

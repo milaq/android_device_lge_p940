@@ -132,8 +132,6 @@ on post-fs-data
     chown system system /sys/class/mhl_orient/mhl_dev_orient/MHL_orient
 
 on boot
-    setprop rild.libpath /system/lib/lge-ril.so
-    setprop ro.nfc.port "I2C"
 
     mkdir /data/smc 0770 drmrpc drmrpc
 
