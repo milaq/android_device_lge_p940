@@ -47,4 +47,4 @@ ro.build.target_operator=OPEN
 ro.bt.bdaddr_path=/sys/devices/platform/bd_address/bdaddr_if
 
 # nfc
-ro.nfc.port="I2C"
+ro.nfc.port=I2C
