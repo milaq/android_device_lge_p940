@@ -10,7 +10,6 @@ rild.libpath=/system/lib/lge-ril.so
 ro.telephony.ril_class=P2RIL
 telephony.lteOnCdmaDevice=0
 mobiledata.interfaces=rmnet0
-telephony.test.ignore.nitz=true
 ro.build.target_ril_platform=ifx
 persist.service.rr.enable=1
 
