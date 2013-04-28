@@ -14,10 +14,6 @@ vendor/firmware/fw_bcmdhd.bin
 vendor/firmware/fw_bcmdhd_apsta.bin
 vendor/firmware/fw_bcmdhd_p2p.bin
 
-## audio
-lib/hw/audio.primary.omap4.so
-lib/libtinyalsa.so
-
 ## camera
 lib/hw/camera.omap4.so
 
