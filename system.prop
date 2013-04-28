@@ -7,7 +7,7 @@ com.ti.omap_enhancement=true
 
 # Define modem related settings
 rild.libpath=/system/lib/lge-ril.so
-ro.telephony.ril_class=LGEInfineon
+ro.telephony.ril_class=P2RIL
 telephony.lteOnCdmaDevice=0
 mobiledata.interfaces=rmnet0
 telephony.test.ignore.nitz=true

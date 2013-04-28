@@ -28,14 +28,9 @@ import android.telephony.TelephonyManager;
 
 import android.util.Log;
 
-/* NITZ stuffs */
-import android.os.SystemProperties;
-import java.util.Date;
-import java.text.SimpleDateFormat;
+public class P2RIL extends RIL implements CommandsInterface {
 
-public class LGEInfineon extends RIL implements CommandsInterface {
-
-    public LGEInfineon(Context context, int networkMode, int cdmaSubscription) {
+    public P2RIL(Context context, int networkMode, int cdmaSubscription) {
         super(context, networkMode, cdmaSubscription);
         PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
             @Override
@@ -63,13 +58,41 @@ public class LGEInfineon extends RIL implements CommandsInterface {
 
     @Override
     public void
+    dial(String address, int clirMode, UUSInfo uusInfo, Message result) {
+        super.dial(address, clirMode, uusInfo, result);
+
+        // RIL_REQUEST_LGE_CPATH
+        RILRequest rrLSL = RILRequest.obtain(
+                0x12a, null);
+        rrLSL.mp.writeInt(1);
+        rrLSL.mp.writeInt(1);
+        send(rrLSL);
+    }
+
+    public void
+    acceptCall (Message result) {
+        super.acceptCall(result);
+
+        // RIL_REQUEST_LGE_CPATH
+        RILRequest rrLSL = RILRequest.obtain(
+                0x12a, null);
+        rrLSL.mp.writeInt(1);
+        rrLSL.mp.writeInt(1);
+        send(rrLSL);
+    }
+
+
+    @Override
+    public void
     getIMEI(Message result) {
-        // RIL_REQUEST_LGE_SEND_COMMAND
+        //RIL_REQUEST_LGE_SEND_COMMAND
+        // Use this to bootstrap a bunch of internal variables
         RILRequest rrLSC = RILRequest.obtain(
                 0x142, null);
         rrLSC.mp.writeInt(1);
         rrLSC.mp.writeInt(0);
         send(rrLSC);
+
 
         // The original (and unmodified) IMEI request
         RILRequest rr = RILRequest.obtain(RIL_REQUEST_GET_IMEI, result);
@@ -102,8 +125,11 @@ public class LGEInfineon extends RIL implements CommandsInterface {
         return data;
     }
 
+    static final int RIL_UNSOL_LGE_BATTERY_LEVEL_UPDATE = 1050;
+    static final int RIL_UNSOL_LGE_XCALLSTAT = 1053;
     static final int RIL_UNSOL_LGE_SIM_STATE_CHANGED = 1060;
     static final int RIL_UNSOL_LGE_SIM_STATE_CHANGED_NEW = 1061;
+    static final int RIL_UNSOL_LGE_SELECTED_SPEECH_CODEC = 1074;
 
     @Override
     protected void
@@ -114,10 +140,11 @@ public class LGEInfineon extends RIL implements CommandsInterface {
 
         switch(response) {
             case RIL_UNSOL_ON_USSD: ret =  responseStrings(p); break;
-            case 1080: ret =  responseVoid(p); break; // RIL_UNSOL_LGE_FACTORY_READY
+            case RIL_UNSOL_LGE_XCALLSTAT: ret =  responseVoid(p); break;
+            case RIL_UNSOL_LGE_SELECTED_SPEECH_CODEC: ret =  responseVoid(p); break;
+            case RIL_UNSOL_LGE_BATTERY_LEVEL_UPDATE: ret =  responseVoid(p); break;
             case RIL_UNSOL_LGE_SIM_STATE_CHANGED:
             case RIL_UNSOL_LGE_SIM_STATE_CHANGED_NEW: ret =  responseVoid(p); break;
-            case RIL_UNSOL_NITZ_TIME_RECEIVED: ret =  responseNitz(p); break;
             default:
                 // Rewind the Parcel
                 p.setDataPosition(dataPosition);
@@ -162,84 +189,12 @@ public class LGEInfineon extends RIL implements CommandsInterface {
                     mIccStatusChangedRegistrants.notifyRegistrants();
                 }
                 break;
-            case RIL_UNSOL_NITZ_TIME_RECEIVED:
-                if (RILJ_LOGD) unsljLogRet(response, ret);
-
-                // has bonus long containing milliseconds since boot that the NITZ
-                // time was received
-                long nitzReceiveTime = p.readLong();
-
-                Object[] result = new Object[2];
-
-                result[0] = ret;
-                result[1] = Long.valueOf(nitzReceiveTime);
-
-                boolean ignoreNitz = SystemProperties.getBoolean(
-                        TelephonyProperties.PROPERTY_IGNORE_NITZ, false);
-
-                if (ignoreNitz) {
-                    if (RILJ_LOGD) riljLog("ignoring UNSOL_NITZ_TIME_RECEIVED");
-                } else {
-                    if (mNITZTimeRegistrant != null) {
-
-                        mNITZTimeRegistrant
-                            .notifyRegistrant(new AsyncResult (null, result, null));
-                    } else {
-                        // in case NITZ time registrant isnt registered yet
-                        mLastNITZTimeInfo = result;
-                    }
-                }
-            break;
+            case RIL_UNSOL_LGE_BATTERY_LEVEL_UPDATE:
+            case RIL_UNSOL_LGE_XCALLSTAT:
+            case RIL_UNSOL_LGE_SELECTED_SPEECH_CODEC:
+                if (RILJ_LOGD) riljLog("sinking LGE request > " + response);
         }
 
-    }
-
-    private Object
-    responseNitz(Parcel p) {
-        int tzoffset, dst=0;
-        String parceldata, parcelextra;
-        String response;
-        SimpleDateFormat dateFormatter;
-        SimpleDateFormat dateParser;
-
-        /* Get the actual date string */
-        parceldata = p.readString();
-
-        /* Break 12/11/6,19:0:15+44,1 into...
-         * parcelitem[0] (date), hourbreak[0] (time), 
-         * hourbreak[1] (tz offset), parcelitem[2] (dst) */
-
-        String [] parcelitem = parceldata.split(",");
-        String [] hourbreak = parcelitem[1].split("[\\+-]");
-        parceldata = parcelitem[0] + "," + hourbreak[0]; // assuming there is always one comma at least
-        tzoffset = Integer.parseInt(hourbreak[1]); // TZ diff in quarter-hours
-        if (parcelitem[1].matches(".*-[0-9]+$")) tzoffset *= -1;
-
-        parcelextra = (parcelitem.length > 2 ? parcelitem[2] : "0");
-        dst = Integer.parseInt(parcelextra);
-
-        /* WTH... Date may come with 4 digits in the year, reduce to 2 */
-        try {
-            dateFormatter = new SimpleDateFormat("yy/MM/dd,HH:mm:ss");
-            dateParser = new SimpleDateFormat("yy/MM/dd,HH:mm:ss");
-
-            /* Directly calculate UTC time using DST Offset */
-            int offset = tzoffset*15*60*1000;	// DST corrected
-            long when = dateParser.parse(parceldata).getTime() - offset;
-            Date d = new Date(when);
-            response = dateFormatter.format(d);
-
-        } catch (java.text.ParseException tpe) {
-            riljLog("NITZ TZ conversion failed: " + tpe);
-            response = parceldata;
-        }
-
-        /* Append the timezone */
-        response = response + ((tzoffset < 0) ? "" : "+") + tzoffset;
-        /* Add DST */
-        response = response + "," + dst;
-
-        return response;
     }
 
 }
