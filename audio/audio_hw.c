@@ -281,7 +281,7 @@ struct route_setting defaults[] = {
     /* SPKR media */
     {
         .ctl_name = MIXER_DL2_MEDIA_PLAYBACK_VOLUME,
-        .intval = MIXER_ABE_GAIN_0DB - 6,
+        .intval = MIXER_ABE_GAIN_0DB - 7,
     },
     {
         .ctl_name = MIXER_DL1_VOICE_PLAYBACK_VOLUME,
