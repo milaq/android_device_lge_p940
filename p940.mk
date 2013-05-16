@@ -29,6 +29,7 @@ PRODUCT_PACKAGES += \
 	audio.a2dp.default \
 	audio_policy.default \
 	audio.primary.p940 \
+	audio.hdmi.p940 \
 	libaudioutils
 
 PRODUCT_COPY_FILES := \
