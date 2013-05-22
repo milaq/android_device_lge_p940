@@ -239,7 +239,7 @@ PRODUCT_PACKAGES += \
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 # goo.im stuff
-$(call inherit-product, device/lge/p940/goo.mk)
+$(call inherit-product-if-exists, vendor/goomanager/goo.mk)
 
 $(call inherit-product-if-exists, vendor/nxp/pn544/nxp-pn544-fw-vendor.mk)
 
