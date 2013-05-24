@@ -52,7 +52,16 @@ int main() {
 		sprintf(macaddr,"0b:ad:c0:ff:ef:%x",macbyte);
 	}
 
-	fprintf(fd1,"cur_etheraddr=%s\n",macaddr);
+	fprintf(fd1,"vlan_mode=0\n\
+mpc=1\n\
+roam_off=0\n\
+roam_scan_period=10\n\
+roam_delta=20\n\
+roam_trigger=-70\n\
+assoc_listen=1\n\
+assoc_retry_max=7\n\
+cur_etheraddr=%s\n\
+",macaddr);
 
 	fclose(fd1);
 	return 0;
