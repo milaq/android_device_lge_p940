@@ -32,9 +32,14 @@ public class P2RIL extends RIL implements CommandsInterface {
     @Override
     public void
     getIMEI(Message result) {
-        //RIL_REQUEST_LGE_SEND_COMMAND
+        //RIL_REQUEST_LGE_SEND_COMMAND, 0 and 1
         RILRequest rrLSC = RILRequest.obtain(
-                0x113, null);
+                0x142, null);
+        rrLSC.mp.writeInt(1);
+        rrLSC.mp.writeInt(0);
+        send(rrLSC);
+        rrLSC = RILRequest.obtain(
+                0x142, null);
         rrLSC.mp.writeInt(1);
         rrLSC.mp.writeInt(1);
         send(rrLSC);
@@ -70,8 +75,9 @@ public class P2RIL extends RIL implements CommandsInterface {
 
     static final int RIL_UNSOL_LGE_BATTERY_LEVEL_UPDATE = 1050;
     static final int RIL_UNSOL_LGE_XCALLSTAT = 1053;
-    static final int RIL_UNSOL_LGE_SELECTED_SPEECH_CODEC = 1074;
+    static final int RIL_UNSOL_LGE_SIM_STATE_CHANGED = 1060;
     static final int RIL_UNSOL_LGE_SIM_STATE_CHANGED_NEW = 1061;
+    static final int RIL_UNSOL_LGE_SELECTED_SPEECH_CODEC = 1074;
 
     @Override
     protected void
@@ -85,6 +91,7 @@ public class P2RIL extends RIL implements CommandsInterface {
             case RIL_UNSOL_LGE_BATTERY_LEVEL_UPDATE: ret =  responseVoid(p); break;
             case RIL_UNSOL_LGE_XCALLSTAT: ret =  responseVoid(p); break;
             case RIL_UNSOL_LGE_SELECTED_SPEECH_CODEC: ret =  responseVoid(p); break;
+            case RIL_UNSOL_LGE_SIM_STATE_CHANGED:
             case RIL_UNSOL_LGE_SIM_STATE_CHANGED_NEW: ret =  responseVoid(p); break;
             default:
                 // Rewind the Parcel
@@ -109,6 +116,7 @@ public class P2RIL extends RIL implements CommandsInterface {
             case RIL_UNSOL_LGE_SELECTED_SPEECH_CODEC:
                 if (RILJ_LOGD) riljLog("sinking LGE request > " + response);
                 break;
+            case RIL_UNSOL_LGE_SIM_STATE_CHANGED:
             case RIL_UNSOL_LGE_SIM_STATE_CHANGED_NEW:
                 if (RILJ_LOGD) unsljLog(response);
 
