@@ -276,7 +276,7 @@ struct route_setting defaults[] = {
     /* EP media */
     {
         .ctl_name = MIXER_DL1_MEDIA_PLAYBACK_VOLUME,
-        .intval = MIXER_ABE_GAIN_0DB - 9,
+        .intval = MIXER_ABE_GAIN_0DB - 8,
     },
     /* SPKR media */
     {
