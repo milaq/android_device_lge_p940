@@ -40,9 +40,8 @@ BOARD_KERNEL_BASE := 0x80000000
 #BOARD_KERNEL_CMDLINE :=
 
 # Define kernel config for inline building
-#TARGET_KERNEL_CONFIG := cyanogenmod_p940_defconfig
-#TARGET_KERNEL_SOURCE := kernel/lge/p940
-TARGET_PREBUILT_KERNEL := device/lge/p940/prebuilt/kernel
+TARGET_KERNEL_CUSTOM_TOOLCHAIN_GNUEABI := arm-2010q1
+TARGET_KERNEL_CONFIG := cyanogenmod_p940_defconfig
 
 TARGET_BOARD_PLATFORM := omap4
 TARGET_BOOTLOADER_BOARD_NAME := p940
