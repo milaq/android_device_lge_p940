@@ -84,17 +84,12 @@ public class P2RIL extends RIL implements CommandsInterface {
     @Override
     public void
     getIMEI(Message result) {
-        //RIL_REQUEST_LGE_SEND_COMMAND, 0 and 1
+        // RIL_REQUEST_LGE_SEND_COMMAND
         // Use this to bootstrap a bunch of internal variables
         RILRequest rrLSC = RILRequest.obtain(
                 0x142, null);
         rrLSC.mp.writeInt(1);
         rrLSC.mp.writeInt(0);
-        send(rrLSC);
-        rrLSC = RILRequest.obtain(
-                0x142, null);
-        rrLSC.mp.writeInt(1);
-        rrLSC.mp.writeInt(1);
         send(rrLSC);
 
         // The original (and unmodified) IMEI request
