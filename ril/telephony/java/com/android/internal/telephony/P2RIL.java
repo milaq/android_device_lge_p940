@@ -156,6 +156,7 @@ public class P2RIL extends RIL implements CommandsInterface {
     static final int RIL_UNSOL_LGE_SIM_STATE_CHANGED = 1060;
     static final int RIL_UNSOL_LGE_SIM_STATE_CHANGED_NEW = 1061;
     static final int RIL_UNSOL_LGE_SELECTED_SPEECH_CODEC = 1074;
+    static final int RIL_UNSOL_LGE_FACTORY_READY = 1080;
 
     @Override
     protected void
@@ -173,6 +174,7 @@ public class P2RIL extends RIL implements CommandsInterface {
             case RIL_UNSOL_LGE_RESPONSE_PS_SIGNALING_STATUS: ret =  responseVoid(p); break;
             case RIL_UNSOL_LGE_SIM_STATE_CHANGED:
             case RIL_UNSOL_LGE_SIM_STATE_CHANGED_NEW: ret =  responseVoid(p); break;
+            case RIL_UNSOL_LGE_FACTORY_READY: ret =  responseVoid(p); break;
             default:
                 // Rewind the Parcel
                 p.setDataPosition(dataPosition);
@@ -220,7 +222,7 @@ public class P2RIL extends RIL implements CommandsInterface {
             case RIL_UNSOL_LGE_RESPONSE_PS_SIGNALING_STATUS:
                 if (RILJ_LOGD) riljLog("sinking LGE request > " + response);
                 break;
-            case 1080: // RIL_UNSOL_LGE_FACTORY_READY (NG)
+            case RIL_UNSOL_LGE_FACTORY_READY:
                 /* Adjust request IDs */
                 RIL_REQUEST_HANG_UP_CALL = 206;
                 break;
