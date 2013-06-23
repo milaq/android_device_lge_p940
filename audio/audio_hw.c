@@ -117,7 +117,7 @@
 #define MIXER_450HZ_HIGH_PASS               "450Hz High-pass"
 #define MIXER_0DB_HIGH_PASS                 "High-pass   0dB"
 #define MIXER_FLAT_RESPONSE                 "Flat   response"
-#define MIXER_4KHZ_LPF_0DB                  "4Khz LPF   0dB"
+#define MIXER_4KHZ_LPF_0DB                  "4Khz LPF    0dB"
 #define MIXER_8KHZ_LPF_0DB                  "8Khz LPF    0dB"
 
 
@@ -170,31 +170,31 @@
 #define DB_TO_ABE_GAIN(x) ((x) + MIXER_ABE_GAIN_0DB)
 #define DB_TO_CAPTURE_PREAMPLIFIER_VOLUME(x) (((x) + 6) / 6)
 #define DB_TO_CAPTURE_VOLUME(x) (((x) - 6) / 6)
-#define DB_TO_HEADSET_VOLUME(x) (((x) + 24) / 2)
+#define DB_TO_HEADSET_VOLUME(x) (((x) + 16) / 2)
 #define DB_TO_SPEAKER_VOLUME(x) (((x) + 52) / 2)
 #define DB_TO_EARPIECE_VOLUME(x) (((x) + 24) / 2)
 
 /* use-case specific mic volumes, all in dB */
 #define CAPTURE_DIGITAL_MIC_VOLUME            26
 #define CAPTURE_MAIN_MIC_VOLUME               15
-#define CAPTURE_SUB_MIC_VOLUME                15
-#define CAPTURE_HEADSET_MIC_VOLUME            15
+#define CAPTURE_SUB_MIC_VOLUME                28
+#define CAPTURE_HEADSET_MIC_VOLUME            21
 
 #define VOICE_RECOGNITION_MAIN_MIC_VOLUME     25
-#define VOICE_RECOGNITION_SUB_MIC_VOLUME      25
-#define VOICE_RECOGNITION_HEADSET_MIC_VOLUME  25
+#define VOICE_RECOGNITION_SUB_MIC_VOLUME      35
+#define VOICE_RECOGNITION_HEADSET_MIC_VOLUME  30
 
 #define CAMCORDER_MAIN_MIC_VOLUME             15
-#define CAMCORDER_SUB_MIC_VOLUME              15
-#define CAMCORDER_HEADSET_MIC_VOLUME          15
+#define CAMCORDER_SUB_MIC_VOLUME              30
+#define CAMCORDER_HEADSET_MIC_VOLUME          21
 
 #define VOIP_MAIN_MIC_VOLUME                  15
-#define VOIP_SUB_MIC_VOLUME                   15
-#define VOIP_HEADSET_MIC_VOLUME               15
+#define VOIP_SUB_MIC_VOLUME                   28
+#define VOIP_HEADSET_MIC_VOLUME               21
 
-#define VOICE_CALL_MAIN_MIC_VOLUME            15 //-2
-#define VOICE_CALL_SUB_MIC_VOLUME             15
-#define VOICE_CALL_HEADSET_MIC_VOLUME         15
+#define VOICE_CALL_MAIN_MIC_VOLUME            -5
+#define VOICE_CALL_SUB_MIC_VOLUME             11
+#define VOICE_CALL_HEADSET_MIC_VOLUME         6
 
 /* use-case specific output volumes */
 #define NORMAL_SPEAKER_VOLUME                 6
@@ -259,7 +259,7 @@ struct route_setting defaults[] = {
     /* general */
     {
         .ctl_name = MIXER_DL2_LEFT_EQUALIZER,
-        .strval = "High-pass -20dB",
+        .strval = MIXER_450HZ_HIGH_PASS,
     },
     {
         .ctl_name = MIXER_DL2_RIGHT_EQUALIZER,
@@ -271,12 +271,12 @@ struct route_setting defaults[] = {
     },
     {
         .ctl_name = "AMIC Equalizer",
-        .strval = "High-pass -18dB",
+        .strval = "High-pass -12dB",
     },
     /* EP media */
     {
         .ctl_name = MIXER_DL1_MEDIA_PLAYBACK_VOLUME,
-        .intval = MIXER_ABE_GAIN_0DB - 8,
+        .intval = MIXER_ABE_GAIN_0DB - 2,
     },
     /* SPKR media */
     {
@@ -309,7 +309,7 @@ struct route_setting defaults[] = {
     },
     {
         .ctl_name = MIXER_CAPTURE_VOLUME,
-        .intval = DB_TO_CAPTURE_VOLUME(18),
+        .intval = DB_TO_CAPTURE_VOLUME(30),
     },
     {
         .ctl_name = MIXER_SDT_UL_VOLUME,
