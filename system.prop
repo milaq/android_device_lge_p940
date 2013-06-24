@@ -2,17 +2,9 @@
 # system.prop for p940
 #
 
-# OMAP
-com.ti.omap_enhancement=true
-
 # Define modem related settings
 rild.libpath=/system/lib/lge-ril.so
 ro.telephony.ril_class=P2RIL
-mobiledata.interfaces=rmnet0
-ro.build.target_ril_platform=ifx
-persist.service.rr.enable=1
-
-# ril sends only one RIL_UNSOL_CALL_RING
 ro.telephony.call_ring.multiple=false
 ro.telephony.call_ring.delay=3000
 ro.telephony.call_ring.absent=true
@@ -20,22 +12,7 @@ ro.telephony.call_ring.absent=true
 # audio
 omap.audio.mic.main=AMic0
 omap.audio.mic.sub=AMic1
-omap.audio.power=HQ
-alsa.mixer.playback.master=DAC2 Analog
-alsa.mixer.capture.master=Analog
-ro.lge.audio_soundexception=true
-ro.lge.audio_soundprofile=true
-persist.sys.system_volume_index=7
-persist.sys.sound_enable=2
-# set high quality mode android resampler
-af.resampler.quality=3
-
-# Define JPEG codec to load. (Set libskiahw with 1 & Set ARM with 0)
-jpeg.libskiahw.encoder.enable=0
-jpeg.libskiahw.decoder.enable=0
-# Define JPEG Threashold for Image size (bytes)
-jpeg.libskiahw.decoder.thresh=0
-jpeg.libskiahw.encoder.thresh=0
+omap.audio.power=PingPong
 
 # Used for automagic internal configs
 ro.build.target_country=EU
