@@ -88,6 +88,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	wifi.supplicant_scan_interval=45
 
 PRODUCT_PACKAGES += \
+	hwcomposer.p940 \
 	lights.p940 \
 	power.p940 \
 	nfc.p940 \
