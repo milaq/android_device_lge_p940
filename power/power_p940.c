@@ -126,11 +126,26 @@ static int boostpulse_open(struct p940_power_module *p940)
 
 static void p940_power_set_interactive(struct power_module *module, int on)
 {
+    int len;
+
+    char buf[MAX_BUF_SZ];
+
     /*
      * Lower maximum frequency when screen is off.  CPU 0 and 1 share a
      * cpufreq policy.
      */
-    sysfs_write(SCALINGMAXFREQ_PATH,
+    if (!on) {
+        /* read the current scaling max freq and save it before updating */
+        len = sysfs_read(SCALINGMAXFREQ_PATH, buf, sizeof(buf));
+
+        if (len != -1)
+            memcpy(scaling_max_freq, buf, sizeof(buf));
+
+        sysfs_write(SCALINGMAXFREQ_PATH,
+                    on ? scaling_max_freq : screen_off_max_freq);
+    }
+    else
+        sysfs_write(SCALINGMAXFREQ_PATH,
                     on ? scaling_max_freq : screen_off_max_freq);
 }
 
