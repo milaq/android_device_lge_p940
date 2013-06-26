@@ -26,7 +26,6 @@
 #include <hardware/power.h>
 
 #define SCALINGMAXFREQ_PATH "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq"
-#define SCREENOFFMAXFREQ_PATH "/sys/devices/system/cpu/cpu0/cpufreq/screen_off_max_freq"
 #define BOOSTPULSE_PATH "/sys/devices/system/cpu/cpufreq/interactive/boostpulse"
 
 #define MAX_BUF_SZ  10
@@ -98,8 +97,6 @@ static void p940_power_init(struct power_module *module)
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay",
                 "100000");
 
-    sysfs_write(SCREENOFFMAXFREQ_PATH,
-                screen_off_max_freq);
 }
 
 static int boostpulse_open(struct p940_power_module *p940)
