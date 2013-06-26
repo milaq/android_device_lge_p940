@@ -51,31 +51,6 @@ public class P2RIL extends RIL implements CommandsInterface {
 
     private int RIL_REQUEST_HANG_UP_CALL = 0xce;
 
-    @Override
-    public void
-    dial(String address, int clirMode, UUSInfo uusInfo, Message result) {
-        super.dial(address, clirMode, uusInfo, result);
-
-        // RIL_REQUEST_LGE_CPATH
-        RILRequest rrLSL = RILRequest.obtain(
-                0x12a, null);
-        rrLSL.mp.writeInt(1);
-        rrLSL.mp.writeInt(1);
-        send(rrLSL);
-    }
-
-    public void
-    acceptCall (Message result) {
-        super.acceptCall(result);
-
-        // RIL_REQUEST_LGE_CPATH
-        RILRequest rrLSL = RILRequest.obtain(
-                0x12a, null);
-        rrLSL.mp.writeInt(1);
-        rrLSL.mp.writeInt(1);
-        send(rrLSL);
-    }
-
     /* We're not actually changing REQUEST_GET_IMEI, but it's one
        of the first requests made after enabling the radio, and it
        isn't repeated while the radio is on, so a good candidate to
