@@ -37,7 +37,7 @@ BOARD_CUSTOM_BOOTIMG_MK := device/lge/p940/releasetools/boot.mk
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/lge/p940/releasetools/p940_ota_from_target_files
 
 BOARD_KERNEL_BASE := 0x80000000
-#BOARD_KERNEL_CMDLINE :=
+BOARD_KERNEL_CMDLINE :=
 
 # Define kernel config for inline building
 TARGET_KERNEL_CUSTOM_TOOLCHAIN_GNUEABI := arm-2010q1
@@ -50,9 +50,6 @@ TARGET_SPECIFIC_HEADER_PATH := device/lge/p940/include/
 
 USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/lge/p940/config/egl.cfg
-
-# set if the target supports FBIO_WAITFORVSYNC
-TARGET_HAS_WAITFORVSYNC := true
 
 # OMAP
 OMAP_ENHANCEMENT := true
@@ -96,7 +93,6 @@ BOARD_BLUEDROID_VENDOR_CONF := device/lge/p940/bluetooth/vnd_p940.txt
 BOARD_HAVE_FM_RADIO := true
 BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 
-# ics audio+camera blobs
 COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB
 
 BOARD_LIB_DUMPSTATE := libdumpstate.p940
@@ -109,7 +105,7 @@ BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/lge/p940/vibrator.c
 BOARD_RIL_CLASS := ../../../device/lge/p940/ril/
 
 KERNEL_SGX_MODULES:
-	make -C device/lge/p940/sgx-module/eurasia_km/eurasiacon/build/linux2/omap4430_android/ O=$(KERNEL_OUT) KERNELDIR=$(ANDROID_BUILD_TOP)/$(KERNEL_SRC) ARCH="arm" $(ARM_CROSS_COMPILE) KERNEL_CROSS_COMPILE=$(ARM_CROSS_COMPILE) TARGET_PRODUCT="blaze_tablet" BUILD=release TARGET_SGX=540 PLATFORM_VERSION=4.0
+	make -C device/lge/p940/sgx-modules/eurasia_km/eurasiacon/build/linux2/omap4430_android/ O=$(KERNEL_OUT) KERNELDIR=$(ANDROID_BUILD_TOP)/$(KERNEL_SRC) ARCH="arm" $(ARM_CROSS_COMPILE) KERNEL_CROSS_COMPILE=$(ARM_CROSS_COMPILE) TARGET_PRODUCT="blaze_tablet" BUILD=release TARGET_SGX=540 PLATFORM_VERSION=4.0
 	mkdir -p $(TARGET_OUT)/modules/
 	mv $(OUT)/target/*sgx540_120.ko $(TARGET_OUT)/modules/
 

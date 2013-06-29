@@ -75,9 +75,6 @@ PRODUCT_COPY_FILES += \
 	device/lge/p940/config/omap4-keypad.kl:system/usr/keylayout/omap4-keypad.kl \
 	device/lge/p940/config/twl6030_pwrbutton.kl:system/usr/keylayout/twl6030_pwrbutton.kl
 
-PRODUCT_COPY_FILES += \
-	device/lge/p940/prebuilt/hwcomposer.p940.so:system/lib/hw/hwcomposer.p940.so
-
 # Bluetooth configuration files
 PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf
@@ -97,10 +94,10 @@ PRODUCT_PACKAGES += \
 
 # NFC
 PRODUCT_PACKAGES += \
-        libnfc \
-        libnfc_jni \
-        Nfc \
-        Tag
+	libnfc \
+	libnfc_jni \
+	Nfc \
+	Tag
 
 PRODUCT_PACKAGES += \
     OMXCore \
@@ -113,7 +110,6 @@ PRODUCT_PACKAGES += \
     libOMX.TI.DUCATI1.VIDEO.DECODER.secure \
     libOMX.TI.DUCATI1.VIDEO.DECODER
 
-#
 PRODUCT_PACKAGES += \
     libtiutils \
     libipcutils \
