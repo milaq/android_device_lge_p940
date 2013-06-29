@@ -80,6 +80,9 @@ PRODUCT_COPY_FILES += \
 	device/lge/p940/prebuilt/modules/omaplfb_sgx540_120.ko:system/modules/omaplfb_sgx540_120.ko \
 	device/lge/p940/prebuilt/modules/pvrsrvkm_sgx540_120.ko:system/modules/pvrsrvkm_sgx540_120.ko
 
+PRODUCT_COPY_FILES += \
+	device/lge/p940/prebuilt/hwcomposer.p940.so:system/lib/hw/hwcomposer.p940.so
+
 # Bluetooth configuration files
 PRODUCT_COPY_FILES += \
 	system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf
