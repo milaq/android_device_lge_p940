@@ -75,11 +75,6 @@ PRODUCT_COPY_FILES += \
 	device/lge/p940/config/omap4-keypad.kl:system/usr/keylayout/omap4-keypad.kl \
 	device/lge/p940/config/twl6030_pwrbutton.kl:system/usr/keylayout/twl6030_pwrbutton.kl
 
-# Sgx modules
-PRODUCT_COPY_FILES += \
-	device/lge/p940/prebuilt/modules/omaplfb_sgx540_120.ko:system/modules/omaplfb_sgx540_120.ko \
-	device/lge/p940/prebuilt/modules/pvrsrvkm_sgx540_120.ko:system/modules/pvrsrvkm_sgx540_120.ko
-
 PRODUCT_COPY_FILES += \
 	device/lge/p940/prebuilt/hwcomposer.p940.so:system/lib/hw/hwcomposer.p940.so
 

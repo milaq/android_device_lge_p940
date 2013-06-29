@@ -108,6 +108,13 @@ BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/lge/p940/vibrator.c
 # Radio fixes
 BOARD_RIL_CLASS := ../../../device/lge/p940/ril/
 
+KERNEL_SGX_MODULES:
+	make -C device/lge/p940/sgx-module/eurasia_km/eurasiacon/build/linux2/omap4430_android/ O=$(KERNEL_OUT) KERNELDIR=$(ANDROID_BUILD_TOP)/$(KERNEL_SRC) ARCH="arm" $(ARM_CROSS_COMPILE) KERNEL_CROSS_COMPILE=$(ARM_CROSS_COMPILE) TARGET_PRODUCT="blaze_tablet" BUILD=release TARGET_SGX=540 PLATFORM_VERSION=4.0
+	mkdir -p $(TARGET_OUT)/modules/
+	mv $(OUT)/target/*sgx540_120.ko $(TARGET_OUT)/modules/
+
+TARGET_KERNEL_MODULES := KERNEL_SGX_MODULES
+
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
 
 BOARD_RECOVERY_ALWAYS_WIPES := true
