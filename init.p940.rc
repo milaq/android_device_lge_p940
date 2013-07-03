@@ -250,47 +250,5 @@ service glgps /system/bin/glgps -c /system/etc/gps_brcm_conf.xml
     user system
     group net_raw sdcard_rw system radio
 
-service rawip_rmnet1 /system/bin/init.rmnet 1 up
-    class main
-    user root
-    group radio cache inet misc net_admin net_raw
-    disabled
-    oneshot
-
-service rawip_rmnet2 /system/bin/init.rmnet 2 up
-    class main
-    user root
-    group radio cache inet misc net_admin net_raw
-    disabled
-    oneshot
-
-service rawip_rmnet3 /system/bin/init.rmnet 3 up
-    class main
-    user root
-    group radio cache inet misc net_admin net_raw
-    disabled
-    oneshot
-
-service rmnet1_down /system/bin/init.rmnet 1 down
-    class main
-    user root
-    group radio cache inet misc net_admin net_raw
-    disabled
-    oneshot
-
-service rmnet2_down /system/bin/init.rmnet 2 down
-    class main
-    user root
-    group radio cache inet misc net_admin net_raw
-    disabled
-    oneshot
-
-service rmnet3_down /system/bin/init.rmnet 3 down
-    class main
-    user root
-    group radio cache inet misc net_admin net_raw
-    disabled
-    oneshot
-
 on property:dev.bootcomplete=1
     exec /system/bin/wifimac
