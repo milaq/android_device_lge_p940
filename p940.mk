@@ -39,25 +39,10 @@ PRODUCT_COPY_FILES := \
 	device/lge/p940/fstab.p940:root/fstab.p940 \
 	device/lge/p940/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
-# proprietary charger
-PRODUCT_COPY_FILES += \
-	device/lge/p940/charger/charger:root/charger \
-	device/lge/p940/charger/images/battery_0.png:root/res/images/charger/battery_0.png \
-	device/lge/p940/charger/images/battery_1.png:root/res/images/charger/battery_1.png \
-	device/lge/p940/charger/images/battery_2.png:root/res/images/charger/battery_2.png \
-	device/lge/p940/charger/images/battery_3.png:root/res/images/charger/battery_3.png \
-	device/lge/p940/charger/images/battery_4.png:root/res/images/charger/battery_4.png \
-	device/lge/p940/charger/images/battery_5.png:root/res/images/charger/battery_5.png \
-	device/lge/p940/charger/images/battery_6.png:root/res/images/charger/battery_6.png \
-	device/lge/p940/charger/images/battery_7.png:root/res/images/charger/battery_7.png \
-	device/lge/p940/charger/images/battery_8.png:root/res/images/charger/battery_8.png \
-	device/lge/p940/charger/images/battery_9.png:root/res/images/charger/battery_9.png \
-	device/lge/p940/charger/images/battery_10.png:root/res/images/charger/battery_10.png \
-	device/lge/p940/charger/images/battery_11.png:root/res/images/charger/battery_11.png \
-	device/lge/p940/charger/images/battery_12.png:root/res/images/charger/battery_12.png \
-	device/lge/p940/charger/images/battery_charge.png:root/res/images/charger/battery_charge.png \
-	device/lge/p940/charger/images/battery_fail.png:root/res/images/charger/battery_fail.png \
-	device/lge/p940/charger/images/battery_none.png:root/res/images/charger/battery_none.png
+# charger mode
+PRODUCT_PACKAGES += \
+	charger \
+	charger_res_images
 
 # configs
 PRODUCT_COPY_FILES += \

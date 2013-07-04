@@ -207,7 +207,7 @@ on boot
     write /proc/sys/net/ipv6/conf/rmnet2/disable_ipv6 1
 
 on charger
-    # disable second core while charging (cpufreq gets handled by charger blob)
+    # disable second core while charging
     write /sys/devices/system/cpu/cpu1/online 0
 
 service charger /charger
