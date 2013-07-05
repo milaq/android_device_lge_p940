@@ -184,7 +184,7 @@ set_light_battery (struct light_device_t* dev,
     unsigned int colorRGB = state->color & 0xFFFFFF;
     int red = (colorRGB >> 16)&0xFF;
     int green = (colorRGB >> 8)&0xFF;
-    g_batled_on = !red&&green?1:0;
+    g_batled_on = red&&green?1:0;
     ALOGV("Calling battery light with state %d - red: %i, green: %i", g_batled_on, red, green);
 
     if (g_touchled_on || g_notled_on)
