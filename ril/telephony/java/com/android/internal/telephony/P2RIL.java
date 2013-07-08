@@ -58,14 +58,41 @@ public class P2RIL extends RIL implements CommandsInterface {
 
     @Override
     public void
+    dial(String address, int clirMode, UUSInfo uusInfo, Message result) {
+        super.dial(address, clirMode, uusInfo, result);
+
+        // RIL_REQUEST_LGE_CPATH
+        RILRequest rrLSL = RILRequest.obtain(
+                0xfd, null);
+        rrLSL.mp.writeInt(1);
+        rrLSL.mp.writeInt(5);
+        send(rrLSL);
+    }
+
+    public void
+    acceptCall (Message result) {
+        super.acceptCall(result);
+
+        // RIL_REQUEST_LGE_CPATH
+        RILRequest rrLSL = RILRequest.obtain(
+                0xfd, null);
+        rrLSL.mp.writeInt(1);
+        rrLSL.mp.writeInt(5);
+        send(rrLSL);
+    }
+
+
+    @Override
+    public void
     getIMEI(Message result) {
         // RIL_REQUEST_LGE_SEND_COMMAND
         // Use this to bootstrap a bunch of internal variables
         RILRequest rrLSC = RILRequest.obtain(
-                0x142, null);
+                0x113, null);
         rrLSC.mp.writeInt(1);
         rrLSC.mp.writeInt(0);
         send(rrLSC);
+
 
         // The original (and unmodified) IMEI request
         RILRequest rr = RILRequest.obtain(RIL_REQUEST_GET_IMEI, result);
@@ -74,7 +101,7 @@ public class P2RIL extends RIL implements CommandsInterface {
 
         send(rr);
     }
-	
+
     @Override
     public void
     hangupWaitingOrBackground (Message result) {
@@ -122,11 +149,9 @@ public class P2RIL extends RIL implements CommandsInterface {
 
     static final int RIL_UNSOL_LGE_BATTERY_LEVEL_UPDATE = 1050;
     static final int RIL_UNSOL_LGE_XCALLSTAT = 1053;
-    static final int RIL_UNSOL_LGE_RESPONSE_PS_SIGNALING_STATUS = 1058;
     static final int RIL_UNSOL_LGE_SIM_STATE_CHANGED = 1060;
     static final int RIL_UNSOL_LGE_SIM_STATE_CHANGED_NEW = 1061;
     static final int RIL_UNSOL_LGE_SELECTED_SPEECH_CODEC = 1074;
-    static final int RIL_UNSOL_LGE_FACTORY_READY = 1080;
 
     @Override
     protected void
@@ -136,15 +161,14 @@ public class P2RIL extends RIL implements CommandsInterface {
         int response = p.readInt();
 
         switch(response) {
-            case RIL_UNSOL_ON_USSD: ret =  responseStrings(p); break;
             case RIL_UNSOL_RESPONSE_RADIO_STATE_CHANGED: ret =  responseVoid(p); break;
-            case RIL_UNSOL_LGE_BATTERY_LEVEL_UPDATE: ret =  responseVoid(p); break;
+            case RIL_UNSOL_ON_USSD: ret =  responseStrings(p); break;
             case RIL_UNSOL_LGE_XCALLSTAT: ret =  responseVoid(p); break;
             case RIL_UNSOL_LGE_SELECTED_SPEECH_CODEC: ret =  responseVoid(p); break;
-            case RIL_UNSOL_LGE_RESPONSE_PS_SIGNALING_STATUS: ret =  responseVoid(p); break;
+            case RIL_UNSOL_LGE_BATTERY_LEVEL_UPDATE: ret =  responseVoid(p); break;
             case RIL_UNSOL_LGE_SIM_STATE_CHANGED:
             case RIL_UNSOL_LGE_SIM_STATE_CHANGED_NEW: ret =  responseVoid(p); break;
-            case RIL_UNSOL_LGE_FACTORY_READY: ret =  responseVoid(p); break;
+
             default:
                 // Rewind the Parcel
                 p.setDataPosition(dataPosition);
@@ -154,6 +178,15 @@ public class P2RIL extends RIL implements CommandsInterface {
                 return;
         }
         switch(response) {
+            case RIL_UNSOL_RESPONSE_RADIO_STATE_CHANGED:
+                /* has bonus radio state int */
+                RadioState newState = getRadioStateFromInt(p.readInt());
+                p.setDataPosition(dataPosition);
+                super.processUnsolicited(p);
+                if (RadioState.RADIO_ON == newState) {
+                    setNetworkSelectionModeAutomatic(null);
+                }
+                return;
             case RIL_UNSOL_ON_USSD:
                 String[] resp = (String[])ret;
 
@@ -177,24 +210,9 @@ public class P2RIL extends RIL implements CommandsInterface {
                         new AsyncResult (null, resp, null));
                 }
                 break;
-            case RIL_UNSOL_RESPONSE_RADIO_STATE_CHANGED:
-                /* has bonus radio state int */
-                RadioState newState = getRadioStateFromInt(p.readInt());
-                p.setDataPosition(dataPosition);
-                super.processUnsolicited(p);
-                if (RadioState.RADIO_ON == newState) {
-                    setNetworkSelectionModeAutomatic(null);
-                }
-                return;
-            case RIL_UNSOL_LGE_BATTERY_LEVEL_UPDATE:
-            case RIL_UNSOL_LGE_XCALLSTAT:
-            case RIL_UNSOL_LGE_SELECTED_SPEECH_CODEC:
-            case RIL_UNSOL_LGE_RESPONSE_PS_SIGNALING_STATUS:
-                if (RILJ_LOGD) riljLog("sinking LGE request > " + response);
-                break;
-            case RIL_UNSOL_LGE_FACTORY_READY:
+            case 1080: // RIL_UNSOL_LGE_FACTORY_READY (NG)
                 /* Adjust request IDs */
-                RIL_REQUEST_HANG_UP_CALL = 206;
+                RIL_REQUEST_HANG_UP_CALL = 0xb7;
                 break;
             case RIL_UNSOL_LGE_SIM_STATE_CHANGED:
             case RIL_UNSOL_LGE_SIM_STATE_CHANGED_NEW:
@@ -204,6 +222,12 @@ public class P2RIL extends RIL implements CommandsInterface {
                     mIccStatusChangedRegistrants.notifyRegistrants();
                 }
                 break;
+            case RIL_UNSOL_LGE_BATTERY_LEVEL_UPDATE:
+            case RIL_UNSOL_LGE_XCALLSTAT:
+            case RIL_UNSOL_LGE_SELECTED_SPEECH_CODEC:
+                if (RILJ_LOGD) riljLog("sinking LGE request > " + response);
         }
+
     }
+
 }
