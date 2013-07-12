@@ -28,6 +28,9 @@ on fs
 
     setprop ro.crypto.fuse_sdcard false
 
+    ## This needs to run ASAP to set up the framebuffer before zygote kicks in
+    start pvrsrvinit
+
 on post-fs-data
     chown system system /dvp
     chmod 0771 /dvp
@@ -217,7 +220,7 @@ service charger /charger
     oneshot
 
 service pvrsrvinit /vendor/bin/pvrsrvinit
-    class core
+    disabled
     user root
     group root
     oneshot
