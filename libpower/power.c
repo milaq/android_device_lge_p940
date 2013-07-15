@@ -28,6 +28,9 @@
 #define SCALINGMAXFREQ_PATH "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq"
 #define BOOSTPULSE_PATH "/sys/devices/system/cpu/cpufreq/interactive/boostpulse"
 
+#define TIMER_RATE_SCREEN_ON "20000"
+#define TIMER_RATE_SCREEN_OFF "500000"
+
 #define MAX_BUF_SZ  10
 
 /* initialize freqs*/
@@ -87,7 +90,7 @@ static void p940_power_init(struct power_module *module)
      */
 
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_rate",
-                "20000");
+                TIMER_RATE_SCREEN_ON);
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/min_sample_time",
                 "60000");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/hispeed_freq",
@@ -137,13 +140,12 @@ static void p940_power_set_interactive(struct power_module *module, int on)
 
         if (len != -1)
             memcpy(scaling_max_freq, buf, sizeof(buf));
-
-        sysfs_write(SCALINGMAXFREQ_PATH,
-                    on ? scaling_max_freq : screen_off_max_freq);
     }
-    else
-        sysfs_write(SCALINGMAXFREQ_PATH,
-                    on ? scaling_max_freq : screen_off_max_freq);
+
+    sysfs_write(SCALINGMAXFREQ_PATH,
+                on ? scaling_max_freq : screen_off_max_freq);
+    sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_rate",
+                on ? TIMER_RATE_SCREEN_ON : TIMER_RATE_SCREEN_OFF);
 }
 
 static void p940_power_hint(struct power_module *module, power_hint_t hint,
