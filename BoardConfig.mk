@@ -116,6 +116,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
 BOARD_RECOVERY_ALWAYS_WIPES := true
 TARGET_RECOVERY_INITRC := device/lge/p940/recovery/init.rc
 BOARD_UMS_LUNFILE := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file"
+TARGET_RECOVERY_PRE_COMMAND := "echo 'boot-recovery' > /dev/block/platform/omap/omap_hsmmc.1/by-name/misc; sync"
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HDPI_RECOVERY := true
 BOARD_USE_CUSTOM_FONT := true
