@@ -113,6 +113,15 @@ TARGET_KERNEL_MODULES := KERNEL_SGX_MODULES
 
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
 
+BOARD_SEPOLICY_DIRS := \
+    device/lge/p940/selinux
+
+BOARD_SEPOLICY_UNION := \
+    file_contexts \
+    pvrsrvinit.te \
+    device.te \
+    domain.te
+
 BOARD_RECOVERY_ALWAYS_WIPES := true
 TARGET_RECOVERY_INITRC := device/lge/p940/recovery/init.rc
 BOARD_UMS_LUNFILE := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file"
