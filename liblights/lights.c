@@ -105,19 +105,23 @@ write_int(char const* path, int value)
     }
 }
 
-static int
-read_int(char const* path)
+int
+is_discharging()
 {
-    int fd;
+    int ret;
 
-    fd = open(path, O_RDONLY);
-    if (fd >= 0) {
-        char buffer[1];
-        int amt = read(fd, buffer, 1);
-        close(fd);
-        return amt == -1 ? -errno : atoi(buffer);
+    FILE* fp = fopen("/sys/class/power_supply/battery/status", "r");
+    if (!fp) {
+        ALOGV("is_charging failed to open /sys/class/power_supply/battery/status - assuming discharging\n");
+        return 1;
     } else {
-        return -errno;
+    if ((char)(fgetc(fp)) == 'D')
+            ret = 1;
+        else
+            ret = 0;
+
+        fclose(fp);
+        return ret;
     }
 }
 
@@ -183,9 +187,9 @@ set_light_battery (struct light_device_t* dev,
     int err = 0;
     unsigned int colorRGB = state->color & 0xFFFFFF;
     int red = (colorRGB >> 16)&0xFF;
-    int green = (colorRGB >> 8)&0xFF;
-    g_batled_on = red&&green?1:0;
-    ALOGV("Calling battery light with state %d - red: %i, green: %i", g_batled_on, red, green);
+
+    g_batled_on = red&&!is_discharging();
+    ALOGD("Calling battery light with state %d", g_batled_on);
 
     if (g_touchled_on || g_notled_on)
         ALOGV("not switching battery light since button/notification led is on");
