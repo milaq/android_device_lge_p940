@@ -8,6 +8,7 @@ ro.telephony.ril_class=P2RIL
 ro.telephony.call_ring.multiple=false
 ro.telephony.call_ring.delay=3000
 ro.telephony.call_ring.absent=true
+persist.radio.rr.enable=1
 
 # audio
 omap.audio.mic.main=AMic0
