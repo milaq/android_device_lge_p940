@@ -208,9 +208,11 @@ PRODUCT_PACKAGES += \
 	setup_fs
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
-# goo.im stuff
+
 $(call inherit-product-if-exists, vendor/goomanager/goo.mk)
 
 $(call inherit-product-if-exists, vendor/nxp/pn544/nxp-pn544-fw-vendor.mk)
 
 $(call inherit-product-if-exists, vendor/lge/p940/p940-vendor.mk)
+
+$(call inherit-product-if-exists, vendor/fonts-roboto/fonts.mk)
