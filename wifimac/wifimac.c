@@ -15,54 +15,35 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 
-/* Read device NVRAM and set the Wifi MAC address accordingly */
+/* Read plain address retrieved by RIL and set the Wifi MAC 
+ * address accordingly */
 
 int main() {
-	int fd1; FILE *fd2;
+
+	int fd1, fd2;
 	int macbyte;
-	int addrcount = 0;
-	char macaddr[18];
 	int i;
 
-	fd1 = fopen("/data/misc/wifi/config","w");
-	fd2 = open("/dev/block/platform/omap/omap_hsmmc.1/by-name/nv",O_RDONLY);
+	fd1 = open("/data/misc/wifi/macAddress",O_RDONLY);
+	fd2 = open("/data/misc/wifi/config",O_WRONLY|O_CREAT|O_TRUNC,S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH);
+
+	write(fd2,"cur_etheraddr=",14);
 
 	for (i = 0; i<12; i++) {
-		macbyte=0;
-		lseek(fd2,i+7680,SEEK_SET);
-		read(fd2,&macbyte,1);
-		addrcount+=macbyte;
-		if (i%2==0 && i!=0)
-			sprintf(macaddr,"%s:%c",macaddr,macbyte);
-		else
-			sprintf(macaddr,"%s%c",macaddr,macbyte);
+		lseek(fd1,i,SEEK_SET);
+		lseek(fd2,0,SEEK_END);
+		read(fd1,&macbyte,1);
+		if (i>1 && !(i%2))
+			write(fd2,":",1);
+		write(fd2,&macbyte,1);
 	}
 
+	write(fd2,"\n",1);
+	close(fd1);
 	close(fd2);
-
-	if (!addrcount) {
-		macbyte = rand()%255;
-		/* least significant bit must be off, else it's multicast */
-		if (macbyte & 1) macbyte--;
-		sprintf(macaddr,"0b:ad:c0:ff:ef:%x",macbyte);
-	}
-
-	fprintf(fd1,"vlan_mode=0\n\
-mpc=1\n\
-roam_off=0\n\
-roam_scan_period=10\n\
-roam_delta=20\n\
-roam_trigger=-70\n\
-assoc_listen=1\n\
-assoc_retry_max=7\n\
-cur_etheraddr=%s\n\
-",macaddr);
-
-	fclose(fd1);
 	return 0;
 }

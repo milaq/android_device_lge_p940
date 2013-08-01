@@ -50,6 +50,9 @@ on post-fs-data
     write /data/misc/wifi/config ""
     chmod 0660 /data/misc/wifi/config
     chown system wifi /data/misc/wifi/config
+    write /data/misc/wifi/macAddress ""
+    chmod 0660 /data/misc/wifi/macAddress
+    chown system radio /data/misc/wifi/macAddress
 
 # hdcp
     mkdir /persist/mhl 0770 radio radio
