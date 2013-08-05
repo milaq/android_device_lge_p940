@@ -91,7 +91,7 @@ static void p940_power_init(struct power_module *module)
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/hispeed_freq",
                 "600000");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/target_loads",
-                "70 800000:80 1008000:90");
+                "50 800000:70 1008000:90");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load",
                 "90");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay",
