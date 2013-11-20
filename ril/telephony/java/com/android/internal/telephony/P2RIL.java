@@ -127,14 +127,14 @@ public class P2RIL extends RIL implements CommandsInterface {
         RILRequest rr
             = RILRequest.obtain(RIL_REQUEST_QUERY_CALL_FORWARD_STATUS, response);
 
-        rr.mp.writeInt(2); // 2 is for query action, not in use anyway
-        rr.mp.writeInt(cfReason);
+        rr.mParcel.writeInt(2); // 2 is for query action, not in use anyway
+        rr.mParcel.writeInt(cfReason);
         if (serviceClass == 0)
             serviceClass = 255;
-        rr.mp.writeInt(serviceClass);
-        rr.mp.writeInt(PhoneNumberUtils.toaFromString(number));
-        rr.mp.writeString(number);
-        rr.mp.writeInt (0);
+        rr.mParcel.writeInt(serviceClass);
+        rr.mParcel.writeInt(PhoneNumberUtils.toaFromString(number));
+        rr.mParcel.writeString(number);
+        rr.mParcel.writeInt (0);
 
         if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest)
                 + " " + cfReason + " " + serviceClass);
