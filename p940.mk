@@ -195,10 +195,6 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp,adb
 
-# Vold and Storage
-PRODUCT_COPY_FILES += \
-	device/lge/p940/config/vold.fstab:system/etc/vold.fstab
-
 PRODUCT_PACKAGES += \
 	com.android.future.usb.accessory
 
