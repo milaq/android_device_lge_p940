@@ -9,3 +9,6 @@
 /dev/block/platform/omap/omap_hsmmc.1/by-name/persist      /persist           ext4    noatime,nosuid,nodev,barrier=1,data=ordered                            wait
 /devices/platform/omap/omap_hsmmc.1/mmc_host/mmc0          /storage/sdcard0   vfat    defaults                                                               voldmanaged=sdcard0:14,nonremovable
 /devices/platform/omap/omap_hsmmc.0/mmc_host/mmc1          /storage/sdcard1   vfat    defaults                                                               voldmanaged=sdcard1:auto
+
+/dev/block/platform/omap/omap_hsmmc.1/by-name/recovery     /recovery          emmc    defaults                                                               recoveryonly
+/dev/block/platform/omap/omap_hsmmc.1/by-name/boot         /boot              emmc    defaults                                                               recoveryonly

@@ -125,6 +125,8 @@ BOARD_SEPOLICY_UNION := \
 
 BOARD_RECOVERY_ALWAYS_WIPES := true
 TARGET_RECOVERY_INITRC := device/lge/p940/recovery/init.rc
+TARGET_RECOVERY_FSTAB := device/lge/p940/fstab.p940
+RECOVERY_FSTAB_VERSION := 2
 BOARD_UMS_LUNFILE := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun0/file"
 TARGET_RECOVERY_PRE_COMMAND := "echo 'boot-recovery' > /dev/block/platform/omap/omap_hsmmc.1/by-name/misc; sync"
 BOARD_HAS_NO_SELECT_BUTTON := true
